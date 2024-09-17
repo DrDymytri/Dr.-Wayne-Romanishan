@@ -1,0 +1,35 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600&display=swap");
+
+h1, h2 {
+    color: #0a3057;
+}
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    background-color: rgb(8, 50, 81);
+    color: aliceblue;
+}
+h2 {
+    font-size: 1.8em;
+    margin-top: 40px;
+    border-bottom: 2px solid #2c3e50;
+    padding-bottom: 10px;
+}
+p {
+    margin: 20px 0;
+    text-align: left;
+    font-size: 1.1em;
+    color: #555;
+}
+ul {
+    margin-left: 40px;
+    list-style-type: square;
+}
+ul li {
+    margin: 15px 0;
+    font-size: 1.1em;
+    text-align: left;  
+}
+li p {
+    margin: 5px 0;
+}

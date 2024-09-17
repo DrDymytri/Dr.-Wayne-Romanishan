@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Consultation Form</title>
+        <link rel="stylesheet" href="./Customer.css">
+        <link rel="icon" href="./Images/psyblack.png" type="image/png">
+        <script>
+            function sendEmail(event) {
+                event.preventDefault(); // Prevent the default form submission
+
+                // Collect form data
+                const company = document.getElementById('company').value;
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const phone = document.getElementById('phone').value;
+                const message = document.getElementById('message').value;
+
+                // Format the email body with line breaks and spaces
+                const emailBody = `
+                    Company Name:....${company}
+                    Name:.........................${name}
+                    Email:.........................${email}
+                    Phone:.......................${phone}
+                    ------------------------------------------------
+
+                    Message:
+                    ${message}
+                `;
+
+                // Create the mailto link with subject and body
+                const mailtoLink = `mailto:wayne.romanishan@live.com?subject=Consultation Request&body=${encodeURIComponent(emailBody)}`;
+
+                // Open the email client with the formatted body
+                window.location.href = mailtoLink;
+            }
+        </script>
+    </head>
+    <body>
+        <div class="container">
+            <form onsubmit="sendEmail(event)">
+                <div class="form-header">
+                    Consultation Request Form:
+                </div><br><br>
+
+                <label for="company">Company Name:</label>
+                <input type="text" id="company" name="company" required><br><br>
+                
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required><br><br>
+            
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required><br><br>
+            
+                <label for="phone">Phone:</label>
+                <input type="tel" id="phone" name="phone" required><br><br>
+            
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" rows="8" required></textarea><br><br>        
+                                
+                <button onclick="window.location.href='./resume.html';">Return to Overview</button>
+
+                <button type="submit">Submit</button><br><br>
+            </form>
+        </div>
+    </body>
+</html>
