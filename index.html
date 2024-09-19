@@ -152,11 +152,11 @@
     <!-- Experience Section -->
     <section class="experience">
       <div class="container">
-        <div class="button-container">          
-          <a href="./Experience.html">
-            <button type="button" class="centered-button">Work and Experience</button>
-          </a>
+        <div class="button-container">
+          <!-- Button to open the modal -->
+          <button type="button" class="centered-button" id="openModalBtn">Work and Experience</button>
         </div>
+    
         <h2 class="section--title">Worked With Multiple Top Tech Companies</h2>
         <p class="section--desc">
           Lorem ipsum is a placeholder text commonly used to demonstrate the
@@ -164,6 +164,7 @@
           content. Lorem ipsum may be used as a placeholder before final copy is
           available.
         </p>    
+    
         <div class="grid--cards">
           <div class="card">
             <h3>Senior Technical Analyst: </h3>
@@ -204,7 +205,33 @@
           </div>
         </div>
       </div>
+    
+      <!-- Modal structure -->
+      <div id="myModal" class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <h2>My Experience Logos</h2>
+          <p>
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minus nobis, doloribus, 
+            veniam ex ad nemo culpa, voluptatum perspiciatis dicta quia soluta. At, beatae. 
+            Totam, voluptate? Architecto perspiciatis repellat veniam tempore.
+          </p>
+          <h2>My Experience Logos</h2>
+          <p>
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minus nobis, doloribus, 
+            veniam ex ad nemo culpa, voluptatum perspiciatis dicta quia soluta. At, beatae. 
+            Totam, voluptate? Architecto perspiciatis repellat veniam tempore.
+          </p>
+          <h2>My Experience Logos</h2>
+          <p>
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minus nobis, doloribus, 
+            veniam ex ad nemo culpa, voluptatum perspiciatis dicta quia soluta. At, beatae. 
+            Totam, voluptate? Architecto perspiciatis repellat veniam tempore.
+          </p>
+        </div>
+      </div>
     </section>
+    
     
 
     <!-- Skills Section -->
@@ -456,10 +483,8 @@
     </footer>
   </body>
   
-  <script
-    type="module"
-    defer="true"
-    src="https://unpkg.com/metallicss/dist/metallicss.min.js"
-    src="./Resume.js">
-  </script>
+  <script src="https://unpkg.com/metallicss/dist/metallicss.min.js"></script>
+  <script src="./Resume.js"></script>
+  <script src="./Modal.js"></script>
+
 </html>
