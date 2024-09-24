@@ -1,6 +1,6 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #2C3E50 20%, #ECF0F1 60%, #1ABC9C 90%);
+    background: #87cfff95;
     margin: 0;
     padding: 5px;
     display: flex;
@@ -11,34 +11,32 @@ body {
 
 .form-header {
     width: 100%; /* Make the header stretch the entire form */
-    height: 20px;
-    background-color: #2C3E50; /* Updated background color */
-    padding: 1rem; /* Add padding for spacing */
+    height: 50px;
+    margin-bottom: 20px;
     text-align: center; /* Center the text */
-    border-top-left-radius: 6px; /* Match the border radius of the form */
-    border-top-right-radius: 6px; /* Match the border radius of the form */
-    border-bottom-left-radius: 6px;
-    border-bottom-right-radius: 6px;
-    color: #fff; /* Make the text white */
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    color: black; /* Make the text black */
     font-size: x-large;
     font-weight: bold;
-    box-shadow: 0 0 5px #000000;
+    border-bottom: 3px solid crimson;
 }
 
 form {
-    background: #ffffff;
+    background: aliceblue;
     width: 100%;
-    max-width: 500px;
-    border-bottom: 6px solid #1ABC9C; /* Updated border color */
-    padding: 1rem;
-    padding-right: 3rem;  /* Increase space between form boundary and text boxes */
+    max-width: 1000px;
+    border-bottom: 6px solid crimson; /* Updated border color */
+    padding: 30px;
+    padding-right: 30px;  /* Increase space between form boundary and text boxes */
     background-color: white;
-    border-radius: 1rem;
-    box-shadow: 0 8px 30px rgb(0, 0, 0);
+    border-radius: 20px;
+    box-shadow: 0 8px 30px black;
 }
 
 form:hover {
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.781);
+    box-shadow: 0 12px 40px black;
 }
 
 
@@ -53,7 +51,7 @@ input, textarea {
     width: 100%;
     padding: 12px;
     margin-bottom: 15px;
-    border: 1px solid #ccc;
+    border: 1px solid black;
     border-radius: 8px;
     transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
@@ -67,9 +65,9 @@ input:focus, textarea:focus {
 button {
     background: #2980b9; /* Updated button background color */
     color: aliceblue;
-    padding: 12px 25px;
+    padding: 5px 5px;
     box-shadow: 0 0 4px #000000;
-    border: none;
+    border: 1xp solid black;
     border-radius: 8px;
     cursor: pointer;
     font-size: medium;
@@ -85,28 +83,6 @@ button:hover {
     transform: translateY(-2px);
 }
 
-.container h1 {
-    /*padding: 5px 12px;*/
-    background-color: #00b7ff00;
-    color: #2C3E50; /* Updated text color */
-    font-size: 24px;
-    margin-bottom: 1rem;    
-    border-radius: 10px;
-    text-align: center;
-}
-
-/* Details section styling */
-.details {
-    padding: 15px;
-    border: 1px solid #ddd;
-    background-color: #f0f4f8;
-    border-radius: 8px;
-}
-
-.details p {
-    margin: 5px 0;
-}
-
 .label {
     font-weight: bold;
     color: #333;
@@ -117,11 +93,74 @@ button:hover {
     font-size: 14px;
 }
 
-/* Footer styling */
-.footer {
-    margin-top: 30px;
-    padding-top: 10px;
-    border-top: 1px solid #ddd;
+/* Dropdown Button */
+.dropbtn {
+    background-color: #3498DB;
+    color: white;
+    padding: 5px;
     font-size: 14px;
-    color: #555;
+    border: 1px solid black;
+    cursor: pointer;
+  }
+  
+  /* Dropdown container */
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  /* Dropdown content (hidden by default) */
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: black;
+    min-width: 400px;
+    box-shadow: 0px 8px 16px 0px black;
+    z-index: 1;
+  }
+  
+  /* Links inside the dropdown */
+  .dropdown-content a {
+    color: aliceblue;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  /* Change color of dropdown links on hover */
+  .dropdown-content a:hover {
+    background-color: #8ec2f7;
+    color: black;
+    box-shadow: 0 0 12px aliceblue;
+  }
+  
+  /* Show the dropdown menu */
+  .show {
+    display: block;
+  }
+  
+  /* Flexbox for form rows */
+.form-row {
+    display: flex;
+    justify-content: space-between;  /* Spread items evenly across the row */
+    margin-bottom: 1rem;  /* Add space between rows */
+}
+
+/* Flexbox for each form group (label + input) */
+.form-group {
+    flex: 0 0 48%;  /* Make each form group take up about half the row */
+}
+
+/* Ensure form inputs take full width of their container */
+.form-group input {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+/* For textarea and other inputs to align with other fields */
+textarea, input[type="date"] {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
 }

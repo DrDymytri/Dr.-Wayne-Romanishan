@@ -7,64 +7,160 @@
         <link rel="stylesheet" href="./Customer.css">
         <link rel="icon" href="./Images/psyblack.png" type="image/png">
         <script>
+            // Function to send the email
             function sendEmail(event) {
                 event.preventDefault(); // Prevent the default form submission
-
+        
                 // Collect form data
                 const company = document.getElementById('company').value;
                 const name = document.getElementById('name').value;
                 const email = document.getElementById('email').value;
                 const phone = document.getElementById('phone').value;
+                const srvcs = document.getElementById('srvcs').value;
+                const ppntmnt1 = document.getElementById('ppntmnt1').value;
+                const ppntmnt2 = document.getElementById('ppntmnt2').value;
                 const message = document.getElementById('message').value;
 
+                // Format the date and time
+                function formatDateTime(dateTime) {
+                    const date = new Date(dateTime);
+                    const formattedDate = date.toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                    });
+                    const formattedTime = date.toLocaleTimeString('en-US', {
+                        hour: '2-digit',
+                        minute: '2-digit'
+                    });
+                    return `${formattedDate} at ${formattedTime}`;
+                }
+
+                const formattedPpntmnt1 = formatDateTime(ppntmnt1);
+                const formattedPpntmnt2 = formatDateTime(ppntmnt2);
+        
                 // Format the email body with line breaks and spaces
                 const emailBody = `
-                    Company Name:....${company}
-                    Name:.........................${name}
-                    Email:..........................${email}
-                    Phone:........................${phone}
+                    Company Name:............${company}
+                    Name:................................${name}
+                    Email:.................................${email}
+                    Phone:...............................${phone}
+                    Service Requested:.......${srvcs}
+                    Appointment 1:.............${formattedPpntmnt1}
+                    Appointment 2:.............${formattedPpntmnt2}
                     ------------------------------------------------
-
+        
                     Message:
                     ${message}
                 `;
-
+        
                 // Create the mailto link with subject and body
-                const mailtoLink = `mailto:wayne.romanishan@live.com?subject=Consultation Request&body=${encodeURIComponent(emailBody)}`;
-
+                const mailtoLink = `mailto:wayne.romanishan@live.com?subject=MDOA: Consultation Request&body=${encodeURIComponent(emailBody)}`;
+        
                 // Open the email client with the formatted body
                 window.location.href = mailtoLink;
             }
-        </script>
+        
+            // Function to toggle the dropdown
+            function toggleDropdown() {
+                document.getElementById("myDropdown").classList.toggle("show");
+            }
+        
+            // Function to select a service and update the visible label
+            function selectService(service) {
+                document.getElementById('srvcs').value = service; // Set hidden field value
+                document.getElementById('selectedService').textContent = `Selected Service: ${service}`; // Update the displayed service
+                document.getElementById("myDropdown").classList.remove("show"); // Close the dropdown after selection
+            }
+        
+            // Close the dropdown if the user clicks outside of it
+            window.onclick = function(event) {
+                if (!event.target.matches('.dropbtn')) {
+                    var dropdowns = document.getElementsByClassName("dropdown-content");
+                    for (var i = 0; i < dropdowns.length; i++) {
+                        var openDropdown = dropdowns[i];
+                        if (openDropdown.classList.contains('show')) {
+                            openDropdown.classList.remove('show');
+                        }
+                    }
+                }
+            }
+        </script>        
     </head>
     <body>
         <div class="container">
             <form onsubmit="sendEmail(event)">
-                <div class="form-header">
-                    Consultation Request Form:
-                </div><br><br>
+                <div class="form-header">Consultation Request Form:</div>
 
-                <label for="company">Company Name:</label>
-                <input type="text" id="company" name="company" required><br><br>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="company">Company Name:</label>
+                        <input type="text" id="company" name="company" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Requestor Name:</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                </div>
+        
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email">Requestor Email:</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Requestor Phone:</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                </div>
+
+                <label for="srvcs">Consultation Service Required:</label>
+                <div class="dropdown">
+                    <button type="button" onclick="toggleDropdown()" class="dropbtn">Services <i class="fa fa-caret-down"></i></button>
+                    <div id="myDropdown" class="dropdown-content">
+                        <a href="#" onclick="selectService('Organizational Development')">Organizational Development</a>
+                        <a href="#" onclick="selectService('Human Factors Engineering')">Human Factors Engineering</a>
+                        <a href="#" onclick="selectService('Talent Management')">Talent Management</a>
+                        <a href="#" onclick="selectService('Engineering Workflow Management')">Engineering Workflow Management</a>
+                        <a href="#" onclick="selectService('Document Management')">Document Management</a>
+                        <a href="#" onclick="selectService('Change Management')">Change Management</a>
+                        <a href="#" onclick="selectService('Algorithmic Psychological Process Development')">Algorithmic Psychological Process Development</a>
+                        <a href="#" onclick="selectService('Custom Projects')">Custom Projects</a>
+                    </div>
+                </div>
+                <!-- Hidden input to store the selected service -->
+                <input type="hidden" id="srvcs" name="srvcs" required>
+        
+                <!-- Display selected service here -->
+                <p id="selectedService" style="font-weight: bold; color: #2980b9; margin-top: 10px;">No service selected</p>
                 
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name" required><br><br>
-            
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required><br><br>
-            
-                <label for="phone">Phone:</label>
-                <input type="tel" id="phone" name="phone" required><br><br>
-            
+                <p>Please provide two critical dates and the best times for us to meet on Micorosoft Teams.</p>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="ppntmnt1">Appointment 1:</label>
+                        <input type="datetime-local" id="ppntmnt1" name="ppntmnt1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="ppntmnt2">Appointment 2:</label>
+                        <input type="datetime-local" id="ppntmnt2" name="ppntmnt2" required>
+                    </div>
+                </div>
+                
                 <label for="message">Message:</label>
-                <textarea id="message" name="message" rows="8" required></textarea><br><br>        
-                                
-                <a href="./index.html">
-                    <button type="button">Return to Overview</button>
-                </a>
-
-                <button type="submit">Submit</button><br><br>
+                <textarea id="message" name="message" rows="8" required></textarea>
+        
+                <div class="form-row">
+                    <div class="form-group">
+                        <a href="./index.html">
+                            <button type="button">Return to Overview</button>
+                        </a>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit">Submit</button>
+                    </div>
+                </div>           
             </form>
         </div>
+        
     </body>
 </html>

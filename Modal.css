@@ -8,7 +8,7 @@
     width: 100%; /* Full width */
     height: 100%; /* Full height */
     overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgb(188, 14, 14); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
 
@@ -17,13 +17,13 @@
     background-color: #caecfba8;
     margin: 15% auto; /* 15% from the top and centered */
     padding: 20px;
-    border: 1px solid #000000;
+    border: 1px solid #cb0909;
     width: 80%; /* Could be more or less, depending on screen size */
 }
 
 /* The Close Button */
 .close {
-    color: #000000;
+    color: black;
     float: right;
     font-size: 28px;
     font-weight: bold;
@@ -31,7 +31,7 @@
 
 .close:hover,
 .close:focus {
-    color: black;
+    color: aliceblue;
     text-decoration: none;
     cursor: pointer;
 }

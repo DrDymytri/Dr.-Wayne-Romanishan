@@ -19,29 +19,53 @@ a {
 }
 
 .button-container {
-  text-align: center; /* Center the button container */
+  display: flex;
+  justify-content: flex-end;        /* Push buttons to the right */
+  align-items: center;
+  gap: 0;                        /* Spacing between the buttons */
+  flex: 0 0 auto;                   /* Ensure the buttons don't shrink or grow */
+}
+
+.Body-Button-Container {
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+}
+
+.Body-Button {
+  background-color: #E74C3C;
+  color: white;
+  padding: 6px 6px;
+  margin: 5px; /* Reduced horizontal spacing between buttons */
+  text-transform: capitalize;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.Body-Button:hover{
+  background: #e2b1ab;
+  color: black;
+  box-shadow: 0 0 12px white;
+  transform: translateY(-2px);
 }
 
 .centered-button {
-  display: inline-block;
-  margin: 2px auto; /* Center the button horizontally and add vertical margin */
-  padding: 4px 4px;
-  background-color: #E74C3C; /* Background color similar to cta-button */
-  color: white;
+  background-color: #2980b9;
+  color: aliceblue;
+  padding: 5px 5px;
+  margin: 5px; /* Reduced horizontal spacing between buttons */
+  text-transform: capitalize;
   border: none;
-  font-size: 14px;
-  font-weight: bold;
+  border-radius: 4px;
   cursor: pointer;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
-  text-align: center;
-  text-decoration: none;
-  box-shadow: 0 0 5px black;
 }
 
-.centered-button:hover {
-  background-color: #C0392B; /* Hover effect */
-  box-shadow: 0 4px 8px #C0392B; /* Optional hover shadow */
+.centered-button:hover, .cta-button:hover {
+  background-color: #8ec2f7;
+  color: black;  
+  box-shadow: 0 0 12px white;
+  transform: translateY(-2px);
 }
 
 section {
@@ -62,20 +86,6 @@ section {
   max-width: 800px;
 }
 
-.btn {
-  padding: 0.8rem 2rem;
-  background-color: #E74C3C; /* Updated button background color */
-  border-radius: 0.5rem;
-  font-weight: 600;
-  width: fit-content;
-  color: #fff;
-  cursor: pointer;
-  text-decoration: none;
-}
-.btn:hover {
-  box-shadow: 0 4px 8px #C0392B; /* Updated button hover color */
-}
-
 img {
   position: absolute;
   top: 0;
@@ -93,7 +103,9 @@ img {
 }
 
 .card {
-  padding: 1.5rem;
+  position: relative;
+  padding: 20px;
+  border: 1px solid black;
   background-color: #fff;
   border-radius: 0.5rem;
   border-bottom: 4px solid #1ABC9C; /* Updated border color */
@@ -101,7 +113,7 @@ img {
 }
 
 i {
-  font-size: 0.9rem;
+  font-size: 14px;
 }
 p {
   color: #555;
@@ -118,7 +130,6 @@ p {
 
 /* nav */
 .nav {
-  padding: 20px 0;
   background-color: black;
   position: sticky;
   top: 0;
@@ -126,12 +137,17 @@ p {
 }
 
 .nav--container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  display: flex;                   /* Use flexbox to control alignment */
+  justify-content: space-between;  /* Space between logo and buttons */
+  align-items: center;             /* Vertically align everything */
+  position: relative;              /* Keep the layout consistent */
+  padding: 15px;
 }
+
 .nav--container h3 {
-  font-size: 24px;
+  flex-grow: 1;                    /* Take up the space between the logo and buttons */
+  text-align: center;              /* Center the heading */
+  font-size: 20px;
   font-family: 'Sofia', sans-serif;
   font-weight: normal;
   font-style: italic;
@@ -143,11 +159,14 @@ p {
   animation: shine 30s reverse infinite;
 }
 
-.logo img {
-  max-height: 300px;
-  width: auto;
+.logo {
+  flex: 0 0 auto;                  /* Do not allow logo to grow or shrink */
   margin-right: 20px;
-  transition: background-color 0.3s ease;
+}
+
+.logo img {
+  max-height: 80px;                /* Adjust size of logo */
+  width: auto;
 }
 
 /* hero */
@@ -179,6 +198,64 @@ p {
         background-position: 100% 50%;
     }
    }
+
+@media (max-width: 768px){
+  .grid--cards {
+    grid-template-columns: 1fr; /* Single column on smaller screens */
+  }
+
+  .container {
+    max-width: 100%; /* Ensure the container takes full width on smaller screens */
+  }
+
+  .hero--title {
+    font-size: 2rem; /* Smaller font size for mobile */
+  }
+
+  .hero--desc {
+    font-size: 1rem; /* Adjusted for readability */
+    padding: 0 1rem;
+  }
+
+  .section--desc {
+    font-size: 0.9rem; /* Smaller font size for sections */
+    padding: 0 1rem;
+  }
+
+  .portfolio--img--cover img, 
+  .test--img--cover img {
+    width: 100%; /* Ensure images resize to fit */
+    height: auto;
+  }
+
+  .video-background {
+    height: 300px; /* Adjust video height for mobile */
+  }
+
+  /* Stacking navigation for mobile */
+  .nav--container {
+    flex-direction: column;
+  }
+
+  .navbar {
+    text-align: center;
+    padding: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero--title {
+    font-size: 1.5rem; /* Even smaller font size for very small screens */
+  }
+
+  .hero--desc {
+    font-size: 0.85rem;
+  }
+
+  .video-background {
+    height: 200px; /* Further reduce video height on very small screens */
+  }
+}
 
 .hero--title {
   text-align: center;
@@ -235,33 +312,10 @@ p {
   align-items: center;
 }
 
-.progress--cover {
-  height: 0.3rem;
-  width: 100%;
-  background-color: #ECF0F1; /* Updated background color */
-  margin-top: 1rem;
+.ColorChange{
+  color: #E74C3C;
 }
 
-.html--progress {
-  background-color: #E74C3C; /* Updated progress bar color */
-  width: 90%;
-  height: 100%;
-}
-.css--progress {
-  background-color: #E74C3C; /* Updated progress bar color */
-  width: 70%;
-  height: 100%;
-}
-.react--progress {
-  background-color: #E74C3C; /* Updated progress bar color */
-  width: 80%;
-  height: 100%;
-}
-.next--progress {
-  background-color: #E74C3C; /* Updated progress bar color */
-  width: 70%;
-  height: 100%;
-}
 /* portfolio */
 .portfolio {
   background-color: #ECF0F1; /* Updated background color */
@@ -271,6 +325,13 @@ p {
   position: relative;
   height: 300px;
 }
+
+.portfolio--img--cover video, .portfolio--img--cover video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 /* testimonial */
 
 .stars {
@@ -323,11 +384,12 @@ footer p {
 .subnavbtn {
   background-color: #E74C3C;
   color: white;
-  padding: 10px 10px;
+  padding: 5px 5px;
   font-size: 14px;
   border-radius: 5px;
   border: none;
   cursor: pointer;
+  margin: 0;
 }
 
 .subnav-content {
@@ -351,7 +413,7 @@ footer p {
 .subnav-content a:hover {
   background-color: #8ec2f7;
   color: black;  
-  box-shadow: 0 0 12px white;
+  box-shadow: 0 0 12px aliceblue;
 }
 
 .navbar:hover .subnav-content {
@@ -400,14 +462,12 @@ footer p {
 .cta-button {
   background-color: #2980b9;
   color: aliceblue;
-  padding: 10px 20px;
+  padding: 5px 5px;
+  margin: 0; /* Reduced horizontal spacing between buttons */
   text-transform: uppercase;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-}
-.cta-button:hover {
-  background-color: #3498db;
 }
 
 /* Ensure the collage aligns well within the section */
@@ -434,47 +494,91 @@ footer p {
 }
 
 /* Modal styling */
+/* Modal container */
 .modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top of other elements */
+  display: none;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
   left: 0;
-  top: 100px;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  background-color: rgba(0, 0, 0, 0.8); /* Black background with opacity */
-  overflow: auto; /* Enable scroll if needed */
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
+  width: 100%;
+  height: 100%;
+  background-color: rgba(117, 206, 253, 0.5); /* Darker overlay for a more professional look */
+  z-index: 1000; /* Ensure it sits on top of other content */
+  overflow-y: auto; /* Ensures modal is scrollable if content is too tall */
 }
 
+.modal-dialog-scrollable .grid--cards {
+  padding: 10px;
+  max-height: calc(100vh - 200px);
+  overflow-y: auto;
+}
+
+/* Modal content */
 .modal-content {
   background-color: #fff;
-  margin: auto; /* Center the modal horizontally */
-  padding: 20px;
-  border-radius: 10px;
-  width: 80%; /* Adjust width of the modal */
-  max-width: 800px; /* Maximum width */
-  text-align: center; /* Center content within the modal */
+  margin: auto; /* Center the modal content */
+  margin-top: 65px;
+  padding: 10px; /* Reduced padding for a cleaner look */
+  border-radius: 8px; /* Slightly smaller border radius */
+  width: 95%; /* Adjust width of the modal */
+  max-width: 1000px; /* Maximum width */
+  text-align: left; /* Left-align content for a more professional look */
+  position: relative;
+  box-shadow: 0 0 15px rgb(5, 53, 91); /* Subtle shadow for depth */
+  box-sizing: border-box; /* Ensure padding and width play nicely */
+  border: 1px solid black;
+}
+
+/* Modal header */
+.modal-header {
+  display: flex;
+  justify-content: space-between; /* Aligns header text on the left, close button on the right */
+  align-items: center;
+  padding-bottom: 10px; /* Added padding for spacing */
+  border-bottom: 3px solid #E74C3C; /* Thinner line under the header */
+  margin-bottom: 10px; /* Added margin for spacing */
   position: relative;
 }
 
-.close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-  position: absolute;
-  right: 20px;
-  top: 10px;
+/* Close button */
+.modal-close {
+  background: transparent;
+  border: none; /* Remove border */
+  font-size: 36px; /* Smaller font size for a more subtle look */
+  cursor: pointer;
+  outline: none; /* Remove outline */
 }
 
-.close:hover,
-.close:focus {
-  color: #000;
+.modal-close:hover,
+.modal-close:focus {
+  color: #E74C3C;
   text-decoration: none;
   cursor: pointer;
+  transform: translateY(-2px); /* Corrected property */
 }
+
+/* Modal body */
+.modal-body {
+  padding: 5px 0; /* Reduced padding for a cleaner look */
+}
+
+/* Modal footer */
+.modal-footer {
+  display: flex;
+  justify-content: flex-end; /* Align buttons to the right */
+  padding-top: 10px; /* Added padding for spacing */
+  border-top: 3px solid #ddd; /* Thinner line above the footer */
+  margin-top: 10px; /* Added margin for spacing */
+}
+
+.modal-footnote{
+  text-align: center;
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
 
 h2 {
   margin-bottom: 10px; /* Space below the heading */
@@ -483,4 +587,12 @@ h2 {
 p {
   margin-bottom: 20px; /* Space below the last paragraph */
   text-align: left;
+}
+
+.cardlogos{
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  width: auto;
 }
