@@ -33,12 +33,12 @@ a {
 }
 
 .Body-Button {
-  background-color: #2980b9;
-  color: aliceblue;
+  background: linear-gradient(rgb(154, 185, 211), rgb(89, 143, 191), rgb(42, 97, 145), rgb(14, 51, 84), rgb(1, 17, 31));
+  color: white;
   padding: 5px 5px;
   margin: 5px; /* Reduced horizontal spacing between buttons */
   text-transform: capitalize;
-  border: none;
+  border: 1px solid aliceblue;
   border-radius: 4px;
   cursor: pointer;
   box-shadow: 0 0 40px rgba(0, 0, 0, 0.703);
@@ -52,12 +52,12 @@ a {
 }
 
 .centered-button {
-  background-color: #2980b9;
+  background: linear-gradient(rgb(154, 185, 211), rgb(89, 143, 191), rgb(42, 97, 145), rgb(14, 51, 84), rgb(1, 17, 31));
   color: aliceblue;
   padding: 5px 5px;
   margin: 5px; /* Reduced horizontal spacing between buttons */
   text-transform: capitalize;
-  border: none;
+  border: 1px solid aliceblue;
   border-radius: 4px;
   cursor: pointer;
 }
@@ -112,6 +112,8 @@ img {
   border-radius: 0.5rem;
   border-bottom: 4px solid #1ABC9C; /* Updated border color */
   box-shadow: 0 0 12px rgb(0, 0, 0);
+  height: auto;
+  margin-bottom: 20px;
 }
 
 i {
@@ -380,7 +382,7 @@ footer p {
 }
 
 .subnavbtn {
-  background-color: #E74C3C;
+  background: linear-gradient(rgb(244, 223, 223), rgb(241, 154, 154), rgb(247, 92, 92), rgb(220, 20, 20));
   color: white;
   padding: 5px 5px;
   font-size: 14px;
@@ -458,12 +460,13 @@ footer p {
 }
 
 .cta-button {
-  background-color: #2980b9;
+  background: linear-gradient(rgb(154, 185, 211), rgb(89, 143, 191), rgb(42, 97, 145), rgb(14, 51, 84), rgb(1, 17, 31));
   color: aliceblue;
   padding: 5px 5px;
   margin: 0; /* Reduced horizontal spacing between buttons */
   text-transform: uppercase;
-  border: none;
+  border: 1px solid rgb(26, 255, 0);
+  box-shadow: 0 0 20px rgb(0, 255, 38);
   border-radius: 4px;
   cursor: pointer;
 }
