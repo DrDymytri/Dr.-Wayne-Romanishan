@@ -203,45 +203,45 @@ p {
     }
    }
 
-@media (max-width: 768px){
-  .grid--cards {
-    grid-template-columns: 1fr; /* Single column on smaller screens */
+   @media (max-width: 768px){
+    .grid--cards {
+      grid-template-columns: 1fr; /* Single column on smaller screens */
+    }
+  
+    .container {
+      max-width: 100%; /* Ensure the container takes full width on smaller screens */
+    }
+  
+    .hero--desc {
+      font-size: 1rem; /* Adjusted for readability */
+      padding: 0 1rem;
+    }
+  
+    .section--desc {
+      font-size: 0.9rem; /* Smaller font size for sections */
+      padding: 0 1rem;
+    }
+  
+    .portfolio--img--cover img, 
+    .test--img--cover img {
+      width: 100%; /* Ensure images resize to fit */
+      height: auto;
+    }
+  
+    .video-background {
+      height: 300px; /* Adjust video height for mobile */
+    }
+  
+    /* Stacking navigation for mobile */
+    .nav--container {
+      flex-direction: column;
+    }
+  
+    .navbar {
+      text-align: center;
+      padding: 10px;
+    }
   }
-
-  .container {
-    max-width: 100%; /* Ensure the container takes full width on smaller screens */
-  }
-
-  .hero--desc {
-    font-size: 1rem; /* Adjusted for readability */
-    padding: 0 1rem;
-  }
-
-  .section--desc {
-    font-size: 0.9rem; /* Smaller font size for sections */
-    padding: 0 1rem;
-  }
-
-  .portfolio--img--cover img, 
-  .test--img--cover img {
-    width: 100%; /* Ensure images resize to fit */
-    height: auto;
-  }
-
-  .video-background {
-    height: 300px; /* Adjust video height for mobile */
-  }
-
-  /* Stacking navigation for mobile */
-  .nav--container {
-    flex-direction: column;
-  }
-
-  .navbar {
-    text-align: center;
-    padding: 10px;
-  }
-}
 
 @media (max-width: 480px) {
   .hero--title {
@@ -324,11 +324,12 @@ p {
 .portfolio--img--cover {
   position: relative;
   height: 300px;
+  overflow: hidden;
 }
 
 .portfolio--img--cover video, .portfolio--img--cover video {
   width: 100%;
-  height: 100%;
+  height: auto;
   object-fit: cover;
 }
 
