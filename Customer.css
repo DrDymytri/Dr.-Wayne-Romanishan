@@ -6,22 +6,24 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh; /* Changed from height to min-height */
 }
 
 .form-header {
-    width: 100%; /* Make the header stretch the entire form */
+    width: 100%;
     height: 50px;
     margin-bottom: 20px;
-    text-align: center; /* Center the text */
+    text-align: center;
     align-items: center;
     justify-content: center;
     display: flex;
-    color: black; /* Make the text black */
+    color: black;
     font-size: x-large;
     font-weight: bold;
     border-bottom: 3px solid crimson;
+    padding-top: 20px; /* Add padding to avoid cutting off the header */
 }
+
 
 form {
     background: aliceblue;

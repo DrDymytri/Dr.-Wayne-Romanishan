@@ -33,19 +33,20 @@ a {
 }
 
 .Body-Button {
-  background-color: #E74C3C;
-  color: white;
-  padding: 6px 6px;
+  background-color: #2980b9;
+  color: aliceblue;
+  padding: 5px 5px;
   margin: 5px; /* Reduced horizontal spacing between buttons */
   text-transform: capitalize;
   border: none;
-  border-radius: 10px;
+  border-radius: 4px;
   cursor: pointer;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.703);
 }
 
 .Body-Button:hover{
-  background: #e2b1ab;
-  color: black;
+  background-color: #8ec2f7;
+  color: black;  
   box-shadow: 0 0 12px white;
   transform: translateY(-2px);
 }
@@ -97,9 +98,10 @@ img {
 
 .grid--cards {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
-  margin-top: 2rem;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
 .card {
@@ -208,10 +210,6 @@ p {
     max-width: 100%; /* Ensure the container takes full width on smaller screens */
   }
 
-  .hero--title {
-    font-size: 2rem; /* Smaller font size for mobile */
-  }
-
   .hero--desc {
     font-size: 1rem; /* Adjusted for readability */
     padding: 0 1rem;
@@ -245,11 +243,11 @@ p {
 
 @media (max-width: 480px) {
   .hero--title {
-    font-size: 1.5rem; /* Even smaller font size for very small screens */
+    font-size: 18px; /* Even smaller font size for very small screens */
   }
 
   .hero--desc {
-    font-size: 0.85rem;
+    font-size: 12px;
   }
 
   .video-background {
@@ -260,7 +258,7 @@ p {
 .hero--title {
   text-align: center;
   margin-top: 1rem;
-  font-size: 3rem;
+  font-size: 24px;
 }
 
 .hero--desc {
@@ -480,16 +478,20 @@ footer p {
   top: 0;
   left: 0;
   width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
   height: auto;
   overflow: hidden; /* Hide any overflow from video */
-  box-shadow: 0 0 30px black;
+  box-shadow: 0 0 100px black;
+  border: 4px solid aliceblue;
 }
 .video-background {
+  display: block;
   position: relative; /* Ensure video is positioned correctly */
   top: 0;
   left: 0;
   width: 100%; /* Make the video cover the entire width */
-  height: 600px; /* Make the video cover the entire height */
+  height: auto; /* Make the video cover the entire height */
   object-fit: cover; /* Ensure the video covers the entire area without stretching */
 }
 
@@ -513,20 +515,24 @@ footer p {
   padding: 10px;
   max-height: calc(100vh - 200px);
   overflow-y: auto;
+  border: 2px solid black;
+  border-radius: 8px;
+  scrollbar-color: black;
 }
 
 /* Modal content */
 .modal-content {
-  background-color: #fff;
+  background-color: rgb(235, 250, 255);
   margin: auto; /* Center the modal content */
-  margin-top: 65px;
+  margin-top: 100px;
+  margin-bottom: 120px;
   padding: 10px; /* Reduced padding for a cleaner look */
   border-radius: 8px; /* Slightly smaller border radius */
   width: 95%; /* Adjust width of the modal */
   max-width: 1000px; /* Maximum width */
   text-align: left; /* Left-align content for a more professional look */
   position: relative;
-  box-shadow: 0 0 15px rgb(5, 53, 91); /* Subtle shadow for depth */
+  box-shadow: 0 0 20px rgb(5, 53, 91); /* Subtle shadow for depth */
   box-sizing: border-box; /* Ensure padding and width play nicely */
   border: 1px solid black;
 }
@@ -534,21 +540,32 @@ footer p {
 /* Modal header */
 .modal-header {
   display: flex;
-  justify-content: space-between; /* Aligns header text on the left, close button on the right */
+  justify-content: center; /* Center the header content */
   align-items: center;
-  padding-bottom: 10px; /* Added padding for spacing */
-  border-bottom: 3px solid #E74C3C; /* Thinner line under the header */
-  margin-bottom: 10px; /* Added margin for spacing */
-  position: relative;
+  padding-bottom: 10px;
+  border-bottom: 3px solid black;
+  margin-bottom: 10px;
+  position: relative; /* Make the container relative for positioning */
 }
 
-/* Close button */
+/* Ensure the title is centered */
+.modal-title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%); /* Center the title horizontally */
+  font-size: 24px; /* Adjust as necessary */
+}
+
+/* Position the close button on the right */
 .modal-close {
+  position: absolute;
+  right: 10px;
+  top: 0;
   background: transparent;
-  border: none; /* Remove border */
-  font-size: 36px; /* Smaller font size for a more subtle look */
+  border: none;
+  font-size: 36px;
   cursor: pointer;
-  outline: none; /* Remove outline */
+  outline: none;
 }
 
 .modal-close:hover,
@@ -574,11 +591,15 @@ footer p {
 }
 
 .modal-footnote{
+  border-width: 100%;
   text-align: center;
   margin-left: 50px;
   margin-right: 50px;
 }
 
+.no-scroll {
+  overflow: hidden;
+}
 
 h2 {
   margin-bottom: 10px; /* Space below the heading */
