@@ -94,6 +94,7 @@ img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  margin-left: 40px;
 }
 
 .grid--cards {
@@ -145,7 +146,7 @@ p {
   justify-content: space-between;  /* Space between logo and buttons */
   align-items: center;             /* Vertically align everything */
   position: relative;              /* Keep the layout consistent */
-  padding: 15px;
+  padding: 15px;  
 }
 
 .nav--container h3 {
@@ -161,6 +162,7 @@ p {
   background-clip: text;
   color: transparent;
   animation: shine 30s reverse infinite;
+  margin: 40px;
 }
 
 .logo {
