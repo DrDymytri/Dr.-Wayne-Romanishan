@@ -146,7 +146,7 @@ p {
   justify-content: space-between;  /* Space between logo and buttons */
   align-items: center;             /* Vertically align everything */
   position: relative;              /* Keep the layout consistent */
-  padding: 15px;  
+  padding: 5px;  
 }
 
 .nav--container h3 {
@@ -162,7 +162,7 @@ p {
   background-clip: text;
   color: transparent;
   animation: shine 30s reverse infinite;
-  margin: 40px;
+  margin: 10px;
 }
 
 .logo {
