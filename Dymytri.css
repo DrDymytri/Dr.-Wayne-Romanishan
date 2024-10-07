@@ -94,7 +94,7 @@ img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  margin-left: 40px;
+  margin-left: 0;
 }
 
 .grid--cards {
@@ -146,7 +146,7 @@ p {
   justify-content: space-between;  /* Space between logo and buttons */
   align-items: center;             /* Vertically align everything */
   position: relative;              /* Keep the layout consistent */
-  padding: 5px;  
+  padding: 15px;  
 }
 
 .nav--container h3 {
@@ -162,8 +162,7 @@ p {
   background-clip: text;
   color: transparent;
   animation: shine 30s reverse infinite;
-  margin: 10px;
-  padding-left: 60px;
+  margin-left: 60px;
 }
 
 .logo {
@@ -242,7 +241,7 @@ p {
   
     .navbar {
       text-align: center;
-      padding-right: 80px;
+      padding: 10px;
     }
   }
 
@@ -383,7 +382,6 @@ footer p {
 .navbar {
   overflow: hidden;
   background-color: #333;
-  margin-right: 50px;
 }
 
 .subnavbtn {
@@ -394,6 +392,7 @@ footer p {
   border-radius: 5px;
   border: none;
   cursor: pointer;
+  margin: 0;
 }
 
 .subnav-content {
@@ -477,7 +476,7 @@ footer p {
 
 /* Ensure the collage aligns well within the section */
 .experience {
-  padding: 40px 0;
+  padding: 0 0;
 }
 
 .video-wrapper {
