@@ -163,6 +163,7 @@ p {
   color: transparent;
   animation: shine 30s reverse infinite;
   margin: 10px;
+  padding-left: 60px;
 }
 
 .logo {
@@ -241,7 +242,7 @@ p {
   
     .navbar {
       text-align: center;
-      padding: 10px;
+      padding-right: 80px;
     }
   }
 
@@ -382,6 +383,7 @@ footer p {
 .navbar {
   overflow: hidden;
   background-color: #333;
+  margin-right: 50px;
 }
 
 .subnavbtn {
@@ -392,7 +394,6 @@ footer p {
   border-radius: 5px;
   border: none;
   cursor: pointer;
-  margin: 0;
 }
 
 .subnav-content {
