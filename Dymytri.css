@@ -175,27 +175,6 @@ p {
   width: auto;
 }
 
-/* hero */
-.psyimg{
-    background-image: url('./Images/output-onlinepngtools.png');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    transform: scale(1);
-    opacity: 1; 
-    padding-top: 1024px;
-    box-shadow: 0 0 15px black;
-}
-
-.hero .img--cover {
-  height: 150px;
-  width: 150px;
-  position: relative;
-  border-radius: 50%;
-  overflow: hidden;
-  margin: auto;
-}
-
 @keyframes shine {
     0% {
         background-position: 0% 50%;
@@ -335,34 +314,6 @@ p {
   object-fit: cover;
 }
 
-/* testimonial */
-
-.stars {
-  display: flex;
-  gap: 1rem;
-  margin-bottom: 0.5rem;
-}
-
-.star {
-  position: relative;
-  height: 1.2rem;
-  width: 1.2rem;
-}
-
-.test--profile {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.test--img--cover {
-  position: relative;
-  height: 50px;
-  width: 50px;
-  border-radius: 50%;
-  overflow: hidden;
-  margin-top: 0.5rem;
-}
 /* footer */
 footer {
   background-color: black; /* Updated footer background color */
