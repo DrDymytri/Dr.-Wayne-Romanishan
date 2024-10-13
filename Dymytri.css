@@ -354,7 +354,14 @@ footer p {
 }
 
 .subnavbtn {
-  background: transparent;
+  background: linear-gradient(
+    rgb(0, 53, 97) 0%, 
+    rgb(0, 140, 255) 20%,
+    rgb(0, 121, 220) 40%,
+    rgb(0, 99, 179) 60%,
+    rgb(0, 85, 154) 80%,
+    rgb(0, 53, 97) 100%
+  );
   color: azure;
   padding: 5px 5px;
   font-size: 14px;
@@ -362,7 +369,7 @@ footer p {
   border: none;
   cursor: pointer;
   margin: 0;
-  border: 2px solid red;
+  border: 2px solid azure;
   text-align: center;
 }
 
