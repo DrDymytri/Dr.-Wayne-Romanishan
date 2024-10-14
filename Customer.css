@@ -20,7 +20,7 @@ body {
     color: black;
     font-size: x-large;
     font-weight: bold;
-    border-bottom: 3px solid crimson;
+    border-bottom: 3px solid rgb(35, 143, 230);
     padding-top: 20px; /* Add padding to avoid cutting off the header */
 }
 
@@ -29,7 +29,7 @@ form {
     background: aliceblue;
     width: 100%;
     max-width: 1000px;
-    border-bottom: 6px solid crimson; /* Updated border color */
+    border-bottom: 6px solid rgb(35, 143, 230); /* Updated border color */
     padding: 30px;
     padding-right: 30px;  /* Increase space between form boundary and text boxes */
     background-color: white;
@@ -65,18 +65,22 @@ input:focus, textarea:focus {
 }
 
 button {
-    background: #2980b9; /* Updated button background color */
-    color: aliceblue;
+    background: linear-gradient(
+    rgb(0, 53, 97) 0%, 
+    rgb(0, 140, 255) 20%,
+    rgb(0, 121, 220) 40%,
+    rgb(0, 99, 179) 60%,
+    rgb(0, 85, 154) 80%,
+    rgb(0, 53, 97) 100%
+    ); /* Updated button background color */
+    color: azure;
     padding: 5px 5px;
-    box-shadow: 0 0 4px #000000;
-    border: 1xp solid black;
+    border: 2xp solid azure;
     border-radius: 8px;
     cursor: pointer;
-    font-size: medium;
+    font-size: 16px;
     width: 100%;
     max-width: 250px;
-    margin-top: 10px;
-    transition: background 0.3s ease-in-out, transform 0.2s ease;
 }
 
 /* Button hover effect */
@@ -97,7 +101,14 @@ button:hover {
 
 /* Dropdown Button */
 .dropbtn {
-    background-color: #3498DB;
+    background: linear-gradient(
+    rgb(0, 53, 97) 0%, 
+    rgb(0, 140, 255) 20%,
+    rgb(0, 121, 220) 40%,
+    rgb(0, 99, 179) 60%,
+    rgb(0, 85, 154) 80%,
+    rgb(0, 53, 97) 100%
+    );
     color: white;
     padding: 5px;
     font-size: 14px;
