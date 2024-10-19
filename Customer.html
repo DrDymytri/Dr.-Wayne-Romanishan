@@ -5,87 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Consultation Form</title>
         <link rel="stylesheet" href="./Customer.css">
-        <link rel="icon" href="./Images/psyblack.png" type="image/png">
-        <script>
-            // Function to send the email
-            function sendEmail(event) {
-                event.preventDefault(); // Prevent the default form submission
-        
-                // Collect form data
-                const company = document.getElementById('company').value;
-                const name = document.getElementById('name').value;
-                const email = document.getElementById('email').value;
-                const phone = document.getElementById('phone').value;
-                const srvcs = document.getElementById('srvcs').value;
-                const ppntmnt1 = document.getElementById('ppntmnt1').value;
-                const ppntmnt2 = document.getElementById('ppntmnt2').value;
-                const message = document.getElementById('message').value;
-
-                // Format the date and time
-                function formatDateTime(dateTime) {
-                    const date = new Date(dateTime);
-                    const formattedDate = date.toLocaleDateString('en-US', {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric'
-                    });
-                    const formattedTime = date.toLocaleTimeString('en-US', {
-                        hour: '2-digit',
-                        minute: '2-digit'
-                    });
-                    return `${formattedDate} at ${formattedTime}`;
-                }
-
-                const formattedPpntmnt1 = formatDateTime(ppntmnt1);
-                const formattedPpntmnt2 = formatDateTime(ppntmnt2);
-        
-                // Format the email body with line breaks and spaces
-                const emailBody = `
-                    Company Name:............${company}
-                    Name:................................${name}
-                    Email:.................................${email}
-                    Phone:...............................${phone}
-                    Service Requested:.......${srvcs}
-                    Appointment 1:.............${formattedPpntmnt1}
-                    Appointment 2:.............${formattedPpntmnt2}
-                    ------------------------------------------------
-        
-                    Message:
-                    ${message}
-                `;
-        
-                // Create the mailto link with subject and body
-                const mailtoLink = `mailto:wayne.romanishan@live.com?subject=MDOA: Consultation Request&body=${encodeURIComponent(emailBody)}`;
-        
-                // Open the email client with the formatted body
-                window.location.href = mailtoLink;
-            }
-        
-            // Function to toggle the dropdown
-            function toggleDropdown() {
-                document.getElementById("myDropdown").classList.toggle("show");
-            }
-        
-            // Function to select a service and update the visible label
-            function selectService(service) {
-                document.getElementById('srvcs').value = service; // Set hidden field value
-                document.getElementById('selectedService').textContent = `Selected Service: ${service}`; // Update the displayed service
-                document.getElementById("myDropdown").classList.remove("show"); // Close the dropdown after selection
-            }
-        
-            // Close the dropdown if the user clicks outside of it
-            window.onclick = function(event) {
-                if (!event.target.matches('.dropbtn')) {
-                    var dropdowns = document.getElementsByClassName("dropdown-content");
-                    for (var i = 0; i < dropdowns.length; i++) {
-                        var openDropdown = dropdowns[i];
-                        if (openDropdown.classList.contains('show')) {
-                            openDropdown.classList.remove('show');
-                        }
-                    }
-                }
-            }
-        </script>        
+        <link rel="icon" href="./Images/psyblack.png" type="image/png">      
     </head>
     <body>
         <div class="container">
@@ -130,11 +50,11 @@
                 </div>
                 <!-- Hidden input to store the selected service -->
                 <input type="hidden" id="srvcs" name="srvcs" required>
-        
+
                 <!-- Display selected service here -->
                 <p id="selectedService" style="font-weight: bold; color: #2980b9; margin-top: 10px;">No service selected</p>
                 
-                <p>Please provide two critical dates and the best times for us to meet on Micorosoft Teams.</p>
+                <p><span class="pColor">Please provide two critical dates and the best times for us to meet on Micorosoft Teams.</span></p>
                 <div class="form-row">
                     <div class="form-group">
                         <label for="ppntmnt1"><span class="highlightred">*</span> Appointment 1:</label>
@@ -160,7 +80,86 @@
                     </div>
                 </div>           
             </form>
-        </div>
-        
+        </div>        
     </body>
+    <script>
+        // Function to send the email
+        function sendEmail(event) {
+            event.preventDefault(); // Prevent the default form submission
+    
+            // Collect form data
+            const company = document.getElementById('company').value;
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const srvcs = document.getElementById('srvcs').value;
+            const ppntmnt1 = document.getElementById('ppntmnt1').value;
+            const ppntmnt2 = document.getElementById('ppntmnt2').value;
+            const message = document.getElementById('message').value;
+
+            // Format the date and time
+            function formatDateTime(dateTime) {
+                const date = new Date(dateTime);
+                const formattedDate = date.toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                });
+                const formattedTime = date.toLocaleTimeString('en-US', {
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+                return `${formattedDate} at ${formattedTime}`;
+            }
+
+            const formattedPpntmnt1 = formatDateTime(ppntmnt1);
+            const formattedPpntmnt2 = formatDateTime(ppntmnt2);
+    
+            // Format the email body with line breaks and spaces
+            const emailBody = `
+                Company Name:............${company}
+                Name:................................${name}
+                Email:.................................${email}
+                Phone:...............................${phone}
+                Service Requested:.......${srvcs}
+                Appointment 1:.............${formattedPpntmnt1}
+                Appointment 2:.............${formattedPpntmnt2}
+                ------------------------------------------------
+    
+                Message:
+                ${message}
+            `;
+    
+            // Create the mailto link with subject and body
+            const mailtoLink = `mailto:wayne.romanishan@live.com?subject=MDOA: Consultation Request&body=${encodeURIComponent(emailBody)}`;
+    
+            // Open the email client with the formatted body
+            window.location.href = mailtoLink;
+        }
+    
+        // Function to toggle the dropdown
+        function toggleDropdown() {
+            document.getElementById("myDropdown").classList.toggle("show");
+        }
+    
+        // Function to select a service and update the visible label
+        function selectService(service) {
+            document.getElementById('srvcs').value = service; // Set hidden field value
+            document.getElementById('selectedService').textContent = `Selected Service: ${service}`; // Update the displayed service
+            document.getElementById("myDropdown").classList.remove("show"); // Close the dropdown after selection
+        }
+    
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropbtn')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                for (var i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+    </script>  
 </html>

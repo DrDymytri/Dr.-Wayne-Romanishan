@@ -35,10 +35,10 @@ a {
 .Body-Button {
     background: linear-gradient(to bottom, #add8e6, #4682b4, #1e3d58, #4682b4, #add8e6); /* Gradient for bluish chrome effect */
     color: azure; /* White text color to complement the chrome look */
-    padding: 8px 10px;
+    padding: 5px 10px;
     border-radius: 25px; /* More rounded for a cylindrical look */
     text-align: center;
-    font-size: 18px;
+    font-size: 16px;
     border: none;
     cursor: pointer;
     box-shadow: 0 0 10px rgb(0, 53, 97), /* Main shadow for depth */
@@ -364,10 +364,10 @@ footer p {
 .subnavbtn {
   background: linear-gradient(to bottom, #add8e6, #4682b4, #1e3d58, #4682b4, #add8e6); /* Gradient for bluish chrome effect */
     color: azure; /* White text color to complement the chrome look */
-    padding: 8px 10px;
+    padding: 5px 10px;
     border-radius: 25px; /* More rounded for a cylindrical look */
     text-align: center;
-    font-size: 18px;
+    font-size: 16px;
     border: none;
     cursor: pointer;
     box-shadow: 0 0 10px rgb(0, 53, 97), /* Main shadow for depth */
@@ -395,8 +395,8 @@ footer p {
 }
 
 .subnav-content a:hover {
-  background-color: #8ec2f7;
-  color: black;  
+  background: linear-gradient(to bottom, #add8e6, #4682b4, #1e3d58, #4682b4, #add8e6);
+  color: azure;  
   box-shadow: 0 0 12px aliceblue;
 }
 
