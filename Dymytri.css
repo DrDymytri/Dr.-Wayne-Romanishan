@@ -38,7 +38,7 @@ a {
     padding: 5px 10px;
     border-radius: 25px; /* More rounded for a cylindrical look */
     text-align: center;
-    font-size: 16px;
+    font-size: 20px;
     border: none;
     cursor: pointer;
     box-shadow: 0 0 10px rgb(0, 53, 97), /* Main shadow for depth */
@@ -70,7 +70,7 @@ a {
     #fce5b7 100%
   );
   color: black;
-  font-size: 16px;
+  font-size: 20px;
   padding: 5px 5px;
   margin: 5px; /* Reduced horizontal spacing between buttons */
   text-transform: capitalize;
@@ -136,7 +136,7 @@ img {
 }
 
 i {
-  font-size: 14px;
+  font-size: 20px;
 }
 p {
   color: #555;
@@ -175,7 +175,7 @@ p {
 .nav--container h4{
   flex-grow: 1;                    /* Take up the space between the logo and buttons */
   text-align: center;              /* Center the heading */
-  font-size: 30px;
+  font-size: 20px;
   font-family: 'Sofia', sans-serif;
   font-weight: normal;
   font-style: italic;
@@ -220,12 +220,12 @@ p {
     }
   
     .hero--desc {
-      font-size: 1rem; /* Adjusted for readability */
+      font-size: 20px; /* Adjusted for readability */
       padding: 0 1rem;
     }
   
     .section--desc {
-      font-size: 0.9rem; /* Smaller font size for sections */
+      font-size: 20px; /* Smaller font size for sections */
       padding: 0 1rem;
     }
   
@@ -252,11 +252,11 @@ p {
 
 @media (max-width: 480px) {
   .hero--title {
-    font-size: 18px; /* Even smaller font size for very small screens */
+    font-size: 24px; /* Even smaller font size for very small screens */
   }
 
   .hero--desc {
-    font-size: 12px;
+    font-size: 20px;
   }
 
   .video-background {
@@ -367,7 +367,7 @@ footer p {
     padding: 5px 10px;
     border-radius: 25px; /* More rounded for a cylindrical look */
     text-align: center;
-    font-size: 16px;
+    font-size: 20px;
     border: none;
     cursor: pointer;
     box-shadow: 0 0 10px rgb(0, 53, 97), /* Main shadow for depth */
@@ -426,7 +426,7 @@ footer p {
 }
 
 .AboutMe--desc {
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 300;
   color: #555;
   line-height: 1.6;
@@ -464,7 +464,7 @@ footer p {
   background: transparent;
   color: azure;
   padding: 5px 5px;
-  font-size: 14px;
+  font-size: 20px;
   border-radius: 5px;
   cursor: pointer;
   margin: 0;
