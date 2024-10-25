@@ -34,16 +34,16 @@ a {
 
 .Body-Button {
     background: linear-gradient(to bottom, #add8e6, #4682b4, #1e3d58, #4682b4, #add8e6); /* Gradient for bluish chrome effect */
-    color: azure; /* White text color to complement the chrome look */
+    color: white; /* White text color to complement the chrome look */
     padding: 5px 10px;
     border-radius: 25px; /* More rounded for a cylindrical look */
     text-align: center;
-    font-size: 20px;
+    font-size: 18px;
     border: none;
     cursor: pointer;
     box-shadow: 0 0 10px rgb(0, 53, 97), /* Main shadow for depth */
                 inset 0 2px 2px rgba(255, 255, 255, 0.5), /* Inset highlight for 3D effect */
-                inset 0 -2px 2px rgb(0, 53, 97); /* Inset shadow for depth */
+                inset 0 -2px 2px rgb(240, 247, 252); /* Inset shadow for depth */
     transition: transform 0.2s, background 0.3s; /* Smooth transitions for click and hover effects */
 }
 
@@ -55,7 +55,7 @@ a {
 .body-button:active {
     transform: scale(0.95); /* Slightly reduce size on click */
     box-shadow: 0 4px 8px rgb(0, 53, 97), /* Main shadow for depth */
-                inset 0 2px 2px rgba(255, 255, 255, 0.5), /* Inset highlight for 3D effect */
+                inset 0 2px 2px rgba(231, 253, 212, 0.5), /* Inset highlight for 3D effect */
                 inset 0 -1px 1px rgb(0, 53, 97); /* Reduced inset shadow for pressed look */
 }
 .centered-button {
@@ -367,12 +367,12 @@ footer p {
     padding: 5px 10px;
     border-radius: 25px; /* More rounded for a cylindrical look */
     text-align: center;
-    font-size: 20px;
+    font-size: 18px;
     border: none;
     cursor: pointer;
     box-shadow: 0 0 10px rgb(0, 53, 97), /* Main shadow for depth */
                 inset 0 2px 2px rgba(255, 255, 255, 0.5), /* Inset highlight for 3D effect */
-                inset 0 -2px 2px rgb(0, 53, 97); /* Inset shadow for depth */
+                inset 0 -2px 2px white; /* Inset shadow for depth */
     transition: transform 0.2s, background 0.3s; /* Smooth transitions for click and hover effects */
 }
 
@@ -389,7 +389,7 @@ footer p {
 
 .subnav-content a {
   color: white;
-  padding: 12px 16px;
+  padding: 5px 10px;
   text-decoration: none;
   display: block;
 }
@@ -489,7 +489,7 @@ footer p {
   left: 0;
   width: 100%;
   max-width: 1000px;
-  margin: 0 auto;
+  margin: 10px auto;
   height: auto;
   overflow: hidden; /* Hide any overflow from video */
   box-shadow: 0 0 30px rgb(0, 53, 97);
