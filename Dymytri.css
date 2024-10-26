@@ -19,6 +19,8 @@ a {
 }
 
 .button-container {
+  margin-top: 5px;
+  margin-bottom: 5px;
   display: flex;
   justify-content: flex-end;        /* Push buttons to the right */
   align-items: center;
@@ -34,28 +36,28 @@ a {
 
 .Body-Button {
     background: linear-gradient(to bottom, #add8e6, #4682b4, #1e3d58, #4682b4, #add8e6); /* Gradient for bluish chrome effect */
-    color: white; /* White text color to complement the chrome look */
-    padding: 5px 10px;
+    color: rgb(236, 235, 235); /* White text color to complement the chrome look */
+    padding: 2px 10px;
     border-radius: 25px; /* More rounded for a cylindrical look */
     text-align: center;
     font-size: 18px;
     border: none;
     cursor: pointer;
-    box-shadow: 0 0 10px rgb(0, 53, 97), /* Main shadow for depth */
-                inset 0 2px 2px rgba(255, 255, 255, 0.5), /* Inset highlight for 3D effect */
-                inset 0 -2px 2px rgb(240, 247, 252); /* Inset shadow for depth */
+    box-shadow: 0 0 20px rgb(0, 8, 14), /* Main shadow for depth */
+                inset 0 1px 2px rgb(240, 250, 255), /* Inset highlight for 3D effect */
+                inset 0 -1px 2px aliceblue; /* Inset shadow for depth */
     transition: transform 0.2s, background 0.3s; /* Smooth transitions for click and hover effects */
 }
 
 .Body-Button:hover{
-  box-shadow: 0 0 30px black;
+  box-shadow: 0 0 30px greenyellow;
   color: greenyellow;
 }
 
 .body-button:active {
     transform: scale(0.95); /* Slightly reduce size on click */
     box-shadow: 0 4px 8px rgb(0, 53, 97), /* Main shadow for depth */
-                inset 0 2px 2px rgba(231, 253, 212, 0.5), /* Inset highlight for 3D effect */
+                inset 0 2px 2px rgba(83, 142, 31, 0.5), /* Inset highlight for 3D effect */
                 inset 0 -1px 1px rgb(0, 53, 97); /* Reduced inset shadow for pressed look */
 }
 .centered-button {
@@ -70,7 +72,7 @@ a {
     #fce5b7 100%
   );
   color: black;
-  font-size: 20px;
+  font-size: 18px;
   padding: 5px 5px;
   margin: 5px; /* Reduced horizontal spacing between buttons */
   text-transform: capitalize;
@@ -175,7 +177,7 @@ p {
 .nav--container h4{
   flex-grow: 1;                    /* Take up the space between the logo and buttons */
   text-align: center;              /* Center the heading */
-  font-size: 20px;
+  font-size: 22px;
   font-family: 'Sofia', sans-serif;
   font-weight: normal;
   font-style: italic;
@@ -363,16 +365,16 @@ footer p {
 
 .subnavbtn {
   background: linear-gradient(to bottom, #add8e6, #4682b4, #1e3d58, #4682b4, #add8e6); /* Gradient for bluish chrome effect */
-    color: azure; /* White text color to complement the chrome look */
-    padding: 5px 10px;
+    color: rgb(234, 234, 234); /* White text color to complement the chrome look */
+    padding: 2px 10px;
     border-radius: 25px; /* More rounded for a cylindrical look */
     text-align: center;
     font-size: 18px;
     border: none;
     cursor: pointer;
-    box-shadow: 0 0 10px rgb(0, 53, 97), /* Main shadow for depth */
-                inset 0 2px 2px rgba(255, 255, 255, 0.5), /* Inset highlight for 3D effect */
-                inset 0 -2px 2px white; /* Inset shadow for depth */
+    box-shadow: 0 0 20px rgb(0, 8, 14), /* Main shadow for depth */
+                inset 0 1px 2px rgb(240, 250, 255), /* Inset highlight for 3D effect */
+                inset 0 -1px 2px aliceblue; /* Inset shadow for depth */
     transition: transform 0.2s, background 0.3s; /* Smooth transitions for click and hover effects */
 }
 
@@ -395,7 +397,7 @@ footer p {
 }
 
 .subnav-content a:hover {
-  background: linear-gradient(to bottom, #add8e6, #4682b4, #1e3d58, #4682b4, #add8e6);
+  background: linear-gradient(to bottom, #add8e6, #275f8e, #1e3d58, #275f8e, #add8e6);
   color: azure;  
   box-shadow: 0 0 12px aliceblue;
 }
@@ -464,7 +466,7 @@ footer p {
   background: transparent;
   color: azure;
   padding: 5px 5px;
-  font-size: 20px;
+  font-size: 18px;
   border-radius: 5px;
   cursor: pointer;
   margin: 0;
