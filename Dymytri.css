@@ -35,8 +35,8 @@ a {
 }
 
 .Body-Button {
-    background: linear-gradient(to bottom, #add8e6, #4682b4, #1e3d58, #4682b4, #add8e6); /* Gradient for bluish chrome effect */
-    color: rgb(236, 235, 235); /* White text color to complement the chrome look */
+    background: linear-gradient(to bottom, #add1f9, #3f89de, #3472b8, #2e5c90, #21456f); /* Gradient for bluish chrome effect */
+    color: white; /* White text color to complement the chrome look */
     padding: 2px 10px;
     border-radius: 25px; /* More rounded for a cylindrical look */
     text-align: center;
@@ -44,14 +44,14 @@ a {
     border: none;
     cursor: pointer;
     box-shadow: 0 0 20px rgb(0, 8, 14), /* Main shadow for depth */
-                inset 0 1px 2px rgb(240, 250, 255), /* Inset highlight for 3D effect */
-                inset 0 -1px 2px aliceblue; /* Inset shadow for depth */
+                inset 0 1px 1px #cde4ffbc, /* Inset highlight for 3D effect */
+                inset 0 -1px 1px rgba(196, 222, 236, 0.732); /* Inset shadow for depth */
     transition: transform 0.2s, background 0.3s; /* Smooth transitions for click and hover effects */
 }
 
 .Body-Button:hover{
-  box-shadow: 0 0 30px greenyellow;
-  color: greenyellow;
+  box-shadow: 0 0 30px rgb(103, 202, 255);
+  color: rgb(104, 215, 255);
 }
 
 .body-button:active {
@@ -364,18 +364,18 @@ footer p {
 }
 
 .subnavbtn {
-  background: linear-gradient(to bottom, #add8e6, #4682b4, #1e3d58, #4682b4, #add8e6); /* Gradient for bluish chrome effect */
-    color: rgb(234, 234, 234); /* White text color to complement the chrome look */
-    padding: 2px 10px;
-    border-radius: 25px; /* More rounded for a cylindrical look */
-    text-align: center;
-    font-size: 18px;
-    border: none;
-    cursor: pointer;
-    box-shadow: 0 0 20px rgb(0, 8, 14), /* Main shadow for depth */
-                inset 0 1px 2px rgb(240, 250, 255), /* Inset highlight for 3D effect */
-                inset 0 -1px 2px aliceblue; /* Inset shadow for depth */
-    transition: transform 0.2s, background 0.3s; /* Smooth transitions for click and hover effects */
+  background: linear-gradient(to bottom, #add1f9, #3f89de, #3472b8, #2e5c90, #21456f); /* Gradient for bluish chrome effect */
+  color: white; /* White text color to complement the chrome look */
+  padding: 2px 10px;
+  border-radius: 25px; /* More rounded for a cylindrical look */
+  text-align: center;
+  font-size: 18px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 0 20px rgb(0, 8, 14), /* Main shadow for depth */
+              inset 0 1px 1px #cde4ffbc, /* Inset highlight for 3D effect */
+              inset 0 -1px 1px rgba(196, 222, 236, 0.732); /* Inset shadow for depth */
+  transition: transform 0.2s, background 0.3s; /* Smooth transitions for click and hover effects */
 }
 
 .subnav-content {
