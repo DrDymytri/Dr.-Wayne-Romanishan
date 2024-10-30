@@ -611,6 +611,7 @@ footer p {
 
 .modal-close:hover,
 .modal-close:focus {
+  text-shadow: 0 0 5px black;
   color: #d32f2f;
   text-decoration: none;
   cursor: pointer;
