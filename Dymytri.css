@@ -9,7 +9,7 @@
 }
 
 .container {
-  max-width: 1100px;
+  max-width: 1000px;
   margin: auto;
   padding: 0 1rem;
 }
@@ -60,27 +60,6 @@ a {
     box-shadow: 0 4px 8px rgb(0, 53, 97), /* Main shadow for depth */
                 inset 0 2px 2px rgba(83, 142, 31, 0.5), /* Inset highlight for 3D effect */
                 inset 0 -1px 1px rgb(0, 53, 97); /* Reduced inset shadow for pressed look */
-}
-.centered-button {
-  background: linear-gradient(
-    #b47041 5%, 
-    #fce5b7 10%,
-    #dfb180 20%,
-    #dfb180 25%,
-    #b47041 50%,
-    #cb8e60 75%,
-    #dfb180 90%,
-    #fce5b7 100%
-  );
-  color: black;
-  font-size: 18px;
-  padding: 5px 5px;
-  margin: 5px; /* Reduced horizontal spacing between buttons */
-  text-transform: capitalize;
-  border: 2px solid rgb(3, 151, 249);
-  border-radius: 4px;
-  cursor: pointer;
-  box-shadow: 0 0 30px rgb(0, 53, 97);
 }
 
 .centered-button:hover, .cta-button:hover {
@@ -158,15 +137,18 @@ p {
 
 /* nav */
 .nav {
-  background-color: black;
-  position: sticky;
+  background: linear-gradient(to right, black, rgb(0, 81, 255));
+  position: relative;
   top: 0;
-  left: 0;
+  left: 50%;
+  transform: translateX(-50%);
   margin-top: 0;
+  max-width: 1000px;
   width: 100%;
   justify-content: center;
   align-items: center;
   z-index: 1000;
+  border-bottom: 3px solid #000000;
 }
 
 .nav--container {
@@ -174,17 +156,17 @@ p {
   justify-content: space-between;  /* Space between logo and buttons */
   align-items: center;             /* Vertically align everything */
   position: relative;              /* Keep the layout consistent */
-  padding: 15px;  
+  padding: 15px;
 }
 
-.nav--container h4{
+.nav--container h4 {
   flex-grow: 1;                    /* Take up the space between the logo and buttons */
   text-align: center;              /* Center the heading */
   font-size: 22px;
   font-family: 'Sofia', sans-serif;
   font-weight: normal;
   font-style: italic;
-  background: linear-gradient(90deg, #8ec2f7 25%, #fce1b3 50%, #c5895e 75%, #8ec2f7 100%);
+  background: linear-gradient(90deg, #eaebec 25%, #f3f0eb 50%, #ddd8d4 75%, #55b7f8 100%);
   background-size: 500% 200%;
   -webkit-background-clip: text;
   background-clip: text;
@@ -205,6 +187,7 @@ p {
   width: auto;
   margin-left: 0;
 }
+
 
 @keyframes shine {
     0% {
@@ -347,7 +330,7 @@ p {
 
 /* footer */
 footer {
-  background-color: black; /* Updated footer background color */
+  background-color: #ECF0F1;
 }
 
 .footer--container {
@@ -358,26 +341,29 @@ footer {
 }
 
 footer p {
-  color: #fff;
+  color: rgb(3, 71, 117);
 }
 
 .navbar {
   overflow: hidden;
-  background-color: #333;
+  background-color: hsl(60, 100%, 98%);
+  outline: none;
+  border-radius: 25px;
 }
 
 .subnavbtn {
   background: linear-gradient(to bottom, #add1f9, #2e7ad1, #1d62b0, #124279, #06284f); /* Gradient for bluish chrome effect */
   color: white; /* White text color to complement the chrome look */
-  padding: 2px 10px;
+  padding: 5px 10px;
   border-radius: 25px; /* More rounded for a cylindrical look */
   text-align: center;
   font-size: 18px;
+  display: inline-block;
   border: none;
   cursor: pointer;
-  box-shadow: 0 0 20px rgb(0, 8, 14), /* Main shadow for depth */
-              inset 0 1px 1px #cde4ffbc, /* Inset highlight for 3D effect */
-              inset 0 -1px 1px white; /* Inset shadow for depth */
+  box-shadow: 0 5px 10px rgb(0, 8, 14), /* Main shadow for depth */
+              inset 0 1px 2px #cde4ffbc, /* Inset highlight for 3D effect */
+              inset 0 -1px 2px white; /* Inset shadow for depth */
   transition: transform 0.2s, background 0.3s; /* Smooth transitions for click and hover effects */
 }
 
