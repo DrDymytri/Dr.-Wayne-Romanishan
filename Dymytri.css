@@ -226,6 +226,10 @@ p {
     .video-background {
       height: 300px; /* Adjust video height for mobile */
     }
+
+    .nav {
+      background: linear-gradient(to bottom, black, black, rgb(0, 81, 255));
+    }
   
     /* Stacking navigation for mobile */
     .nav--container {
@@ -239,6 +243,10 @@ p {
   }
 
 @media (max-width: 480px) {
+
+  .nav {
+    background: linear-gradient(to bottom, black, black, rgb(0, 81, 255));
+  }
   .hero--title {
     font-size: 24px; /* Even smaller font size for very small screens */
   }
