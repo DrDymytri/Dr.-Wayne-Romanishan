@@ -22,21 +22,28 @@ a {
   margin-top: 5px;
   margin-bottom: 5px;
   display: flex;
-  justify-content: flex-end;        /* Push buttons to the right */
+  justify-content: flex-end; /* Push buttons to the right */
   align-items: center;
-  gap: 0;                        /* Spacing between the buttons */
-  flex: 0 0 auto;                   /* Ensure the buttons don't shrink or grow */
+  gap: 0; /* Spacing between the buttons */
+  flex: 0 0 auto; /* Ensure the buttons don't shrink or grow */
 }
 
 .Body-Button-Container {
   margin-top: 5px;
   display: flex;
   justify-content: center;
-  align-items: center; 
+  align-items: center;
 }
 
 .Body-Button {
-  background: linear-gradient(to bottom, #add1f9, #2e7ad1, #1d62b0, #124279, #06284f); /* Gradient for bluish chrome effect */
+  background: linear-gradient(
+    to bottom,
+    #add1f9,
+    #2e7ad1,
+    #1d62b0,
+    #124279,
+    #06284f
+  ); /* Gradient for bluish chrome effect */
   color: white; /* White text color to complement the chrome look */
   padding: 5px 10px;
   border-radius: 25px; /* More rounded for a cylindrical look */
@@ -44,27 +51,28 @@ a {
   font-size: 18px;
   border: none;
   cursor: pointer;
-  box-shadow: 0 5px 10px rgb(0, 8, 14), /* Main shadow for depth */
-              inset 0 1px 2px #cde4ffbc, /* Inset highlight for 3D effect */
-              inset 0 -1px 2px white; /* Inset shadow for depth */
+  box-shadow: 0 5px 10px rgb(0, 8, 14),
+    /* Main shadow for depth */ inset 0 1px 2px #cde4ffbc,
+    /* Inset highlight for 3D effect */ inset 0 -1px 2px white; /* Inset shadow for depth */
   transition: transform 0.2s, background 0.3s; /* Smooth transitions for click and hover effects */
 }
 
-.Body-Button:hover{
+.Body-Button:hover {
   box-shadow: 0 0 30px white;
   color: rgb(104, 215, 255);
 }
 
 .body-button:active {
-    transform: scale(0.95); /* Slightly reduce size on click */
-    box-shadow: 0 4px 8px rgb(0, 53, 97), /* Main shadow for depth */
-                inset 0 2px 2px rgba(83, 142, 31, 0.5), /* Inset highlight for 3D effect */
-                inset 0 -1px 1px rgb(0, 53, 97); /* Reduced inset shadow for pressed look */
+  transform: scale(0.95); /* Slightly reduce size on click */
+  box-shadow: 0 4px 8px rgb(0, 53, 97),
+    /* Main shadow for depth */ inset 0 2px 2px rgba(83, 142, 31, 0.5),
+    /* Inset highlight for 3D effect */ inset 0 -1px 1px rgb(0, 53, 97); /* Reduced inset shadow for pressed look */
 }
 
-.centered-button:hover, .cta-button:hover {
+.centered-button:hover,
+.cta-button:hover {
   background-color: #8ec2f7;
-  color: black;  
+  color: black;
   box-shadow: 0 0 12px white;
   transform: translateY(-2px);
 }
@@ -128,7 +136,14 @@ p {
 .chip {
   font-size: 16px;
   padding: 5px 10px;
-  background: linear-gradient(to bottom, #ff8585, #de3f3f, #8c1e1e, #902e2e, #6f2121); /* Updated chip background color */
+  background: linear-gradient(
+    to bottom,
+    #ff8585,
+    #de3f3f,
+    #8c1e1e,
+    #902e2e,
+    #6f2121
+  ); /* Updated chip background color */
   width: fit-content;
   border-radius: 10px;
   color: white;
@@ -152,21 +167,27 @@ p {
 }
 
 .nav--container {
-  display: flex;                   /* Use flexbox to control alignment */
-  justify-content: space-between;  /* Space between logo and buttons */
-  align-items: center;             /* Vertically align everything */
-  position: relative;              /* Keep the layout consistent */
+  display: flex; /* Use flexbox to control alignment */
+  justify-content: space-between; /* Space between logo and buttons */
+  align-items: center; /* Vertically align everything */
+  position: relative; /* Keep the layout consistent */
   padding: 15px;
 }
 
 .nav--container h4 {
-  flex-grow: 1;                    /* Take up the space between the logo and buttons */
-  text-align: center;              /* Center the heading */
+  flex-grow: 1; /* Take up the space between the logo and buttons */
+  text-align: center; /* Center the heading */
   font-size: 22px;
-  font-family: 'Sofia', sans-serif;
+  font-family: "Sofia", sans-serif;
   font-weight: normal;
   font-style: italic;
-  background: linear-gradient(90deg, #eaebec 25%, #f3f0eb 50%, #ddd8d4 75%, #55b7f8 100%);
+  background: linear-gradient(
+    90deg,
+    #eaebec 25%,
+    #f3f0eb 50%,
+    #ddd8d4 75%,
+    #55b7f8 100%
+  );
   background-size: 500% 200%;
   -webkit-background-clip: text;
   background-clip: text;
@@ -177,73 +198,71 @@ p {
 }
 
 .logo {
-  flex: 0 0 auto;                  /* Do not allow logo to grow or shrink */
+  flex: 0 0 auto; /* Do not allow logo to grow or shrink */
   margin-right: 20px;
   margin-left: 20px;
 }
 
 .logo img {
-  max-height: 80px;                /* Adjust size of logo */
+  max-height: 80px; /* Adjust size of logo */
   width: auto;
   margin-left: 0;
 }
 
-
 @keyframes shine {
-    0% {
-        background-position: 0% 50%;
-    }
-    100% {
-        background-position: 100% 50%;
-    }
-   }
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
 
-   @media (max-width: 768px){
-    .grid--cards {
-      grid-template-columns: 1fr; /* Single column on smaller screens */
-    }
-  
-    .container {
-      max-width: 100%; /* Ensure the container takes full width on smaller screens */
-    }
-  
-    .hero--desc {
-      font-size: 20px; /* Adjusted for readability */
-      padding: 0 1rem;
-    }
-  
-    .section--desc {
-      font-size: 20px; /* Smaller font size for sections */
-      padding: 0 1rem;
-    }
-  
-    .portfolio--img--cover img, 
-    .test--img--cover img {
-      width: 100%; /* Ensure images resize to fit */
-      height: auto;
-    }
-  
-    .video-background {
-      height: 300px; /* Adjust video height for mobile */
-    }
-
-    .nav {
-      background: linear-gradient(to bottom, black, black, rgb(0, 81, 255));
-    }
-  
-    /* Stacking navigation for mobile */
-    .nav--container {
-      flex-direction: column;
-    }
-  
-    .navbar {
-      text-align: center;
-      padding: 10px;
-    }
+@media (max-width: 768px) {
+  .grid--cards {
+    grid-template-columns: 1fr; /* Single column on smaller screens */
   }
 
-@media (max-width: 480px) {
+  .container {
+    max-width: 100%; /* Ensure the container takes full width on smaller screens */
+  }
 
+  .hero--desc {
+    font-size: 20px; /* Adjusted for readability */
+    padding: 0 1rem;
+  }
+
+  .section--desc {
+    font-size: 20px; /* Smaller font size for sections */
+    padding: 0 1rem;
+  }
+
+  .portfolio--img--cover img,
+  .test--img--cover img {
+    width: 100%; /* Ensure images resize to fit */
+    height: auto;
+  }
+
+  .video-background {
+    height: 300px; /* Adjust video height for mobile */
+  }
+
+  .nav {
+    background: linear-gradient(to bottom, black, black, rgb(0, 81, 255));
+  }
+
+  /* Stacking navigation for mobile */
+  .nav--container {
+    flex-direction: column;
+  }
+
+  .navbar {
+    text-align: center;
+    padding: 10px;
+  }
+}
+
+@media (max-width: 480px) {
   .nav {
     background: linear-gradient(to bottom, black, black, rgb(0, 81, 255));
   }
@@ -285,7 +304,7 @@ p {
 
 /* experience */
 .experience {
-  background-color: #ECF0F1; /* Updated background color */
+  background-color: #ecf0f1; /* Updated background color */
 }
 
 .divider {
@@ -315,13 +334,13 @@ p {
   align-items: center;
 }
 
-.ColorChange{
-  color: #E74C3C;
+.ColorChange {
+  color: #e74c3c;
 }
 
 /* portfolio */
 .portfolio {
-  background-color: #ECF0F1; /* Updated background color */
+  background-color: #ecf0f1; /* Updated background color */
 }
 
 .portfolio--img--cover {
@@ -330,7 +349,8 @@ p {
   overflow: hidden;
 }
 
-.portfolio--img--cover video, .portfolio--img--cover video {
+.portfolio--img--cover video,
+.portfolio--img--cover video {
   width: 100%;
   height: auto;
   object-fit: cover;
@@ -338,7 +358,7 @@ p {
 
 /* footer */
 footer {
-  background-color: #ECF0F1;
+  background-color: #ecf0f1;
 }
 
 .footer--container {
@@ -360,7 +380,14 @@ footer p {
 }
 
 .subnavbtn {
-  background: linear-gradient(to bottom, #add1f9, #2e7ad1, #1d62b0, #124279, #06284f); /* Gradient for bluish chrome effect */
+  background: linear-gradient(
+    to bottom,
+    #add1f9,
+    #2e7ad1,
+    #1d62b0,
+    #124279,
+    #06284f
+  ); /* Gradient for bluish chrome effect */
   color: white; /* White text color to complement the chrome look */
   padding: 5px 10px;
   border-radius: 25px; /* More rounded for a cylindrical look */
@@ -369,9 +396,9 @@ footer p {
   display: inline-block;
   border: none;
   cursor: pointer;
-  box-shadow: 0 5px 10px rgb(0, 8, 14), /* Main shadow for depth */
-              inset 0 1px 2px #cde4ffbc, /* Inset highlight for 3D effect */
-              inset 0 -1px 2px white; /* Inset shadow for depth */
+  box-shadow: 0 5px 10px rgb(0, 8, 14),
+    /* Main shadow for depth */ inset 0 1px 2px #cde4ffbc,
+    /* Inset highlight for 3D effect */ inset 0 -1px 2px white; /* Inset shadow for depth */
   transition: transform 0.2s, background 0.3s; /* Smooth transitions for click and hover effects */
 }
 
@@ -385,7 +412,6 @@ footer p {
   left: auto; /* Prevent any left expansion */
 }
 
-
 .subnav-content a {
   color: white;
   padding: 5px 10px;
@@ -394,26 +420,37 @@ footer p {
 }
 
 .subnav-content a:hover {
-  background: linear-gradient(to bottom, #add8e6, #275f8e, #1e3d58, #275f8e, #add8e6);
-  color: azure;  
+  background: linear-gradient(
+    to bottom,
+    #add8e6,
+    #275f8e,
+    #1e3d58,
+    #275f8e,
+    #add8e6
+  );
+  color: azure;
   box-shadow: 0 0 12px aliceblue;
 }
 
 .navbar:hover .subnav-content {
-  display: block;  
+  display: block;
   box-shadow: 0 0 10px white;
 }
 
 /* About Me Section */
 .AboutMe {
-  padding: 50px 20px;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 .AboutMe-Page {
   max-width: 800px;
   margin: 0 auto;
   text-align: center;
+}
+
+.AboutMe-Page h2 {
+  color: rgb(3, 30, 57);
+  text-shadow: 1px 0 0 aliceblue;
 }
 
 .AboutMe--title {
@@ -441,6 +478,11 @@ footer p {
   margin-bottom: 20px;
 }
 
+.AboutMe--desc h2 {
+  color: rgb(3, 30, 57);
+  text-shadow: 6px 0 0 rgb(0, 136, 255);
+}
+
 /* Ensure the collage aligns well within the section */
 .experience {
   padding: 0 0;
@@ -458,6 +500,18 @@ footer p {
   box-shadow: 0 0 30px rgb(0, 53, 97);
   border: 4px solid aliceblue;
 }
+
+.headSpace {
+  max-width: 1000px;
+  align-items: center;
+  justify-items: center;
+  margin: 10px auto;
+  text-align: center;
+  background: none;
+  color: rgb(3, 30, 57);
+  text-shadow: 2px 0 0 aliceblue;
+}
+
 .video-background {
   display: block;
   position: relative; /* Ensure video is positioned correctly */
@@ -479,7 +533,7 @@ footer p {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(7, 38, 79, 0.6); 
+  background-color: rgba(7, 38, 79, 0.6);
   z-index: 1000; /* Ensure it sits on top of other content */
   overflow-y: auto; /* Ensures modal is scrollable if content is too tall */
 }
@@ -490,7 +544,7 @@ footer p {
   overflow-y: auto;
   border: 2px solid black;
   border-radius: 10px;
-  background-color: #ECF0F1;
+  background-color: #ecf0f1;
 }
 
 /* Modal content */
@@ -511,19 +565,26 @@ footer p {
   color: #333;
 }
 
-.card h4{
+.card h4 {
   color: black;
 }
 
-.card i{
+.card i {
   color: black;
   font-size: medium;
 }
 
-.card h3{
+.card h3 {
   font-size: 16px;
   padding: 5px 10px;
-  background: linear-gradient(to bottom, #ff8585, #de3f3f, #8c1e1e, #902e2e, #6f2121); /* Updated chip background color */
+  background: linear-gradient(
+    to bottom,
+    #ff8585,
+    #de3f3f,
+    #8c1e1e,
+    #902e2e,
+    #6f2121
+  ); /* Updated chip background color */
   width: fit-content;
   border-radius: 10px;
   color: white;
@@ -544,7 +605,12 @@ footer p {
   margin-bottom: 10px;
   background-color: rgba(26, 91, 151, 0.319);
   position: relative; /* Make the container relative for positioning */
-  text-shadow: rgba(3, 85, 157, 0.686);; /* Horizontal offset, vertical offset, blur radius, color */
+  text-shadow: rgba(
+    3,
+    85,
+    157,
+    0.686
+  ); /* Horizontal offset, vertical offset, blur radius, color */
   color: black;
   border-radius: 10px;
 }
@@ -592,7 +658,7 @@ footer p {
   margin-top: 10px; /* Added margin for spacing */
 }
 
-.modal-footnote{
+.modal-footnote {
   border-width: 100%;
   text-align: center;
   margin-left: 50px;
@@ -613,7 +679,7 @@ p {
   text-align: left;
 }
 
-.cardlogos{
+.cardlogos {
   position: relative;
   align-items: center;
   justify-content: center;
