@@ -5,7 +5,12 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: "Rubik", sans-serif;
+  font-family: serif;
+  letter-spacing: normal;
+}
+
+body {
+  background-color: hsl(60, 100%, 98%);
 }
 
 .container {
@@ -46,7 +51,7 @@ a {
   ); /* Gradient for bluish chrome effect */
   color: white; /* White text color to complement the chrome look */
   padding: 5px 10px;
-  border-radius: 25px; /* More rounded for a cylindrical look */
+  border-radius: 10px; /* More rounded for a cylindrical look */
   text-align: center;
   font-size: 18px;
   border: none;
@@ -195,6 +200,7 @@ p {
   animation: shine 60s reverse infinite;
   margin-left: 60px;
   margin-right: 60px;
+  letter-spacing: 1px;
 }
 
 .logo {
@@ -283,6 +289,7 @@ p {
   text-align: center;
   margin-top: 5px;
   font-size: 24px;
+  text-shadow: 1px 0 0 #fff;
 }
 
 .hero--desc {
@@ -390,7 +397,7 @@ footer p {
   ); /* Gradient for bluish chrome effect */
   color: white; /* White text color to complement the chrome look */
   padding: 5px 10px;
-  border-radius: 25px; /* More rounded for a cylindrical look */
+  border-radius: 10px; /* More rounded for a cylindrical look */
   text-align: center;
   font-size: 18px;
   display: inline-block;

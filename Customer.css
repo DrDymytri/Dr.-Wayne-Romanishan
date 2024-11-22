@@ -1,183 +1,206 @@
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #87cfff95;
-    margin: 0;
-    padding: 5px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh; /* Changed from height to min-height */
+  font-family: serif;
+  background: #87cfff95;
+  margin: 0;
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Changed from height to min-height */
 }
 
 .form-header {
-    width: 100%;
-    height: 30px;
-    margin-bottom: 5px;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-    display: flex;
-    color: black;
-    font-size: x-large;
-    font-weight: bold;
-    border-bottom: 3px solid rgb(0, 53, 97);
+  width: 100%;
+  height: 30px;
+  margin-bottom: 5px;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  color: black;
+  font-size: x-large;
+  font-weight: bold;
+  border-bottom: 3px solid rgb(0, 53, 97);
 }
 
-
 form {
-    position: relative;
-    background: transparent;
-    width: 100%;
-    max-width: 1000px;
-    border-bottom: 6px solid rgb(0, 53, 97); /* Updated border color */
-    padding: 15px;
-    padding-right: 15px;  /* Increase space between form boundary and text boxes */
-    background-color: aliceblue;
-    border-radius: 20px;
-    box-shadow: 0 0 40px rgb(0, 53, 97);
+  position: relative;
+  background: transparent;
+  width: 100%;
+  max-width: 1000px;
+  border-bottom: 6px solid rgb(0, 53, 97); /* Updated border color */
+  padding: 15px;
+  padding-right: 15px; /* Increase space between form boundary and text boxes */
+  background-color: aliceblue;
+  border-radius: 20px;
+  box-shadow: 0 0 40px rgb(0, 53, 97);
 }
 
 .highlightred {
-    color: red;
-    font-weight: bold;
+  color: red;
+  font-weight: bold;
 }
 
-.pColor{
-    color: black;
+.pColor {
+  color: black;
 }
 
 form:hover {
-    box-shadow: 0 12px 40px black;
+  box-shadow: 0 12px 40px black;
 }
-
 
 label {
-    color: black;
-    margin-bottom: 5px;
-    display: block;
-    font-weight: bold;
+  color: black;
+  margin-bottom: 5px;
+  display: block;
+  font-weight: bold;
 }
 
-input, textarea {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border-radius: 8px;
-    transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    border: 1px solid black;
-    box-shadow: inset 3px 3px 10px rgba(0, 0, 0, 0.4);
-    background-color: white;
+input,
+textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  border: 1px solid black;
+  box-shadow: inset 3px 3px 10px rgba(0, 0, 0, 0.4);
+  background-color: white;
 }
 
 /* Add focus state for input fields */
-input:focus, textarea:focus {
-    border-color: #1ABC9C; /* Updated focus border color */
-    box-shadow: 0 0 8px rgba(26, 188, 156, 0.2); /* Updated focus box-shadow color */
+input:focus,
+textarea:focus {
+  border-color: #1abc9c; /* Updated focus border color */
+  box-shadow: 0 0 8px rgba(26, 188, 156, 0.2); /* Updated focus box-shadow color */
 }
 
 button {
-    background: linear-gradient(to bottom, #add1f9, #2e7ad1, #1d62b0, #124279, #06284f); /* Gradient for bluish chrome effect */
-    color: white; /* White text color to complement the chrome look */
-    padding: 5px 10px;
-    border-radius: 25px; /* More rounded for a cylindrical look */
-    text-align: center;
-    font-size: 18px;
-    border: none;
-    cursor: pointer;
-    box-shadow: 0 5px 10px rgb(0, 8, 14), /* Main shadow for depth */
-                inset 0 1px 2px #cde4ffbc, /* Inset highlight for 3D effect */
-                inset 0 -1px 2px white; /* Inset shadow for depth */
-    transition: transform 0.2s, background 0.3s; /* Smooth transitions for click and hover effects */
+  background: linear-gradient(
+    to bottom,
+    #add1f9,
+    #2e7ad1,
+    #1d62b0,
+    #124279,
+    #06284f
+  ); /* Gradient for bluish chrome effect */
+  color: white; /* White text color to complement the chrome look */
+  padding: 5px 10px;
+  border-radius: 10px; /* More rounded for a cylindrical look */
+  text-align: center;
+  font-family: serif;
+  font-size: 18px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 5px 10px rgb(0, 8, 14),
+    /* Main shadow for depth */ inset 0 1px 2px #cde4ffbc,
+    /* Inset highlight for 3D effect */ inset 0 -1px 2px white; /* Inset shadow for depth */
+  transition: transform 0.2s, background 0.3s; /* Smooth transitions for click and hover effects */
 }
 
 /* Button hover effect */
 button:hover {
-    background: #87cfff; /* Updated button hover color */
-    transform: translateY(-2px);
+  background: #87cfff; /* Updated button hover color */
+  transform: translateY(-2px);
 }
 
 .message {
-    margin-top: 10px;
-    font-size: 16px;
+  margin-top: 10px;
+  font-size: 16px;
 }
 
 /* Dropdown Button */
 .dropbtn {
-    background: linear-gradient(to bottom, #add1f9, #2e7ad1, #1d62b0, #124279, #06284f); /* Gradient for bluish chrome effect */
-    color: white; /* White text color to complement the chrome look */
-    padding: 5px 10px;
-    border-radius: 25px; /* More rounded for a cylindrical look */
-    text-align: center;
-    font-size: 18px;
-    border: none;
-    cursor: pointer;
-    box-shadow: 0 5px 20px rgb(0, 8, 14), /* Main shadow for depth */
-                inset 0 1px 2px #cde4ffbc, /* Inset highlight for 3D effect */
-                inset 0 -1px 2px white; /* Inset shadow for depth */
-    transition: transform 0.2s, background 0.3s; /* Smooth transitions for click and hover effects */
-  }
-  
-  /* Dropdown container */
-  .dropdown {
-    position: relative;
-    display: inline-block;
-  }
-  
-  /* Dropdown content (hidden by default) */
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: black;
-    min-width: 400px;
-    box-shadow: 0px 8px 16px 0px black;
-    z-index: 1;
-  }
-  
-  /* Links inside the dropdown */
-  .dropdown-content a {
-    color: aliceblue;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-  }
-  
-  /* Change color of dropdown links on hover */
-  .dropdown-content a:hover {
-    background: linear-gradient(to bottom, #add8e6, #4682b4, #1e3d58, #4682b4, #add8e6);
-    color: azure;
-    box-shadow: 0 0 12px aliceblue;
-  }
-  
-  /* Show the dropdown menu */
-  .show {
-    display: block;
-  }
-  
-  /* Flexbox for form rows */
+  background: linear-gradient(
+    to bottom,
+    #add1f9,
+    #2e7ad1,
+    #1d62b0,
+    #124279,
+    #06284f
+  ); /* Gradient for bluish chrome effect */
+  color: white; /* White text color to complement the chrome look */
+  padding: 5px 10px;
+  border-radius: 10px; /* More rounded for a cylindrical look */
+  text-align: center;
+  font-size: 18px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 5px 20px rgb(0, 8, 14),
+    /* Main shadow for depth */ inset 0 1px 2px #cde4ffbc,
+    /* Inset highlight for 3D effect */ inset 0 -1px 2px white; /* Inset shadow for depth */
+  transition: transform 0.2s, background 0.3s; /* Smooth transitions for click and hover effects */
+}
+
+/* Dropdown container */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown content (hidden by default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: black;
+  min-width: 400px;
+  box-shadow: 0px 8px 16px 0px black;
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: aliceblue;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+  background: linear-gradient(
+    to bottom,
+    #add8e6,
+    #4682b4,
+    #1e3d58,
+    #4682b4,
+    #add8e6
+  );
+  color: azure;
+  box-shadow: 0 0 12px aliceblue;
+}
+
+/* Show the dropdown menu */
+.show {
+  display: block;
+}
+
+/* Flexbox for form rows */
 .form-row {
-    display: flex;
-    justify-content: space-between;  /* Spread items evenly across the row */
-    margin-bottom: 1rem;  /* Add space between rows */
+  display: flex;
+  justify-content: space-between; /* Spread items evenly across the row */
+  margin-bottom: 1rem; /* Add space between rows */
 }
 
 /* Flexbox for each form group (label + input) */
 .form-group {
-    flex: 0 0 48%;  /* Make each form group take up about half the row */
+  flex: 0 0 48%; /* Make each form group take up about half the row */
 }
 
 /* Ensure form inputs take full width of their container */
 .form-group input {
-    width: 100%;
-    padding: 8px;
-    box-sizing: border-box;
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
 }
 
 /* For textarea and other inputs to align with other fields */
-textarea, input[type="date"] {
-    width: 100%;
-    padding: 10px;
-    box-sizing: border-box;
-    border: 1px solid black;
-    box-shadow: inset 3px 3px 10px rgba(0, 0, 0, 0.4);
-    background-color: white;
+textarea,
+input[type="date"] {
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  border: 1px solid black;
+  box-shadow: inset 3px 3px 10px rgba(0, 0, 0, 0.4);
+  background-color: white;
 }
