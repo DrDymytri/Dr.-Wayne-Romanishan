@@ -43,23 +43,23 @@ a {
 .Body-Button {
   background: linear-gradient(
     to bottom,
-    #add1f9,
-    #2e7ad1,
-    #1d62b0,
-    #124279,
-    #06284f
-  ); /* Gradient for bluish chrome effect */
-  color: white; /* White text color to complement the chrome look */
+    #add8e6,
+    #4682b4,
+    #1e3d58,
+    #4682b4,
+    #add8e6
+  );
+  color: white;
+  text-shadow: 1px 1px 1px black, 2px 2px 2px black, 3px 3px 3px black;
   padding: 5px 10px;
-  border-radius: 10px; /* More rounded for a cylindrical look */
+  border-radius: 10px;
   text-align: center;
   font-size: 18px;
   border: none;
   cursor: pointer;
-  box-shadow: 0 5px 10px rgb(0, 8, 14),
-    /* Main shadow for depth */ inset 0 1px 2px #cde4ffbc,
-    /* Inset highlight for 3D effect */ inset 0 -1px 2px white; /* Inset shadow for depth */
-  transition: transform 0.2s, background 0.3s; /* Smooth transitions for click and hover effects */
+  box-shadow: 0 5px 20px rgb(0, 8, 14), inset 0 1px 2px #cde4ffbc,
+    inset 0 -1px 2px white;
+  transition: transform 0.2s, background 0.3s;
 }
 
 .Body-Button:hover {
@@ -83,7 +83,7 @@ a {
 }
 
 section {
-  padding: 10px 0;
+  padding: 0;
   background-color: hsl(60, 100%, 98%);
 }
 
@@ -288,8 +288,8 @@ p {
 .hero--title {
   text-align: center;
   margin-top: 5px;
-  font-size: 24px;
-  text-shadow: 1px 0 0 #fff;
+  font-size: 28px;
+  text-shadow: 1px 0 1px aliceblue, 2px 0 2px aliceblue, 3px 0 3px aliceblue;
 }
 
 .hero--desc {
@@ -389,24 +389,24 @@ footer p {
 .subnavbtn {
   background: linear-gradient(
     to bottom,
-    #add1f9,
-    #2e7ad1,
-    #1d62b0,
-    #124279,
-    #06284f
-  ); /* Gradient for bluish chrome effect */
-  color: white; /* White text color to complement the chrome look */
+    #add8e6,
+    #4682b4,
+    #1e3d58,
+    #4682b4,
+    #add8e6
+  );
+  color: white;
+  text-shadow: 1px 1px 1px black, 2px 2px 2px black, 3px 3px 3px black;
   padding: 5px 10px;
-  border-radius: 10px; /* More rounded for a cylindrical look */
+  border-radius: 10px;
   text-align: center;
+  font-family: serif;
   font-size: 18px;
-  display: inline-block;
   border: none;
   cursor: pointer;
-  box-shadow: 0 5px 10px rgb(0, 8, 14),
-    /* Main shadow for depth */ inset 0 1px 2px #cde4ffbc,
-    /* Inset highlight for 3D effect */ inset 0 -1px 2px white; /* Inset shadow for depth */
-  transition: transform 0.2s, background 0.3s; /* Smooth transitions for click and hover effects */
+  box-shadow: 0 5px 10px rgb(0, 8, 14), inset 0 1px 2px #cde4ffbc,
+    inset 0 -1px 2px white;
+  transition: transform 0.2s, background 0.3s;
 }
 
 .subnav-content {
@@ -430,9 +430,9 @@ footer p {
   background: linear-gradient(
     to bottom,
     #add8e6,
-    #275f8e,
+    #4682b4,
     #1e3d58,
-    #275f8e,
+    #4682b4,
     #add8e6
   );
   color: azure;
@@ -509,14 +509,24 @@ footer p {
 }
 
 .headSpace {
+  font-size: 36px;
+  margin-bottom: 40px;
+  /* background: linear-gradient(
+    to bottom,
+    #add8e6,
+    #4682b4,
+    #1e3d58,
+    #4682b4,
+    #add8e6
+  ); */
   max-width: 1000px;
   align-items: center;
   justify-items: center;
   margin: 10px auto;
   text-align: center;
-  background: none;
-  color: rgb(3, 30, 57);
-  text-shadow: 2px 0 0 aliceblue;
+  color: black;
+  text-shadow: 1px 1px 1px rgb(177, 177, 177), 2px 2px 2px rgb(177, 177, 177),
+    3px 3px 3px rgb(177, 177, 177), 4px 4px 4px rgb(177, 177, 177);
 }
 
 .video-background {
@@ -678,11 +688,11 @@ footer p {
 }
 
 h2 {
-  margin-bottom: 10px; /* Space below the heading */
+  /* margin-bottom: 10px; Space below the heading */
 }
 
 p {
-  margin-bottom: 20px; /* Space below the last paragraph */
+  /* margin-bottom: 20px; Space below the last paragraph */
   text-align: left;
 }
 
