@@ -92,7 +92,8 @@
         <!-- Display selected service here -->
         <p
           id="selectedService"
-          style="font-weight: bold; color: black; margin-top: 10px"
+          class="pre-select"
+          style="font-weight: bold; margin-top: 10px"
         >
           No service selected
         </p>
@@ -220,8 +221,17 @@
       document.getElementById(
         "selectedService"
       ).textContent = `Selected Service: ${service}`; // Update the displayed service
+
+      selectedService.classList.remove("pre-select");
+      selectedService.classList.add("post-select");
+
       document.getElementById("myDropdown").classList.remove("show"); // Close the dropdown after selection
     }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const selectedService = document.getElementById("selectedService");
+      selectedService.classList.add("pre-select");
+    });
 
     // Close the dropdown if the user clicks outside of it
     window.onclick = function (event) {
