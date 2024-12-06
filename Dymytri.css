@@ -140,19 +140,28 @@ p {
 
 .chip {
   font-size: 16px;
-  padding: 5px 10px;
+  padding: 10px 10px;
   background: linear-gradient(
     to bottom,
     #ff8585,
-    #de3f3f,
     #8c1e1e,
-    #902e2e,
-    #6f2121
-  ); /* Updated chip background color */
+    #6f2121,
+    #8c1e1e,
+    #ff8585
+  );
+  text-shadow: 1px 1px 1px black, 2px 2px 2px black, 3px 3px 3px black;
+  padding: 10px 20px;
+  text-align: center;
+  font-size: 18px;
+  border: none;
+  box-shadow: 0 5px 20px rgb(0, 8, 14), inset 0 1px 2px #cde4ffbc,
+    inset 0 -1px 2px white;
+  transition: transform 0.2s, background 0.3s;
   width: fit-content;
   border-radius: 10px;
   color: white;
-  margin-bottom: 5px;
+  width: 100%;
+  margin-bottom: 15px;
 }
 
 /* nav */
@@ -591,21 +600,38 @@ footer p {
   font-size: medium;
 }
 
+.card-Header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
+  width: 100%;
+}
+
 .card h3 {
   font-size: 16px;
-  padding: 5px 10px;
+  padding: 10px 10px;
   background: linear-gradient(
     to bottom,
     #ff8585,
-    #de3f3f,
     #8c1e1e,
-    #902e2e,
-    #6f2121
-  ); /* Updated chip background color */
+    #8a2222,
+    #8c1e1e,
+    #ff8585
+  );
+  text-shadow: 1px 1px 1px black, 2px 2px 2px black, 3px 3px 3px black;
+  padding: 10px 10px;
+  text-align: center;
+  font-size: 18px;
+  border: none;
+  box-shadow: 0 5px 20px rgb(0, 8, 14), inset 0 1px 2px #cde4ffbc,
+    inset 0 -1px 2px white;
+  transition: transform 0.2s, background 0.3s;
   width: fit-content;
   border-radius: 10px;
   color: white;
-  margin-bottom: 5px;
+  margin: 0;
+  width: 100%;
 }
 
 /* Modal header */
