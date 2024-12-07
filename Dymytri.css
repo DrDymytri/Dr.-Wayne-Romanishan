@@ -83,7 +83,8 @@ a {
 }
 
 section {
-  padding: 0;
+  padding-right: 10px;
+  padding-left: 10px;
   background-color: hsl(60, 100%, 98%);
 }
 
@@ -249,7 +250,7 @@ p {
 
   .section--desc {
     font-size: 20px; /* Smaller font size for sections */
-    padding: 0 1rem;
+    padding: 10px 10px;
   }
 
   .portfolio--img--cover img,
