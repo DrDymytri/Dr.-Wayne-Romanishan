@@ -42,24 +42,30 @@ a {
 
 .Body-Button {
   background: linear-gradient(
-    to bottom,
-    #add8e6,
-    #4682b4,
-    #1e3d58,
-    #4682b4,
-    #add8e6
+    135deg,
+    #001f33 0%,
+    #1584ce 25%,
+    #39b1ec 50%,
+    #3290af 75%,
+    #115583 100%
   );
-  color: white;
-  text-shadow: 1px 1px 1px black, 2px 2px 2px black, 3px 3px 3px black;
+  background-blend-mode: screen;
+  filter: brightness(1.1);
+  /* color: white; */
+  text-shadow: 1px 1px 1px black, 2px 2px 2px black, 3px 3px 3px black,
+    4px 4px 4px black;
+  color: aliceblue;
+  border: 2px solid silver;
+  border-radius: 5px;
   padding: 5px 10px;
   border-radius: 10px;
   text-align: center;
-  font-size: 18px;
+  font-size: 20px;
   border: none;
   cursor: pointer;
   box-shadow: 0 5px 20px rgb(0, 8, 14), inset 0 1px 2px #cde4ffbc,
     inset 0 -1px 2px white;
-  transition: transform 0.2s, background 0.3s;
+  transition: transform 0.3s, background 0.3s;
 }
 
 .Body-Button:hover {
@@ -140,24 +146,21 @@ p {
 }
 
 .chip {
-  font-size: 16px;
+  font-size: 20px;
   padding: 10px 10px;
   background: linear-gradient(
-    to bottom,
-    #ff8585,
-    #8c1e1e,
-    #6f2121,
-    #8c1e1e,
-    #ff8585
+    135deg,
+    #550909 0%,
+    #ce1515 25%,
+    #ec3939 50%,
+    #af3232 75%,
+    #d32121 100%
   );
-  text-shadow: 1px 1px 1px black, 2px 2px 2px black, 3px 3px 3px black;
-  padding: 10px 20px;
+  text-shadow: 1px 1px 1px black, 2px 2px 2px black, 3px 3px 3px black,
+    4px 4px 4px black;
   text-align: center;
-  font-size: 18px;
   border: none;
-  box-shadow: 0 5px 20px rgb(0, 8, 14), inset 0 1px 2px #cde4ffbc,
-    inset 0 -1px 2px white;
-  transition: transform 0.2s, background 0.3s;
+  transition: transform 0.3s, background 0.3s;
   width: fit-content;
   border-radius: 10px;
   color: white;
@@ -167,7 +170,7 @@ p {
 
 /* nav */
 .nav {
-  background: linear-gradient(to right, black, rgb(0, 81, 255));
+  background: linear-gradient(135deg, black 30%, rgb(0, 81, 255));
   position: relative;
   top: 0;
   left: 50%;
@@ -198,7 +201,7 @@ p {
   font-style: italic;
   background: linear-gradient(
     90deg,
-    #eaebec 25%,
+    #e9b693 25%,
     #f3f0eb 50%,
     #ddd8d4 75%,
     #55b7f8 100%
@@ -398,25 +401,26 @@ footer p {
 
 .subnavbtn {
   background: linear-gradient(
-    to bottom,
-    #add8e6,
-    #4682b4,
-    #1e3d58,
-    #4682b4,
-    #add8e6
+    135deg,
+    #093755 0%,
+    #1584ce 25%,
+    #39b1ec 50%,
+    #3281af 75%,
+    #218cd3 100%
   );
-  color: white;
-  text-shadow: 1px 1px 1px black, 2px 2px 2px black, 3px 3px 3px black;
+  color: aliceblue;
+  text-shadow: 1px 1px 1px black, 2px 2px 2px black, 3px 3px 3px black,
+    4px 4px 4px black;
   padding: 5px 10px;
   border-radius: 10px;
   text-align: center;
   font-family: serif;
-  font-size: 18px;
+  font-size: 20px;
   border: none;
   cursor: pointer;
   box-shadow: 0 5px 10px rgb(0, 8, 14), inset 0 1px 2px #cde4ffbc,
     inset 0 -1px 2px white;
-  transition: transform 0.2s, background 0.3s;
+  transition: transform 0.3s, background 0.3s;
 }
 
 .subnav-content {
@@ -529,7 +533,7 @@ footer p {
     #4682b4,
     #add8e6
   ); */
-  max-width: 1000px;
+  max-width: 800px;
   align-items: center;
   justify-items: center;
   margin: 10px auto;
@@ -610,23 +614,20 @@ footer p {
 }
 
 .card h3 {
-  font-size: 16px;
-  padding: 10px 10px;
+  font-size: 20px;
+  padding: 6px 10px;
   background: linear-gradient(
-    to bottom,
-    #ff8585,
-    #8c1e1e,
-    #8a2222,
-    #8c1e1e,
-    #ff8585
+    135deg,
+    #550909 0%,
+    #ce1515 25%,
+    #ec3939 50%,
+    #af3232 75%,
+    #d32121 100%
   );
-  text-shadow: 1px 1px 1px black, 2px 2px 2px black, 3px 3px 3px black;
-  padding: 10px 10px;
+  text-shadow: 1px 1px 1px black, 2px 2px 2px black, 3px 3px 3px black,
+    4px 4px 4px black;
   text-align: center;
-  font-size: 18px;
-  border: none;
-  box-shadow: 0 5px 20px rgb(0, 8, 14), inset 0 1px 2px #cde4ffbc,
-    inset 0 -1px 2px white;
+  border: 1px solid black;
   transition: transform 0.2s, background 0.3s;
   width: fit-content;
   border-radius: 10px;
