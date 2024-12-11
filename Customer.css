@@ -7,34 +7,49 @@
 }
 
 .form-header {
+  background: radial-gradient(
+    circle,
+    rgb(4, 87, 165),
+    rgb(55, 128, 196),
+    rgb(2, 29, 53)
+  );
   width: 100%;
-  height: 30px;
-  margin-bottom: 35px;
+  padding-bottom: 15px;
+  /* height: 30px; */
+  /* margin-bottom: 35px; */
   text-align: center;
   align-items: center;
   justify-content: center;
-  display: flex;
-  flex-wrap: wrap;
+  /* display: flex; */
+  /* flex-wrap: wrap; */
   color: white;
-  text-shadow: 1px 1px 1px black, 2px 2px 2px black, 3px 3px 3px black,
-    4px 4px 4px black;
+  text-shadow: 1px 1px 1px black, 2px 2px 1px black, 3px 3px 1px black,
+    4px 4px 1px black;
   font-size: 36px;
   font-weight: bold;
+  /* border-radius: 15px; */
+  margin-bottom: 5px;
 }
 
 form {
   position: relative;
   width: 100%;
   max-width: 1000px;
-  padding: 15px;
+  padding: 10px;
   padding-right: 15px;
-  background: linear-gradient(
+  background: radial-gradient(
+    circle,
+    rgb(4, 87, 165),
+    rgb(55, 128, 196),
+    rgb(2, 29, 53)
+  );
+  /* background: linear-gradient(
     to bottom,
     rgb(157, 219, 255),
     rgb(2, 41, 63),
     rgb(48, 103, 134),
     rgb(2, 41, 63)
-  );
+  ); */
   border-radius: 20px;
   box-shadow: 0 0 40px 10px black;
   border: 1px solid white;
@@ -50,8 +65,8 @@ form:hover {
   height: 2px;
   background: #003561;
   box-shadow: 0 0 5px 5px rgba(240, 248, 255, 0.808);
-  margin-bottom: 20px;
-  margin-top: 20px;
+  /* margin-bottom: 20px;
+  margin-top: 20px; */
 }
 
 label {
@@ -87,24 +102,22 @@ textarea:focus {
 }
 
 button {
-  background: linear-gradient(
-    to bottom,
-    #add8e6,
-    #4682b4,
-    #1e3d58,
-    #4682b4,
-    #add8e6
+  background: radial-gradient(
+    circle,
+    rgb(4, 87, 165),
+    rgb(55, 128, 196),
+    rgb(2, 29, 53)
   );
   color: white;
-  text-shadow: 1px 1px 1px black, 2px 2px 2px black, 3px 3px 3px black;
+  text-shadow: 1px 1px 1px black, 2px 2px 2px black, 3px 3px 3px black,
+    4px 4px 4px black;
   padding: 5px 10px;
   border-radius: 10px;
   text-align: center;
-  font-family: serif;
   font-size: 18px;
   border: none;
   cursor: pointer;
-  box-shadow: 0 5px 10px rgb(0, 8, 14), inset 0 1px 2px #cde4ffbc,
+  box-shadow: 0 5px 20px rgb(0, 8, 14), inset 0 1px 2px #cde4ffbc,
     inset 0 -1px 2px white;
   transition: transform 0.2s, background 0.3s;
   margin-bottom: 10px;
@@ -137,17 +150,15 @@ button:hover {
 
 /* Dropdown Button */
 .dropbtn {
-  margin-top: 10px;
-  background: linear-gradient(
-    to bottom,
-    #add8e6,
-    #4682b4,
-    #1e3d58,
-    #4682b4,
-    #add8e6
+  background: radial-gradient(
+    circle,
+    rgb(4, 87, 165),
+    rgb(55, 128, 196),
+    rgb(2, 29, 53)
   );
   color: white;
-  text-shadow: 1px 1px 1px black, 2px 2px 2px black, 3px 3px 3px black;
+  text-shadow: 1px 1px 1px black, 2px 2px 2px black, 3px 3px 3px black,
+    4px 4px 4px black;
   padding: 5px 10px;
   border-radius: 10px;
   text-align: center;
@@ -251,10 +262,6 @@ input[type="date"] {
   .form-group {
     flex: 0 0 100%;
   }
-
-  .dropdown-content {
-    min-width: 200px;
-  }
 }
 
 @media (max-width: 520px) {
@@ -267,13 +274,19 @@ input[type="date"] {
     padding: 8px;
   }
 
-  button,
+  /* button,
   .dropbtn {
     padding: 8px;
     font-size: 16px;
-  }
+  } */
 
-  .form-header {
-    margin-bottom: 70px;
+  @media (max-width: 480px) {
+    .form-header {
+      /* margin-bottom: 70px; */
+    }
+
+    .dropdown-content {
+      min-width: 300px;
+    }
   }
 }
