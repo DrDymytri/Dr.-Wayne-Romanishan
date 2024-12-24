@@ -365,20 +365,34 @@ div {
   margin: 20px 0; /* Adds spacing between titles */
 }
 
+.HeroTitle-container {
+  background-color: whitesmoke;
+  max-width: 800px;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  border-top: 1px solid black;
+  border-right: 1px solid black;
+  border-left: 1px solid black;
+  margin: 10px auto;
+}
+
 /* Styling for the main title container */
 .hero--title {
   font-size: 1.5rem;
+  font-family: serif;
+  font-weight: bold;
   position: relative;
   opacity: 1; /* Ensures the container is visible */
   white-space: normal; /* Allow text wrapping */
   text-align: center; /* Center-align text */
   word-wrap: break-word; /* Ensure words wrap correctly */
-  max-width: 90%; /* Restrict width for proper wrapping */
+  max-width: 800px; /* Restrict width for proper wrapping */
   margin: 0 auto; /* Center align the container */
   line-height: 1; /* Ensure proper spacing between lines */
-  text-shadow: 0 1px 2px rgba(8, 28, 59, 0.15), 0 2px 4px rgba(8, 28, 59, 0.1),
-    0 3px 6px rgba(8, 28, 59, 0.05);
+  text-shadow: 1px 1px 1px rgb(226, 226, 226), 2px 2px 1px rgb(226, 226, 226);
   padding: 0;
+  margin-bottom: 20px;
 }
 
 /* Individual letter animation */
