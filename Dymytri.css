@@ -54,7 +54,7 @@ a {
   padding: 5px 10px;
   border-radius: 10px;
   text-align: center;
-  font-size: 18px;
+  font-size: 20px;
   border: none;
   cursor: pointer;
   box-shadow: 0 5px 20px rgb(0, 8, 14), inset 0 1px 2px #cde4ffbc,
@@ -102,7 +102,7 @@ section {
 }
 
 .section--desc {
-  max-width: 800px;
+  max-width: 1000px;
   text-shadow: none;
   font-size: 18px;
 }
@@ -196,7 +196,7 @@ p {
   left: 50%;
   transform: translateX(-50%);
   margin-top: 0;
-  max-width: 800px;
+  max-width: 1000px;
   width: 100%;
   justify-content: center;
   align-items: center;
@@ -367,7 +367,7 @@ div {
 
 .HeroTitle-container {
   background-color: whitesmoke;
-  max-width: 800px;
+  max-width: 1000px;
   justify-content: center;
   justify-items: center;
   align-items: center;
@@ -387,7 +387,7 @@ div {
   white-space: normal; /* Allow text wrapping */
   text-align: center; /* Center-align text */
   word-wrap: break-word; /* Ensure words wrap correctly */
-  max-width: 800px; /* Restrict width for proper wrapping */
+  max-width: 1000px; /* Restrict width for proper wrapping */
   margin: 0 auto; /* Center align the container */
   line-height: 1; /* Ensure proper spacing between lines */
   text-shadow: 1px 1px 1px rgb(226, 226, 226), 2px 2px 1px rgb(226, 226, 226);
@@ -420,7 +420,7 @@ div {
 
 .hero--desc {
   text-align: center;
-  max-width: 700px;
+  max-width: 1000px;
   margin: auto;
   margin-top: 1rem;
 }
@@ -534,7 +534,7 @@ footer {
   border-radius: 10px;
   text-align: center;
   font-family: serif;
-  font-size: 18px;
+  font-size: 20px;
   cursor: pointer;
   box-shadow: 0 5px 10px rgb(0, 8, 14), inset 0 1px 2px #cde4ffbc,
     inset 0 -1px 2px white;
@@ -584,7 +584,7 @@ footer {
 }
 
 .AboutMe-Page {
-  max-width: 800px;
+  max-width: 1000px;
   margin: 0 auto;
   text-align: center;
 }
@@ -634,7 +634,7 @@ footer {
   top: 0;
   left: 0;
   width: 100%;
-  max-width: 800px;
+  max-width: 1000px;
   margin: 10px auto;
   height: auto;
   overflow: hidden; /* Hide any overflow from video */
@@ -653,7 +653,7 @@ footer {
     #4682b4,
     #add8e6
   ); */
-  max-width: 800px;
+  max-width: 1000px;
   align-items: center;
   justify-items: center;
   margin: 10px auto;
@@ -707,7 +707,7 @@ footer {
   padding: 20px; /* Reduced padding for a cleaner look */
   border-radius: 10px; /* Slightly smaller border radius */
   width: 100%; /* Adjust width of the modal */
-  max-width: 800px; /* Maximum width */
+  max-width: 1000px; /* Maximum width */
   text-align: left; /* Left-align content for a more professional look */
   position: relative;
   box-shadow: 0 0 50px white; /* Subtle shadow for depth */
