@@ -25,3 +25,39 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+
+function openImagePopup(cardElement) {
+  const imageUrl = cardElement.getAttribute("data-image"); // Get the image URL from the card's data attribute
+  const popup = window.open(
+    "",
+    "_blank",
+    "width=800,height=600,scrollbars=no,resizable=yes"
+  );
+  popup.document.write(`
+    <html>
+      <head>
+        <title>Image Preview</title>
+        <style>
+          body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #000;
+          }
+          img {
+            max-width: 100%;
+            max-height: 100%;
+          }
+        </style>
+      </head>
+      <body>
+        <img src="${imageUrl}" alt="Popup Image">
+        <script>
+          document.body.addEventListener('click', () => window.close());
+        </script>
+      </body>
+    </html>
+  `);
+}
