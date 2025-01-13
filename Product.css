@@ -8,8 +8,10 @@ h1 {
   font-size: 36px;
   margin-bottom: 40px;
   color: black;
-  text-shadow: 0.25px 0.25px white, 0.5px 0.5px white, 0.75px 0.75px white,
-    1px 1px white, 1.25px 1.25px white;
+  text-shadow: -0.125px -0.25px white, -0.25px -0.5px white,
+    -0.375px -0.75px white, -0.5px -1px white, 0.125px 0.25px white,
+    0.25px 0.5px white, 0.375px 0.75px white, 0.5px 1px white,
+    0.625px 1.25px white, 0.75px 1.5px white;
 }
 
 h2 {

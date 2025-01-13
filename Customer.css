@@ -7,11 +7,13 @@
 }
 
 .form-header {
-  background: radial-gradient(
-    circle,
+  background: linear-gradient(
+    to right,
+    rgba(2, 29, 53, 0.425),
+    rgba(18, 71, 121, 0.411),
     rgb(4, 87, 165),
-    rgb(55, 128, 196),
-    rgb(2, 29, 53)
+    rgba(18, 71, 121, 0.411),
+    rgba(2, 29, 53, 0.425)
   );
   width: 100%;
   padding-bottom: 15px;
@@ -23,8 +25,8 @@
   /* display: flex; */
   /* flex-wrap: wrap; */
   color: white;
-  text-shadow: 0.25px 0.25px black, 0.5px 0.5px black, 0.75px 0.75px black,
-    1px 1px black;
+  text-shadow: 0.125px 0.25px black, 0.25px 0.5px black, 0.375px 0.75px black,
+    0.5px 1px black, 0.625px 1.25px black, 0.75px 1.5px black;
   font-size: 36px;
   font-weight: bold;
   /* border-radius: 15px; */
@@ -73,8 +75,8 @@ form:hover {
 
 label {
   color: white;
-  text-shadow: 0.25px 0.25px black, 0.5px 0.5px black, 0.75px 0.75px black,
-    1px 1px black;
+  text-shadow: 0.125px 0.25px black, 0.25px 0.5px black, 0.375px 0.75px black,
+    0.5px 1px black, 0.625px 1.25px black, 0.75px 1.5px black;
   margin-bottom: 5px;
   display: block;
   font-size: 20px;
@@ -113,8 +115,8 @@ button {
     rgb(2, 29, 53)
   );
   color: white;
-  text-shadow: 0.25px 0.25px black, 0.5px 0.5px black, 0.75px 0.75px black,
-    1px 1px black;
+  text-shadow: 0.125px 0.25px black, 0.25px 0.5px black, 0.375px 0.75px black,
+    0.5px 1px black, 0.625px 1.25px black, 0.75px 1.5px black;
   padding: 5px 10px;
   border-radius: 10px;
   text-align: center;
@@ -161,8 +163,8 @@ button:hover {
     rgb(2, 29, 53)
   );
   color: white;
-  text-shadow: 0.25px 0.25px black, 0.5px 0.5px black, 0.75px 0.75px black,
-    1px 1px black;
+  text-shadow: 0.125px 0.25px black, 0.25px 0.5px black, 0.375px 0.75px black,
+    0.5px 1px black, 0.625px 1.25px black, 0.75px 1.5px black;
   padding: 5px 10px;
   border-radius: 10px;
   text-align: center;
