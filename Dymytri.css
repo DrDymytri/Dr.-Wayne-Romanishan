@@ -69,7 +69,7 @@ a {
   color: rgb(104, 215, 255);
 }
 
-.body-button:active {
+.Body-button:active {
   transform: scale(0.95); /* Slightly reduce size on click */
   box-shadow: 0 4px 8px rgb(0, 53, 97),
     /* Main shadow for depth */ inset 0 2px 2px rgba(83, 142, 31, 0.5),
