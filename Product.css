@@ -63,7 +63,7 @@ li p {
   height: auto;
   overflow: hidden; /* Hide any overflow from video */
   box-shadow: 0 0 30px rgb(0, 53, 97);
-  border: 4px solid black;
+  border: 2px solid black;
 }
 
 .headSpace-container {
