@@ -1,0 +1,165 @@
+/* ========== Global Reset ========== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  background-color: #f9fafb;
+  color: #333;
+  padding: 0;
+  margin: 0;
+}
+
+/* ========== Layout Sections ========== */
+header, section, footer {
+  padding: 4rem 2rem;
+  max-width: 1100px;
+  margin: auto;
+}
+
+header {
+  background: linear-gradient(135deg, #004d80, #0077b6);
+  color: white;
+  text-align: center;
+  padding: 5rem 2rem;
+}
+
+header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+header p {
+  color: aliceblue;
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+/* ========== Typography ========== */
+h1, h2, h3 {
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #222;
+}
+
+p {
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
+  color: #444;
+}
+
+ul {
+  margin: 1rem 0 1.5rem 1.5rem;
+}
+
+li {
+  margin-bottom: 0.75rem;
+}
+
+/* ========== Buttons ========== */
+.btn, .btn-secondary {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  margin: 0.5rem;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.btn {
+  background: #0077b6;
+  color: white;
+}
+
+.btn:hover {
+  background: #005f8a;
+}
+
+.btn-secondary {
+  background: #e5e7eb;
+  color: #333;
+}
+
+.btn-secondary:hover {
+  background: #d1d5db;
+}
+
+/* ========== Services Grid ========== */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.service {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.08);
+  text-align: center;
+  font-weight: 600;
+  color: #0077b6;
+}
+
+/* ========== Service Blocks (Services Page) ========== */
+.service-block {
+  background: white;
+  padding: 2.5rem;
+  margin-bottom: 2rem;
+  border-left: 6px solid #0077b6;
+  border-radius: 6px;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.service-block h2 {
+  margin-bottom: 0.75rem;
+  color: #004d80;
+}
+
+/* ========== Case Study / Resource Cards ========== */
+.card {
+  background: white;
+  padding: 2rem;
+  border-radius: 6px;
+  margin-bottom: 2rem;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* ========== Footer ========== */
+footer {
+  background: #004d80;
+  color: white;
+  text-align: center;
+  padding: 3rem 2rem;
+}
+
+footer h2 {
+  color: white;
+}
+
+footer p {
+  color: #e5e7eb;
+  margin-bottom: 1.5rem;
+}
+
+/* ========== Responsive Adjustments ========== */
+@media (max-width: 768px) {
+  header h1 {
+    font-size: 2rem;
+  }
+
+  header p {
+    font-size: 1rem;
+  }
+
+  .btn, .btn-secondary {
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+  }
+}

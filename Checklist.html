@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Magic Card Checklist</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    h1 { color: #4b2e83; }
+    .card-item { margin: 5px 0; }
+    input[type="checkbox"] { margin-right: 10px; }
+  </style>
+</head>
+<body>
+  <h1>Magic Card Checklist</h1>
+  <input id="newCard" placeholder="Add a card..." />
+  <button onclick="addCard()">Add</button>
+  <ul id="cardList"></ul>
+
+  <script>
+    let cards = JSON.parse(localStorage.getItem("cards")) || [];
+
+    function render() {
+      const list = document.getElementById("cardList");
+      list.innerHTML = "";
+      cards.forEach((card, i) => {
+        const li = document.createElement("li");
+        li.className = "card-item";
+        li.innerHTML = `
+          <input type="checkbox" ${card.checked ? "checked" : ""} 
+            onchange="toggleCard(${i})">
+          ${card.name}
+          <button onclick="removeCard(${i})">❌</button>
+        `;
+        list.appendChild(li);
+      });
+    }
+
+    function addCard() {
+      const input = document.getElementById("newCard");
+      if (input.value.trim()) {
+        cards.push({ name: input.value, checked: false });
+        input.value = "";
+        save();
+      }
+    }
+
+    function toggleCard(index) {
+      cards[index].checked = !cards[index].checked;
+      save();
+    }
+
+    function removeCard(index) {
+      cards.splice(index, 1);
+      save();
+    }
+
+    function save() {
+      localStorage.setItem("cards", JSON.stringify(cards));
+      render();
+    }
+
+    render();
+  </script>
+</body>
+</html>
