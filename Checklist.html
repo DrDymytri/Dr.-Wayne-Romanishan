@@ -15,7 +15,7 @@
   <input id="newCard" placeholder="Add a card..." />
   <button onclick="addCard()">Add</button>
   <ul id="cardList"></ul>
-
+  <a href="index.html">Back to Home</a>
   <script>
     let cards = JSON.parse(localStorage.getItem("cards")) || [];
 
@@ -61,5 +61,6 @@
 
     render();
   </script>
+  
 </body>
 </html>
