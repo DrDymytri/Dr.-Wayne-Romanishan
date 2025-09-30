@@ -57,13 +57,14 @@ section, footer {
 
 /* ===== Header / Hero ===== */
 header {
-  background: linear-gradient(120deg, #002147, #004d80);
+  /* Use only one linear-gradient, after the image */
   color: #ffffff;
   text-align: center;
   padding: 2rem 1rem;
-  border-bottom: 4px solid #c5a46d; 
+  border-bottom: 4px solid #c5a46d;
   background-image:
-    url("/Images/Hero-bg.jpg");
+    url("/images/hero-bg.jpg"),
+    linear-gradient(120deg, #002147, #004d80);
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -117,7 +118,8 @@ li {
 .hero {
   position: relative;
   height: auto;
-  background: url("images/hero-bg.jpg") no-repeat center center/cover;
+  /* Remove background property here */
+  /* background: url("images/hero-bg.jpg") no-repeat center center/cover; */
   display: flex;
   align-items: center;
   justify-content: center;
