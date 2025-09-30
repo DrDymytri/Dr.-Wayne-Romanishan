@@ -1,4 +1,4 @@
-/* ========== Global Reset ========== */
+/* ===== Global Reset ===== */
 * {
   margin: 0;
   padding: 0;
@@ -6,160 +6,728 @@
 }
 
 body {
-  font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  line-height: 1.6;
-  background-color: #f9fafb;
-  color: #333;
-  padding: 0;
-  margin: 0;
+  font-family: "Merriweather", Georgia, serif; /* Adds academic gravitas */
+  line-height: 1.75;
+  background-color: #fffcf4;
+  color: #2b2b2b;
+  font-size: 17px;
 }
 
-/* ========== Layout Sections ========== */
+/* Ensure full width and prevent horizontal scroll on all devices */
+html, body {
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+/* ===== Layout ===== */
 header, section, footer {
-  padding: 4rem 2rem;
-  max-width: 1100px;
+  padding: 2rem 2rem;
+  max-width: 1200px;
   margin: auto;
 }
 
+/* Add slight side padding to all main content below the hero */
+section, footer {
+  padding-left: 1vw;
+  padding-right: 1vw;
+}
+
+/* On small screens, ensure the padding remains subtle and not removed */
+@media (max-width: 600px) {
+  section, footer {
+    padding-left: 2vw !important;
+    padding-right: 2vw !important;
+  }
+}
+
+/* Remove max-width and side paddings for main containers on small screens */
+@media (max-width: 600px) {
+  header, section, footer {
+    max-width: 100% !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+  .hero-overlay {
+    max-width: 100% !important;
+    padding-left: 0.2rem !important;
+    padding-right: 0.2rem !important;
+  }
+}
+
+/* ===== Header / Hero ===== */
 header {
-  background: linear-gradient(135deg, #004d80, #0077b6);
-  color: white;
+  background: linear-gradient(120deg, #002147, #004d80);
+  color: #ffffff;
   text-align: center;
-  padding: 5rem 2rem;
+  padding: 2rem 1rem;
+  border-bottom: 4px solid #c5a46d; /* Subtle gold accent */
 }
 
 header h1 {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  letter-spacing: 1px;
 }
 
 header p {
-  color: aliceblue;
-  font-size: 1.2rem;
-  margin-bottom: 2rem;
+  font-size: 1rem;
+  max-width: 700px;
+  margin: auto;
+  opacity: 0.95;
+  margin-bottom: 0.5rem;
 }
 
-/* ========== Typography ========== */
+/* ===== Typography ===== */
 h1, h2, h3 {
-  font-weight: 600;
-  margin-bottom: 1rem;
-  color: #222;
+  font-family: "Lato", Arial, sans-serif; /* Modern sans-serif headings */
+  font-weight: 700;
+  color: #2a4876;
+  margin-bottom: 1.25rem;
+}
+
+h2 {
+  font-size: 2rem;
+  border-left: 5px solid #c5a46d;
+  padding-left: 0.75rem; 
 }
 
 p {
   margin-bottom: 1.5rem;
-  font-size: 1rem;
-  color: #444;
+  color: #333;
 }
 
 ul {
-  margin: 1rem 0 1.5rem 1.5rem;
+  margin: 1.25rem 0 1.5rem 1.5rem;
+  list-style-type: square;
+  color: #444;
 }
 
 li {
   margin-bottom: 0.75rem;
 }
 
-/* ========== Buttons ========== */
+/* ===== Hero Banner ===== */
+.hero {
+  position: relative;
+  height: auto;
+  background: url("images/hero-bg.jpg") no-repeat center center/cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #ffffff;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 33, 71, 0.478); /* navy overlay for contrast */
+}
+
+/* Responsive Hero Section */
+.hero-overlay {
+  position: relative;
+  z-index: 2;
+  max-width: 900px;
+  padding: 2rem;
+  display: block;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-overlay h1 {
+  width: 100%;
+  max-width: 800px;
+  font-size: 3.2rem;
+  margin-bottom: 1rem;
+  font-family: "Lato", Arial, sans-serif;
+  color: aliceblue;
+  text-shadow: 0.125px 0.25px black, 0.25px 0.5px black, 0.375px 0.75px black,
+    0.5px 1px black, 0.625px 1.25px black, 0.75px 1.5px black, 0.875px 1.75px black;
+  text-align: center;
+  word-break: break-word;
+}
+
+.hero-overlay p {
+  font-size: 1.35rem;
+  margin-bottom: .25rem;
+  font-family: "Merriweather", Georgia, serif;
+  color: aliceblue;
+  text-shadow: 0.125px 0.25px black, 0.25px 0.5px black, 0.375px 0.75px black,
+    0.5px 1px black, 0.625px 1.25px black, 0.75px 1.5px black;
+  text-align: center;
+  word-break: break-word;
+}
+
+.hero-brand {
+  /* Remove absolute positioning for mobile friendliness */
+  position: static;
+  top: auto;
+  left: auto;
+  transform: none;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto 1rem auto;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: aliceblue;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  text-shadow: 0.125px 0.25px black, 0.25px 0.5px black, 0.375px 0.75px black,
+    0.5px 1px black, 0.625px 1.25px black, 0.75px 1.5px black;
+  box-sizing: border-box;
+  margin-bottom: 1.5rem;
+}
+
+.hero-signature {
+  font-family: 'Dancing Script', cursive; /* calligraphy style */
+  font-size: 1.75rem;
+  color: #cdae79; /* gold accent for prestige */  
+  text-shadow: 0.125px 0.25px black, 0.25px 0.5px black, 0.375px 0.75px black,
+    0.5px 1px black, 0.625px 1.25px black, 0.75px 1.5px black;
+  display: block;
+}
+
+.hero .btn, 
+.hero .btn-secondary {
+  margin-top: 0.6rem;
+  display: block;
+  width: 100%;
+  max-width: 320px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 0.5rem;
+}
+
+/* ===== Buttons ===== */
 .btn, .btn-secondary {
   display: inline-block;
-  padding: 0.75rem 1.5rem;
-  margin: 0.5rem;
-  text-decoration: none;
-  border-radius: 6px;
+  padding: 0.85rem 1.75rem;
+  margin: 0.75rem;
+  border-radius: 4px;
   font-weight: 600;
-  transition: background 0.3s ease, color 0.3s ease;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
 }
 
 .btn {
-  background: #0077b6;
-  color: white;
+  background: #004d80;
+  color: #fff;
+  border: 2px solid #a1d5f8; 
+  text-shadow: 0.125px 0.25px black, 0.25px 0.5px black, 0.375px 0.75px black,
+    0.5px 1px black, 0.625px 1.25px black, 0.75px 1.5px black;
 }
 
 .btn:hover {
-  background: #005f8a;
+  background: #c5a46d;
+  border-color: #c5a46d;
+  color: #fff;
 }
 
 .btn-secondary {
-  background: #e5e7eb;
-  color: #333;
+  background: transparent;
+  border: 2px solid #a1d5f8;
+  color: #abdafa; 
+  text-shadow: 0.125px 0.25px black, 0.25px 0.5px black, 0.375px 0.75px black,
+    0.5px 1px black, 0.625px 1.25px black, 0.75px 1.5px black;
 }
 
 .btn-secondary:hover {
-  background: #d1d5db;
+  background: #004d80;
+  color: #fff;
 }
 
-/* ========== Services Grid ========== */
+.back-btn {
+  display: inline-block;
+  margin: 1rem 2rem;
+  padding: 0.4rem 1rem;
+  background: #004d80;
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background 0.3s ease;
+  border: 1px solid #a1d5f8; 
+  text-shadow: 0.125px 0.25px black, 0.25px 0.5px black, 0.375px 0.75px black,
+    0.5px 1px black, 0.625px 1.25px black, 0.75px 1.5px black;
+}
+
+.back-btn:hover {
+  background: #c5a46d; /* gold accent */
+  color: #fff;
+}
+
+/* ===== Services Grid ===== */
 .services-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 1.5rem;
-  margin: 2rem 0;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2rem;
+  margin: 3rem 0;
 }
 
 .service {
-  background: white;
+  background: #ffffff;
   padding: 2rem;
+  border: 1px solid #002147;
   border-radius: 8px;
-  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.08);
+  border-top: 4px solid #c5a46d;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.08);
   text-align: center;
   font-weight: 600;
-  color: #0077b6;
+  font-size: 1.1rem;
+  color: #004d80;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
 }
 
-/* ========== Service Blocks (Services Page) ========== */
+.service:hover {
+  transform: translateY(-6px);
+  box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+/* ===== Service Blocks (Services Page) ===== */
 .service-block {
-  background: white;
-  padding: 2.5rem;
-  margin-bottom: 2rem;
-  border-left: 6px solid #0077b6;
+  background: #ffffff;
+  padding: 3rem;
+  margin-bottom: 2.5rem;
+  border-left: 6px solid #004d80;
   border-radius: 6px;
-  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.05);
+  box-shadow: 0px 3px 12px rgba(0, 0, 0, 0.07);
 }
 
 .service-block h2 {
   margin-bottom: 0.75rem;
+  color: #002147;
+}
+
+.service-card {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 1.5rem;
+  margin: 1rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+  cursor: pointer;   /* 👈 shows the hand cursor */
+  text-align: center;
+}
+
+.service-card h3 {
+  margin: 0;
+  font-size: 1.2rem;
   color: #004d80;
 }
 
-/* ========== Case Study / Resource Cards ========== */
-.card {
-  background: white;
-  padding: 2rem;
-  border-radius: 6px;
-  margin-bottom: 2rem;
-  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.05);
+/* Hover effect */
+.service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  background: #f9fbff;
 }
 
-/* ========== Footer ========== */
+
+/* ===== Cards (Case Studies / Resources) ===== */
+.card {
+  background: #ffffff;
+  padding: 2.5rem;
+  border-radius: 8px;
+  margin-bottom: 2.5rem;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.08);
+  border-top: 4px solid #004d80;
+}
+
+/* ===== Footer ===== */
 footer {
-  background: #004d80;
-  color: white;
+  background: #002147;
+  color: #e5e7eb;
   text-align: center;
-  padding: 3rem 2rem;
+  padding: 4rem 2rem;
 }
 
 footer h2 {
-  color: white;
+  color: #ffffff;
+  margin-bottom: 1rem;
 }
 
 footer p {
-  color: #e5e7eb;
+  max-width: 700px;
+  margin: auto;
+  margin-bottom: 1.5rem;
+  color: #d1d5db;
+}
+
+/* Modal: improved centering and scrolling for all screens */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0; top: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.7);
+  padding: 0;
+  overflow-y: auto;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Make modal-content always fit and center vertically with margin, allow scrolling if needed */
+.modal-content {
+  background: #fff;
+  margin: 6vh auto 6vh auto;
+  padding: 2rem;
+  border-radius: 10px;
+  width: 95vw;
+  max-width: 500px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+  position: relative;
+  max-height: 88vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding-top: 3.5rem; /* Add space for close button above title */
+}
+
+/* Make close button above modal title and not overlap */
+.modal-close {
+  position: absolute;
+  top: 0.8rem;
+  right: 1.2rem;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #333;
+  cursor: pointer;
+  z-index: 10;
+  /* Place above title, not overlapping */
+  background: #fff;
+  border-radius: 50%;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  border: 1px solid #eee;
+}
+
+/* On small screens, further adjust modal for usability */
+@media (max-width: 600px) {
+  .modal-content {
+    width: 99vw;
+    min-width: 0;
+    max-width: 99vw;
+    padding: 1rem 0.5rem 1.5rem 0.5rem;
+    font-size: 1rem;
+    margin: 3vh auto 3vh auto;
+    max-height: 94vh;
+  }
+  .modal-close {
+    top: 8px;
+    right: 10px;
+    font-size: 2.2rem;
+  }
+}
+
+/* Ensure all modal section titles wrap properly */
+.modal-content h2,
+.modal-content h3,
+.modal-content h2#modalTitle {
+  word-break: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+  text-align: center;
+  max-width: 90%;
+  padding: 0 0.5rem;
+}
+
+/* New styles for modal title in modal-content */
+.modal-content h2#modalTitle {
+  word-break: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+  text-align: center;
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  padding: 0 0.5rem;
+  max-width: 100%;
+  /* Prevents overflow and ensures wrapping */
+}
+
+/* ===== Contact Form ===== */
+#contact {
+  max-width: 700px;
+  margin: 3rem auto;
+  padding: 2rem;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+#contact h2 {
+  text-align: center;
   margin-bottom: 1.5rem;
 }
 
-/* ========== Responsive Adjustments ========== */
+form label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #002147;
+}
+
+.form-input,
+.form-textarea {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1.1rem;
+  border: 2px solid #c5a46d;
+  border-radius: 6px;
+  margin-bottom: 1.5rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover/Focus effect */
+.form-input:focus,
+.form-textarea:focus {
+  border-color: #004d80;
+  outline: none;
+  box-shadow: 0 0 6px rgba(0,77,128,0.3);
+}
+
+/* ===== Consultation Questions (Private Page) ===== */
+.locked {
+  text-align: center;
+  padding: 5rem 2rem;
+}
+
+.locked input {
+  padding: 0.8rem;
+  font-size: 1.1rem;
+  border: 2px solid #c5a46d;
+  border-radius: 6px;
+  margin-right: 0.5rem;
+}
+
+.locked button {
+  padding: 0.8rem 1.2rem;
+  background: #004d80;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.locked button:hover {
+  background: #c5a46d;
+}
+
+#errorMessage {
+  color: red;
+  margin-top: 1rem;
+  display: none;
+}
+
+.content {
+  display: none;
+  padding: 2rem;
+  max-width: 900px;
+  margin: 3rem auto;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.content h1 {
+  color: #002147;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.content h2 {
+  color: #004d80;
+  border-left: 5px solid #c5a46d;
+  padding-left: 0.75rem;
+  margin-top: 2rem;
+}
+
+.note-area {
+  width: 100%;
+  margin-top: 0.5rem;
+  margin-bottom: 1.5rem;
+  padding: 0.6rem;
+  font-size: 1rem;
+  border: 1px solid #c5a46d;
+  border-radius: 6px;
+}
+
+.export-btn {
+  margin-top: 2rem;
+  padding: 0.9rem 1.5rem;
+  background: #004d80;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.export-btn:hover {
+  background: #c5a46d;
+}
+
+/* ===== Client Info Block ===== */
+.client-info {
+  margin-bottom: 2rem;
+  padding: 1rem;
+  background: #f4f8fb;
+  border: 1px solid #c5a46d;
+  border-radius: 6px;
+}
+
+.client-info label {
+  display: block;
+  font-weight: bold;
+  margin-top: 0.5rem;
+  color: #002147;
+}
+
+.client-info input {
+  width: 100%;
+  padding: 0.6rem;
+  font-size: 1rem;
+  margin-top: 0.3rem;
+  margin-bottom: 1rem;
+  border: 1px solid #c5a46d;
+  border-radius: 4px;
+}
+
+/* Make images responsive, especially the RWRM model image */
+#model img,
+img.responsive,
+img[alt~="Romanishan"] {
+  max-width: 100vw;
+  width: 100%;
+  height: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+  padding-left: 2vw;
+  padding-right: 2vw;
+}
+
+/* On very small screens, reduce padding to maximize image area */
+@media (max-width: 480px) {
+  #model img,
+  img.responsive,
+  img[alt~="Romanishan"] {
+    padding-left: 0.5vw;
+    padding-right: 0.5vw;
+  }
+}
+
+/* ===== Responsive ===== */
 @media (max-width: 768px) {
   header h1 {
-    font-size: 2rem;
+    font-size: 2.2rem;
+    padding-left: 2vw;
+    padding-right: 2vw;
   }
 
-  header p {
-    font-size: 1rem;
+  h1 {
+    font-size: 2.5rem;
+    padding-left: 2vw;
+    padding-right: 2vw;
+  }
+
+  h2 {
+    font-size: 1.6rem;
+  }
+  
+  p {
+    padding-left: 2.5vw;
+    padding-right: 2.5vw;
   }
 
   .btn, .btn-secondary {
-    padding: 0.6rem 1rem;
-    font-size: 0.9rem;
+    padding: 0.65rem 1.2rem;
+    font-size: 0.95rem;
+  }
+
+  .hero-overlay h1 {
+    font-size: 2.2rem;
+    width: 100%;
+    max-width: 100%;
+    padding: 0 0.5rem;
+  }
+  .hero-overlay p {
+    font-size: 1.1rem;
+    padding: 0 0.5rem;
+  }
+  .hero-brand {
+    font-size: 1rem;
+    max-width: 100%;
+    padding: 0 0.5rem;
+    margin-bottom: 1.2rem;
+  }
+  .hero-signature {
+    font-size: 1.5rem;
+  }
+}
+@media (max-width: 480px) {
+  body {
+    font-size: 16px;
+  }
+
+  header, section, footer {
+    padding: 3rem 1rem;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-overlay {
+    padding: 1rem 0.2rem;
+  }
+  .hero-overlay h1 {
+    font-size: 1.3rem;
+    padding: 0 0.2rem;
+  }
+  .hero-overlay p {
+    font-size: 1rem;
+    padding: 0 0.2rem;
+  }
+  .hero-brand {
+    font-size: 0.95rem;
+    padding: 0 0.2rem;
+    margin-bottom: 1rem;
+  }
+  .hero-signature {
+    font-size: 1.3rem;
+  }
+  .hero .btn, 
+  .hero .btn-secondary {
+    font-size: 1rem;
+    padding: 0.7rem 0.5rem;
+    max-width: 100%;
+  }
+}
+@media (max-width: 360px) {
+  header h1 {
+    font-size: 1.8rem;
+  }
+
+  h2 {
+    font-size: 1.4rem;
   }
 }

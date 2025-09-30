@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Consultation Playbook - Private</title>
+  <link rel="stylesheet" href="styles2.css">
+</head>
+  <body>
+    <div class="locked">
+      <h2>Private Access</h2>
+      <input type="password" id="passwordInput" placeholder="Enter Access Code">
+      <button onclick="checkPassword()">Unlock</button>
+      <p id="errorMessage">Incorrect password. Please try again.</p>
+    </div>
+
+    <div class="content" id="protectedContent">
+      <h1>Doctoral-Level Consultation Playbook</h1>
+
+      <!-- New client info fields -->
+      <div class="client-info">
+        <label for="clientName">Client Name:</label>
+        <input type="text" id="clientName" placeholder="Enter client name">
+
+        <label for="consultDate">Consultation Date:</label>
+        <input type="date" id="consultDate">
+      </div>
+      
+      <!-- ========== Organizational Development ========== -->
+      <h2>Organizational Development</h2>
+      <ul>
+        <li>How aligned are your strategic objectives with the daily decision-making of frontline employees?  
+          <textarea class="note-area" data-question="OD Q1"></textarea></li>
+        <li>If I asked three different teams what success looks like here, would their answers be consistent?  
+          <textarea class="note-area" data-question="OD Q2"></textarea></li>
+        <li>What mechanisms do you use to detect misalignment before it becomes costly?  
+          <textarea class="note-area" data-question="OD Q3"></textarea></li>
+      </ul>
+
+      <!-- ========== Human Factors Engineering ========== -->
+      <h2>Human Factors Engineering</h2>
+      <ul>
+        <li>Where in your processes do human errors or workarounds seem to repeat — and do you view them as individual failings or system design signals?  
+          <textarea class="note-area"></textarea></li>
+        <li>How much of your workflow design assumes people should adapt to the system, versus the system being designed around human limits?  
+          <textarea class="note-area"></textarea></li>
+        <li>If a new hire shadowed your current team, what parts of the system would feel intuitive, and what would feel unnecessarily complex?  
+          <textarea class="note-area"></textarea></li>
+      </ul>
+
+      <!-- ========== Talent Management ========== -->
+      <h2>Talent Management</h2>
+      <ul>
+        <li>How do you distinguish between turnover that is healthy versus turnover that signals disengagement or systemic issues?  
+          <textarea class="note-area"></textarea></li>
+        <li>In your workforce, do you see generational friction — and how is it expressed in meetings, promotions, or informal communication?  
+          <textarea class="note-area"></textarea></li>
+        <li>What signals do you look for that someone is thriving here — and how predictive are those signals of long-term retention?  
+          <textarea class="note-area"></textarea></li>
+      </ul>
+
+      <!-- ========== Engineering Workflow Management ========== -->
+      <h2>Engineering Workflow Management</h2>
+      <ul>
+        <li>Where do projects most often stall — at handoffs, in approvals, or at the interface of disciplines?  
+          <textarea class="note-area"></textarea></li>
+        <li>How do you measure workflow efficiency — time, cost, quality, or resilience to change?  
+          <textarea class="note-area"></textarea></li>
+        <li>If one bottleneck could be removed tomorrow, what would it be — and why does it persist today?  
+          <textarea class="note-area"></textarea></li>
+      </ul>
+
+      <!-- ========== Document Management ========== -->
+      <h2>Document Management</h2>
+      <ul>
+        <li>When employees need critical information, how long does it take them to find it — and how confident are they in its accuracy?  
+          <textarea class="note-area"></textarea></li>
+        <li>What compliance or audit risks have been most stressful in the last two years — and how much of that is traceable to documentation gaps?  
+          <textarea class="note-area"></textarea></li>
+        <li>If three key employees left tomorrow, what institutional knowledge would disappear — and what would remain accessible?  
+          <textarea class="note-area"></textarea></li>
+      </ul>
+
+      <!-- ========== Change Management ========== -->
+      <h2>Change Management</h2>
+      <ul>
+        <li>When major changes occur here, what emotions do you notice most — confusion, skepticism, or fatigue?  
+          <textarea class="note-area"></textarea></li>
+        <li>How do leaders here frame change — as a burden, a necessity, or an opportunity?  
+          <textarea class="note-area"></textarea></li>
+        <li>What patterns have you observed in past change initiatives — what made the successful ones work, and why did others fail?  
+          <textarea class="note-area"></textarea></li>
+      </ul>
+
+      <!-- ========== Algorithmic Psychology ========== -->
+      <h2>Algorithmic Psychology & Workforce Analytics</h2>
+      <ul>
+        <li>What’s the last workforce report you looked at — and what questions did it leave unanswered?  
+          <textarea class="note-area"></textarea></li>
+        <li>If I asked why your top performers stay, would your answer be based on data, anecdote, or assumption?  
+          <textarea class="note-area"></textarea></li>
+        <li>Which engagement signals do you wish you could predict — and what would you do differently if you had that foresight?  
+          <textarea class="note-area"></textarea></li>
+      </ul>
+
+      <!-- ========== Closing ========== -->
+      <h2>Closing Transition</h2>
+      <ul>
+        <li>From what we’ve discussed, which issues feel most urgent — and which are most critical for long-term sustainability?  
+          <textarea class="note-area"></textarea></li>
+        <li>If we designed a system to reduce waste, strengthen alignment, and build resilience, what would tangible success look like for you?  
+          <textarea class="note-area"></textarea></li>
+        <li>Would you prefer we start with a targeted intervention in one area, or a holistic diagnostic across multiple workforce dimensions?  
+          <textarea class="note-area"></textarea></li>
+      </ul>
+
+      <button class="export-btn" onclick="exportToPDF()">Export Notes to PDF</button>
+    </div>
+
+    <!-- ===== Dependencies for Word Export ===== -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
