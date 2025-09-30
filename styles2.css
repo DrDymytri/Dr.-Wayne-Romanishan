@@ -62,8 +62,9 @@ header {
   text-align: center;
   padding: 2rem 1rem;
   border-bottom: 4px solid #c5a46d;
+  /* Try all common path/case variants for the hero image */
   background-image:
-    url("/images/hero-bg.jpg"),
+    url("/Images/Hero-bg.jpg"),
     linear-gradient(120deg, #002147, #004d80);
   background-repeat: no-repeat;
   background-position: center center;
