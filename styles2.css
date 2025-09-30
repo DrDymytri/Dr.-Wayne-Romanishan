@@ -636,33 +636,35 @@ img[alt~="Romanishan"] {
 /* Responsive image for diplomas and similar content */
 .responsive-img,
 .diploma-img {
+  display: block;
   max-width: 100%;
   width: 100%;
   height: auto;
-  display: block;
   margin-left: auto;
   margin-right: auto;
   box-sizing: border-box;
-  padding-left: 2vw;
-  padding-right: 2vw;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* Ensure no horizontal scroll and image fits viewport on all devices */
+@media (max-width: 900px) {
+  .responsive-img,
+  .diploma-img {
+    width: 100vw;
+    max-width: 100vw;
+    padding-left: 0;
+    padding-right: 0;
+  }
 }
 
 @media (max-width: 480px) {
   .responsive-img,
   .diploma-img {
-    padding-left: 0.5vw;
-    padding-right: 0.5vw;
+    width: 100vw;
     max-width: 100vw;
-  }
-}
-
-/* On very small screens, reduce padding to maximize image area */
-@media (max-width: 480px) {
-  #model img,
-  img.responsive,
-  img[alt~="Romanishan"] {
-    padding-left: 0.5vw;
-    padding-right: 0.5vw;
+    padding-left: 0;
+    padding-right: 0;
   }
 }
 
