@@ -62,6 +62,11 @@ header {
   text-align: center;
   padding: 2rem 1rem;
   border-bottom: 4px solid #c5a46d; /* Subtle gold accent */
+  /* Restore background image for all headers */
+  background-image: url("images/hero-bg.jpg"), linear-gradient(120deg, #002147, #004d80);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
 }
 
 header h1 {
