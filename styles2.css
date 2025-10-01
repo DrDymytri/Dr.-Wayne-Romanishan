@@ -249,7 +249,7 @@ li {
 }
 
 .btn-secondary {
-  background: transparent;
+  background: rgba(240, 248, 255, 0.185);
   border: 2px solid #a1d5f8;
   color: #abdafa; 
   text-shadow: 0.125px 0.25px black, 0.25px 0.5px black, 0.375px 0.75px black,
