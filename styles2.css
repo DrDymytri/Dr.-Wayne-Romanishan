@@ -173,14 +173,6 @@ li {
 
 .hero-brand {
   /* Remove absolute positioning for mobile friendliness */
-  background: linear-gradient(
-    to right,
-    rgb(60, 137, 209),
-    rgb(18, 67, 112),
-    rgb(13, 41, 66),
-    rgb(18, 67, 112),
-    rgb(60, 137, 209)
-  );
   position: static;
   top: auto;
   left: auto;
@@ -188,7 +180,7 @@ li {
   width: 100%;
   max-width: 800px;
   margin: 0 auto 1rem auto;
-  font-size: 1.55rem;
+  font-size: 2rem;
   font-weight: 700;
   color: aliceblue;
   padding: 0.5rem 1rem;
@@ -197,13 +189,11 @@ li {
     0.5px 1px black, 0.625px 1.25px black, 0.75px 1.5px black;
   box-sizing: border-box;
   margin-bottom: 1.5rem;
-  box-shadow: 0 5px 20px rgb(0, 8, 14), inset 0 1px 2px #cde4ffbc,
-    inset 0 -1px 2px white;
 }
 
 .hero-signature {
   font-family: 'Dancing Script', cursive; /* calligraphy style */
-  font-size: 1.75rem;
+  font-size: 2rem;
   color: #cdae79; /* gold accent for prestige */  
   text-shadow: 0.125px 0.25px black, 0.25px 0.5px black, 0.375px 0.75px black,
     0.5px 1px black, 0.625px 1.25px black, 0.75px 1.5px black;
@@ -213,12 +203,15 @@ li {
 .hero .btn, 
 .hero .btn-secondary {
   margin-top: 0.6rem;
-  display: block;
-  width: 100%;
-  max-width: 320px;
+  display: inline-block;
+  width: auto;
+  min-width: 120px;
+  max-width: 90vw;
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 0.5rem;
+  text-align: center;
+  /* Remove forced 100% width and max-width for mobile */
 }
 
 /* ===== Buttons ===== */
@@ -226,19 +219,15 @@ li {
   display: inline-block;
   padding: 0.85rem 1.75rem;
   margin: 0.75rem;
-  border-radius: 4px;
+  border-radius: 1px;
   font-weight: 600;
   font-size: 1rem;
   text-decoration: none;
   transition: all 0.3s ease;
 }
 
-.btn {
-  border-top: 4px solid rgb(189, 209, 230);
-  border-bottom: 4px solid rgb(121, 141, 160);
-  border-right: 4px solid rgb(149, 172, 190);
-  border-left: 4px solid rgb(156, 175, 194);
-  outline: 1px solid black;
+.btn {  
+  border: 2px solid #a1d5f8;
   background: linear-gradient(
     to right,
     rgb(60, 137, 209),
@@ -251,7 +240,6 @@ li {
   box-sizing: border-box;
   text-shadow: 0.125px 0.25px black, 0.25px 0.5px black, 0.375px 0.75px black,
     0.5px 1px black, 0.625px 1.25px black, 0.75px 1.5px black;
-  box-shadow: 0 0 15px 1px aliceblue;
 }
 
 .btn:hover {
@@ -773,8 +761,13 @@ img[alt~="Romanishan"] {
   .hero .btn, 
   .hero .btn-secondary {
     font-size: 1rem;
-    padding: 0.7rem 0.5rem;
-    max-width: 100%;
+    padding: 0.7rem 1.2rem;
+    width: auto;
+    min-width: 100px;
+    max-width: 90vw;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
   }
 }
 @media (max-width: 360px) {
