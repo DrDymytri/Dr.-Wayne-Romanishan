@@ -305,6 +305,27 @@ li {
   cursor: pointer;
 }
 
+/* Service card sizing for mobile: fit to content, not full width */
+@media (max-width: 600px) {
+  .services-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  }
+  .service {
+    width: auto;
+    min-width: 180px;
+    max-width: 95vw;
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+    text-align: center;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
 .service:hover {
   transform: translateY(-6px);
   box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.12);
@@ -516,6 +537,18 @@ form label {
   border-color: #004d80;
   outline: none;
   box-shadow: 0 0 6px rgba(0,77,128,0.3);
+}
+
+/* Improve form label/input readability on mobile */
+@media (max-width: 600px) {
+  form label,
+  .form-input,
+  .form-textarea {
+    margin-left: 6vw;
+    margin-right: 6vw;
+    width: 88vw;
+    box-sizing: border-box;
+  }
 }
 
 /* ===== Consultation Questions (Private Page) ===== */
