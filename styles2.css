@@ -173,6 +173,14 @@ li {
 
 .hero-brand {
   /* Remove absolute positioning for mobile friendliness */
+  background: linear-gradient(
+    to right,
+    rgb(60, 137, 209),
+    rgb(18, 67, 112),
+    rgb(13, 41, 66),
+    rgb(18, 67, 112),
+    rgb(60, 137, 209)
+  );
   position: static;
   top: auto;
   left: auto;
@@ -180,7 +188,7 @@ li {
   width: 100%;
   max-width: 800px;
   margin: 0 auto 1rem auto;
-  font-size: 1.2rem;
+  font-size: 1.55rem;
   font-weight: 700;
   color: aliceblue;
   padding: 0.5rem 1rem;
@@ -189,6 +197,8 @@ li {
     0.5px 1px black, 0.625px 1.25px black, 0.75px 1.5px black;
   box-sizing: border-box;
   margin-bottom: 1.5rem;
+  box-shadow: 0 5px 20px rgb(0, 8, 14), inset 0 1px 2px #cde4ffbc,
+    inset 0 -1px 2px white;
 }
 
 .hero-signature {
@@ -224,11 +234,24 @@ li {
 }
 
 .btn {
-  background: #004d80;
+  border-top: 4px solid rgb(189, 209, 230);
+  border-bottom: 4px solid rgb(121, 141, 160);
+  border-right: 4px solid rgb(149, 172, 190);
+  border-left: 4px solid rgb(156, 175, 194);
+  outline: 1px solid black;
+  background: linear-gradient(
+    to right,
+    rgb(60, 137, 209),
+    rgb(18, 67, 112),
+    rgb(13, 41, 66),
+    rgb(18, 67, 112),
+    rgb(60, 137, 209)
+  );
   color: #fff;
-  border: 2px solid #a1d5f8; 
+  box-sizing: border-box;
   text-shadow: 0.125px 0.25px black, 0.25px 0.5px black, 0.375px 0.75px black,
     0.5px 1px black, 0.625px 1.25px black, 0.75px 1.5px black;
+  box-shadow: 0 0 15px 1px aliceblue;
 }
 
 .btn:hover {
