@@ -262,8 +262,11 @@ li {
 }
 
 .back-btn {
-  display: inline-block;
-  margin: 1rem 2rem;
+  display: block;
+  margin-top: 0.5rem !important;
+  margin-bottom: 0.5rem !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
   padding: 0.4rem 1rem;
   background: #004d80;
   color: #fff;
@@ -273,13 +276,16 @@ li {
   border-radius: 4px;
   transition: background 0.3s ease;
   border: 1px solid #a1d5f8; 
+  text-align: center;
+  max-width: 220px;
   text-shadow: 0.125px 0.25px black, 0.25px 0.5px black, 0.375px 0.75px black,
     0.5px 1px black, 0.625px 1.25px black, 0.75px 1.5px black;
 }
 
 .back-btn:hover {
-  background: #c5a46d; /* gold accent */
+  background: #c5a46d;
   color: #fff;
+  border-color: #c5a46d;
 }
 
 /* ===== Services Grid ===== */
@@ -896,4 +902,33 @@ img[alt~="Romanishan"] {
 @media (max-width:700px) {
   .scan-question input[type="range"] { width:100%; }
   .scores-grid { grid-template-columns: 1fr !important; }
+}
+
+/* Center and constrain scan form/questions to header width */
+.scan-section {
+  /* Already has padding and border-radius */
+  max-width: 900px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.scan-explanation {
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.client-info {
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+}
+
+/* Modal content width matches scan-section/header */
+#scanModal .modal-content {
+  max-width: 900px;
+}
+#scanModal .modal-content {
+  max-width: 900px;
 }
