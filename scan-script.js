@@ -244,7 +244,12 @@ document.addEventListener("DOMContentLoaded", () => {
     for (let i=1;i<=31;i++){
       const val = values[i-1];
       const interp = qInterpret[i] ? qInterpret[i][val] : `Q${i}: ${val}`;
-      html += `<p style="margin:0.35rem 0;"><strong>Q${i} (${val}):</strong> ${interp}</p>`;
+      // Remove duplicate "Qx (val):" prefix if present
+      if (qInterpret[i] && qInterpret[i][val]) {
+        html += `<p style="margin:0.35rem 0;"><strong>Q${i} (${val}):</strong> ${interp.replace(/^Q\d+\s*\(\d+\):\s*/, "")}</p>`;
+      } else {
+        html += `<p style="margin:0.35rem 0;"><strong>Q${i} (${val}):</strong> ${interp}</p>`;
+      }
     }
     html += `</div></details>`;
 
@@ -254,15 +259,61 @@ document.addEventListener("DOMContentLoaded", () => {
     const clientName = document.getElementById("clientName") ? document.getElementById("clientName").value : "Client";
     const consultDate = document.getElementById("scanDate") ? document.getElementById("scanDate").value : new Date().toLocaleDateString();
 
+    // Attach modalExportBtn handler after modal is rendered
+    const modalExportBtn = document.getElementById("modalExportBtn");
     if (modalExportBtn) {
       modalExportBtn.onclick = () => exportScanToPDF({ clientName, consultDate, overall, alignScore, purposeScore, adaptiveScore: adaptiveScore, genScore, weakest, contradictions, serviceResults, values });
     }
+
+    // Attach modalEmailBtn handler after modal is rendered
+    const modalEmailBtn = document.getElementById("modalEmailBtn");
     if (modalEmailBtn) {
       modalEmailBtn.onclick = () => {
-        const questionLines = values.map((v,i)=>`Q${i+1}: ${v} — ${qInterpret[i+1] ? qInterpret[i+1][v] : ""}`).join("\n");
-        const topServices = serviceResults.slice(0,3).map(s => `${s.name}: ${s.needPercent}% need, ${s.weeks} weeks, $${s.estCost.toLocaleString()}`).join("\n");
-        const body = encodeURIComponent(`Client: ${clientName}\nDate: ${consultDate}\n\nResilience Index: ${overall}%\nWeakest Pillar: ${weakest ? `${weakest[0]} (${weakest[1]}%)` : "N/A"}\n\nTop Recommendations:\n${topServices}\n\nContradictions:\n${contradictions.length ? contradictions.map(c=>`Q${c.pos}/Q${c.inv}: ${c.posVal}/${c.invVal} - ${c.probe}`).join("\n") : "None"}\n\nQuestion interpretations:\n${questionLines}`);
-        window.location.href = `mailto:dr.wayneromanishan@mdoasolutions.com?subject=RRS Results - ${clientName}&body=${body}`;
+        // Compose email body to match PDF content
+        let body = "";
+        body += `MDOA Solutions — Resilience Readiness Brief\n\n`;
+        body += `Client: ${clientName}\n`;
+        body += `Date: ${consultDate}\n`;
+        body += `Resilience Index: ${overall}%\n\n`;
+
+        body += `Pillar Scores:\n`;
+        body += `• Algorithmic Alignment: ${alignScore}%\n`;
+        body += `• Purpose Capital: ${purposeScore}%\n`;
+        body += `• Adaptive Fear Reset: ${adaptiveScore}%\n`;
+        body += `• Generational Flow Integration: ${genScore}%\n\n`;
+
+        body += `Top Service Recommendations:\n`;
+        serviceResults.slice(0,3).forEach(s => {
+          body += `${s.name} — ${s.needPercent}% need • ${s.weeks} weeks • $${s.estCost.toLocaleString()}\n`;
+          if (s.drivers && s.drivers.length) {
+            body += `  Key drivers:\n`;
+            s.drivers.forEach(d => {
+              body += `    - ${d.interp}\n`;
+            });
+          }
+        });
+        body += `\n`;
+
+        if (contradictions.length) {
+          body += `Contradictions & Suggested Probes:\n`;
+          contradictions.forEach(c => {
+            body += `  Q${c.pos}/Q${c.inv}: ${c.posVal}/${c.invVal} — ${c.probe || ""}\n`;
+          });
+          body += `\n`;
+        }
+
+        body += `Full question interpretations:\n`;
+        for (let i=1;i<=31;i++) {
+          const val = values[i-1];
+          const interp = qInterpret[i] ? qInterpret[i][val] : `Q${i}: ${val}`;
+          // Always show "Qx (val): interpretation" for each question
+          body += `Q${i} (${val}): ${interp.replace(/^Q\d+\s*\(\d+\):\s*/, "")}\n`;
+        }
+
+        // Open mailto (use encodeURIComponent for full body)
+        window.location.href =
+          "mailto:dr.wayneromanishan@mdoasolutions.com?subject=Resilience Scan Diagnostic Review&body=" +
+          encodeURIComponent(body);
       };
     }
   } // end calculate
@@ -273,15 +324,22 @@ document.addEventListener("DOMContentLoaded", () => {
     const doc = new jsPDF({ unit: "pt", format: "letter" });
     let y = 40;
     const left = 40;
+
     doc.setFontSize(18);
     doc.text("MDOA Solutions — Resilience Readiness Brief", left, y);
     y += 26;
+
     doc.setFontSize(12);
     doc.text(`Client: ${data.clientName}`, left, y); y += 14;
     doc.text(`Date: ${data.consultDate}`, left, y); y += 18;
     doc.text(`Resilience Index: ${data.overall}%`, left, y); y += 18;
 
-    doc.text("Pillar Scores:", left, y); y += 14;
+    // Section: Pillar Scores
+    doc.setFont("times", "bold");
+    doc.setFontSize(14);
+    doc.text("Pillar Scores:", left, y); y += 18;
+    doc.setFont("times", "normal");
+    doc.setFontSize(12);
     const scores = [
       ["Algorithmic Alignment", data.alignScore],
       ["Purpose Capital", data.purposeScore],
@@ -289,9 +347,14 @@ document.addEventListener("DOMContentLoaded", () => {
       ["Generational Flow Integration", data.genScore]
     ];
     scores.forEach(s => { doc.text(`• ${s[0]}: ${s[1]}%`, left+12, y); y += 12; });
-    y += 8;
+    y += 16;
 
-    doc.text("Top Service Recommendations:", left, y); y += 14;
+    // Section: Top Service Recommendations
+    doc.setFont("times", "bold");
+    doc.setFontSize(14);
+    doc.text("Top Service Recommendations:", left, y); y += 18;
+    doc.setFont("times", "normal");
+    doc.setFontSize(12);
     data.serviceResults.slice(0,3).forEach(s => {
       const line = `${s.name} — ${s.needPercent}% need • ${s.weeks} weeks • $${s.estCost.toLocaleString()}`;
       const lines = doc.splitTextToSize(line, 480);
@@ -308,9 +371,15 @@ document.addEventListener("DOMContentLoaded", () => {
       }
       if (y > 700) { doc.addPage(); y = 40; }
     });
+    y += 16;
 
+    // Section: Contradictions
     if (data.contradictions && data.contradictions.length) {
-      doc.text("Contradictions & Suggested Probes:", left, y); y += 14;
+      doc.setFont("times", "bold");
+      doc.setFontSize(14);
+      doc.text("Contradictions & Suggested Probes:", left, y); y += 18;
+      doc.setFont("times", "normal");
+      doc.setFontSize(12);
       data.contradictions.forEach(c => {
         const text = `Q${c.pos}/Q${c.inv}: ${c.posVal}/${c.invVal} — ${c.probe || ""}`;
         const lines = doc.splitTextToSize(text, 480);
@@ -318,10 +387,15 @@ document.addEventListener("DOMContentLoaded", () => {
         y += lines.length * 12 + 6;
         if (y > 700) { doc.addPage(); y = 40; }
       });
-      y += 6;
+      y += 16;
     }
 
-    doc.text("Full question interpretations:", left, y); y += 14;
+    // Section: Full question interpretations
+    doc.setFont("times", "bold");
+    doc.setFontSize(14);
+    doc.text("Full question interpretations:", left, y); y += 18;
+    doc.setFont("times", "normal");
+    doc.setFontSize(12);
     for (let i=1;i<=31;i++) {
       const val = data.values ? data.values[i-1] : getQ(i);
       const interp = qInterpret[i] ? qInterpret[i][val] : `Q${i}: ${val}`;

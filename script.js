@@ -184,6 +184,22 @@ document.addEventListener("DOMContentLoaded", () => {
     closeBtn.onclick = () => modal.style.display = "none";
     window.onclick = e => { if (e.target === modal) modal.style.display = "none"; };
   }
+
+  // Fix: ensure modalEmailBtn event is attached after modal is shown
+  function attachModalHandlers() {
+    const modalEmailBtn = document.getElementById("modalEmailBtn");
+    if (modalEmailBtn) {
+      modalEmailBtn.onclick = function() {
+        // ...your email logic here...
+        // Example: window.location.href = "mailto:...";
+      };
+    }
+    // ...attach other modal handlers if needed...
+  }
+
+  // If you open the modal dynamically, call attachModalHandlers() after showing modal
+  // If modal is always present, call it once on DOMContentLoaded:
+  attachModalHandlers();
 });
 
 function checkPassword() {
