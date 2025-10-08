@@ -3,183 +3,133 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MDOA Solutions | Building Resilient Workforces</title>
-  <meta name="description" content="MDOA Solutions applies psychology, engineering, and sustainability to build resilient, purpose-driven organizations. Founded by Dr. Wayne Romanishan, creator of the Romanishan Workforce Resilience Model (RWRM).">
+  <title>MDOA Solutions | Resilience Readiness Scan</title>
+  <meta name="description" content="The Romanishan Workforce Resilience Model (RWRM) scan identifies organizational strengths and vulnerabilities across alignment, purpose, adaptability, and generational flow.">
   <link rel="icon" href="./Images/psyblack.png" type="image/png">
-  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
 
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Merriweather:wght@400;700&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
   <link rel="stylesheet" href="styles2.css">
 </head>
 <body>
   <!-- Hero Section -->
   <header class="hero">
     <div class="hero-overlay">
-      <!-- Top brand text -->
       <div class="hero-brand">Multi-Dimensional Operations and Analysis (MDOA Solutions)</div> 
       <h1>Resilience Readiness Scan</h1>
-      <p>20 questions · 5 minutes · Bias-resilient. Complete to receive an instant Resilience Index, 
-        contradiction flags, and recommended services.</p>
-      <!-- Signature at bottom -->
+      <p>20 questions · 5 minutes · Scientifically grounded and bias-resilient. Complete this scan to receive an instant Resilience Index, contradiction insights, and recommended service pathways.</p>
       <div class="hero-signature">Dr. Wayne Romanishan Jr., Psy.D.</div> 
       <a href="./contact2.html" class="btn">Schedule a Consultation</a>
-      <a href="./services2.html" class="btn-secondary">Explore Our Services</a> 
-      <a href="./index.html" class="back-btn" style="display:block;max-width:220px;margin:2rem auto 0 auto;">← Back to Home</a>
+      <a href="./services2.html" class="btn-secondary">Explore Our Services</a>
+      <a href="./index.html" class="back-btn">← Back to Home</a>
     </div>  
-  </header></header>
+  </header>
 
-    <!-- Client info -->
-    <section class="client-info" style="margin-bottom:1rem;">
+  <main class="scan-container">
+    <!-- Client Info -->
+    <section class="client-info">
       <label for="clientName">Client / Organization Name</label>
-      <input id="clientName" type="text" placeholder="Client or Org name" />
+      <input id="clientName" type="text" placeholder="Enter client or organization name">
       <label for="scanDate">Date</label>
-      <input id="scanDate" type="date" />
+      <input id="scanDate" type="date">
     </section>
 
-    <!-- Scan form -->
-    <form id="scanForm" class="scan-section">
-      <!-- Add explanation for sliders -->
-      <div class="scan-explanation" style="margin-bottom:1.25rem; background:#f4f7fb; padding:1rem; border-radius:8px;">
-        <strong>How to use the sliders:</strong>
-        <ul style="margin-top:0.5rem;">
-          <li><strong>All the way left (1):</strong> Strongly disagree / Not true at all for your organization.</li>
-          <li><strong>All the way right (5):</strong> Strongly agree / Fully true for your organization.</li>
-          <li><strong>Middle values (2-4):</strong> Reflect partial agreement, uncertainty, or areas where your organization is in transition.</li>
-          <li>Be honest—your answers help identify strengths, risks, and where integration or improvement is needed.</li>
-        </ul>
-      </div>
-      <!-- Questions: each <div class="scan-question"> contains label and range input -->
-      <!-- IDs follow q1..q20. We rely on IDs in the script -->
-      <!-- Section headings inserted for readability -->
+    <!-- Introductory Guidance -->
+    <div class="scan-guidance">
+      <h3>How to Use This Scan</h3>
+      <p>
+        The <strong>Resilience Readiness Scan</strong> is derived from the <strong>Romanishan Workforce Resilience Model (RWRM)</strong>, blending principles from organizational psychology, systems engineering, and behavioral science.
+      </p>
+      <p>
+        Each question evaluates one of the four RWRM pillars: <strong>Algorithmic Alignment</strong>, <strong>Purpose Capital</strong>, <strong>Adaptive Fear Reset</strong>, and <strong>Generational Flow Integration</strong>.
+      </p>
+      <ul>
+        <li><strong>1:</strong> Strongly disagree or not evident in the organization.</li>
+        <li><strong>3:</strong> Partially true, uncertain, or inconsistent across teams.</li>
+        <li><strong>5:</strong> Strongly agree or consistently practiced throughout.</li>
+      </ul>
+      <p>
+        <strong>If you don’t know how to respond:</strong> Select a midpoint (e.g., “3”) to indicate limited visibility or uncertainty. This helps identify where awareness or diagnostic clarity is missing — a key component of resilience analysis.
+      </p>
+      <p>
+        <em>Note:</em> Your results are not “pass/fail.” They illuminate areas of alignment, adaptation, and risk. The scan helps guide conversation, not judgment.
+      </p>
+    </div>
+
+    <!-- RWRM Question Set -->
+    <form id="scanForm">
       <h2>Algorithmic Alignment</h2>
-      <div class="scan-question">
-        <label for="q1">1. Teams clearly understand how daily work maps to strategic goals.</label>
-        <input id="q1" name="q1" type="range" min="1" max="5" value="3" />
-      </div>
+      <div class="scan-question"><label for="q1">1. Teams clearly understand how daily work maps to strategic goals.</label><input id="q1" type="range" min="1" max="5" value="3"></div>
+      <div class="scan-question"><label for="q2">2. Leadership decisions cascade quickly and are implemented consistently.</label><input id="q2" type="range" min="1" max="5" value="3"></div>
+      <div class="scan-question"><label for="q3">3. Different departments collaborate with minimal duplication of effort.</label><input id="q3" type="range" min="1" max="5" value="3"></div>
 
-      <div class="scan-question">
-        <label for="q2">2. Leadership decisions cascade quickly and are implemented consistently.</label>
-        <input id="q2" name="q2" type="range" min="1" max="5" value="3" />
-      </div>
-
-      <div class="scan-question">
-        <label for="q3">3. Different departments collaborate with minimal duplication of effort.</label>
-        <input id="q3" name="q3" type="range" min="1" max="5" value="3" />
-      </div>
-
-      <!-- Purpose Capital -->
       <h2>Purpose Capital</h2>
-      <div class="scan-question">
-        <label for="q4">4. Employees feel their work has meaningful, long-term purpose.</label>
-        <input id="q4" name="q4" type="range" min="1" max="5" value="3" />
-      </div>
+      <div class="scan-question"><label for="q4">4. Employees feel their work has meaningful, long-term purpose.</label><input id="q4" type="range" min="1" max="5" value="3"></div>
+      <div class="scan-question"><label for="q5">5. Recognition and reward systems reinforce desired behaviors.</label><input id="q5" type="range" min="1" max="5" value="3"></div>
+      <div class="scan-question"><label for="q6">6. We can point to recent examples (past 6 months) where purpose improved outcomes.</label><input id="q6" type="range" min="1" max="5" value="3"></div>
 
-      <div class="scan-question">
-        <label for="q5">5. Recognition and reward systems reinforce desired behaviors.</label>
-        <input id="q5" name="q5" type="range" min="1" max="5" value="3" />
-      </div>
-
-      <div class="scan-question">
-        <label for="q6">6. We can point to recent examples (past 6 months) where purpose improved outcomes.</label>
-        <input id="q6" name="q6" type="range" min="1" max="5" value="3" />
-      </div>
-
-      <!-- Adaptive Fear Reset -->
       <h2>Adaptive Fear Reset</h2>
-      <div class="scan-question">
-        <label for="q7">7. Employees feel safe voicing new ideas and admitting mistakes.</label>
-        <input id="q7" name="q7" type="range" min="1" max="5" value="3" />
-      </div>
+      <div class="scan-question"><label for="q7">7. Employees feel safe voicing new ideas and admitting mistakes.</label><input id="q7" type="range" min="1" max="5" value="3"></div>
+      <div class="scan-question"><label for="q8">8. Leadership communicates change with transparency and empathy.</label><input id="q8" type="range" min="1" max="5" value="3"></div>
+      <div class="scan-question"><label for="q9">9. When initiatives fail, we analyze system causes (not find scapegoats).</label><input id="q9" type="range" min="1" max="5" value="3"></div>
 
-      <div class="scan-question">
-        <label for="q8">8. Leadership communicates change with transparency and empathy.</label>
-        <input id="q8" name="q8" type="range" min="1" max="5" value="3" />
-      </div>
-
-      <div class="scan-question">
-        <label for="q9">9. When initiatives fail, we analyze system causes (not find scapegoats).</label>
-        <input id="q9" name="q9" type="range" min="1" max="5" value="3" />
-      </div>
-
-      <!-- Generational Flow Integration -->
       <h2>Generational Flow Integration</h2>
-      <div class="scan-question">
-        <label for="q10">10. Generational / experiential differences are used as strengths, not excuses for conflict.</label>
-        <input id="q10" name="q10" type="range" min="1" max="5" value="3" />
-      </div>
+      <div class="scan-question"><label for="q10">10. Generational differences are used as strengths, not excuses for conflict.</label><input id="q10" type="range" min="1" max="5" value="3"></div>
+      <div class="scan-question"><label for="q11">11. Communication methods adapt to diverse work styles.</label><input id="q11" type="range" min="1" max="5" value="3"></div>
+      <div class="scan-question"><label for="q12">12. New employees are integrated through mentoring and knowledge transfer.</label><input id="q12" type="range" min="1" max="5" value="3"></div>
 
-      <div class="scan-question">
-        <label for="q11">11. Communication methods adapt to diverse workstyles across the org.</label>
-        <input id="q11" name="q11" type="range" min="1" max="5" value="3" />
-      </div>
-
-      <div class="scan-question">
-        <label for="q12">12. New employees are rapidly integrated through mentoring and knowledge transfer.</label>
-        <input id="q12" name="q12" type="range" min="1" max="5" value="3" />
-      </div>
-
-      <!-- Service alignment discovery (and reality / evidence checks) -->
       <h2>Service Alignment & Evidence Checks</h2>
-      <div class="scan-question">
-        <label for="q13">13. Our workflows and documentation reduce friction rather than create it.</label>
-        <input id="q13" name="q13" type="range" min="1" max="5" value="3" />
-      </div>
+      <div class="scan-question"><label for="q13">13. Workflows and documentation reduce friction rather than create it.</label><input id="q13" type="range" min="1" max="5" value="3"></div>
+      <div class="scan-question"><label for="q14">14. We attract and retain talent who fit our culture and technical needs.</label><input id="q14" type="range" min="1" max="5" value="3"></div>
+      <div class="scan-question"><label for="q15">15. Past change initiatives led to measurable improvements.</label><input id="q15" type="range" min="1" max="5" value="3"></div>
+      <div class="scan-question"><label for="q16">16. Documentation and controls are current and used daily.</label><input id="q16" type="range" min="1" max="5" value="3"></div>
 
-      <div class="scan-question">
-        <label for="q14">14. We reliably attract and retain talent who fit our culture and technical needs.</label>
-        <input id="q14" name="q14" type="range" min="1" max="5" value="3" />
-      </div>
-
-      <div class="scan-question">
-        <label for="q15">15. Past change initiatives led to measurable improvements (not just messaging).</label>
-        <input id="q15" name="q15" type="range" min="1" max="5" value="3" />
-      </div>
-
-      <div class="scan-question">
-        <label for="q16">16. Our documentation and controls are current and used by teams daily.</label>
-        <input id="q16" name="q16" type="range" min="1" max="5" value="3" />
-      </div>
-
-      <!-- Inverted / reality-check (contradiction detectors) -->
       <h2>Reality & Contradiction Checks</h2>
-      <div class="scan-question">
-        <label for="q17">17. Employees often say they are surprised or blindsided by leadership decisions.</label>
-        <input id="q17" name="q17" type="range" min="1" max="5" value="2" />
-      </div>
+      <div class="scan-question"><label for="q17">17. Employees often say they are blindsided by leadership decisions.</label><input id="q17" type="range" min="1" max="5" value="2"></div>
+      <div class="scan-question"><label for="q18">18. We often fix problems by asking people to "work harder" instead of changing systems.</label><input id="q18" type="range" min="1" max="5" value="2"></div>
+      <div class="scan-question"><label for="q19">19. Compared to 3 years ago, our ability to adapt to change has significantly improved.</label><input id="q19" type="range" min="1" max="5" value="3"></div>
+      <div class="scan-question"><label for="q20">20. We have verifiable metrics showing resilience during disruptions.</label><input id="q20" type="range" min="1" max="5" value="2"></div>
 
-      <div class="scan-question">
-        <label for="q18">18. We often fix problems by asking people to "work harder", not by changing systems.</label>
-        <input id="q18" name="q18" type="range" min="1" max="5" value="2" />
-      </div>
+      <h2>Algorithmic Psychology</h2>
+      <div class="scan-question"><label for="q21">21. Our organization uses data and behavioral insights to anticipate challenges before they occur.</label><input id="q21" name="q21" type="range" min="1" max="5" value="3" /></div>
+      <div class="scan-question"><label for="q22">22. Leaders are comfortable making data-informed decisions that challenge intuition or tradition.</label><input id="q22" name="q22" type="range" min="1" max="5" value="3" /></div>
 
-      <div class="scan-question">
-        <label for="q19">19. Compared to 3 years ago, our ability to adapt to market changes has improved significantly.</label>
-        <input id="q19" name="q19" type="range" min="1" max="5" value="3" />
-      </div>
+      <h2>Human Factors Engineering (Supplement)</h2>
+      <div class="scan-question"><label for="q23">23. Our systems and workflows are designed around human limits—reducing mental overload and preventing fatigue.</label><input id="q23" name="q23" type="range" min="1" max="5" value="3" /></div>
+      <div class="scan-question"><label for="q24">24. When errors occur, we analyze environmental and system factors before assigning individual blame.</label><input id="q24" name="q24" type="range" min="1" max="5" value="3" /></div>
 
-      <div class="scan-question">
-        <label for="q20">20. We have verifiable metrics (KPIs) showing resilience during the last major disruption.</label>
-        <input id="q20" name="q20" type="range" min="1" max="5" value="2" />
-      </div>
+      <h2>Engineering Workflow Management (Supplement)</h2>
+      <div class="scan-question"><label for="q25">25. Our cross-department workflows are mapped, visible, and regularly reviewed for optimization.</label><input id="q25" name="q25" type="range" min="1" max="5" value="3" /></div>
+      <div class="scan-question"><label for="q26">26. Digital and physical workflows are integrated seamlessly—information is accessible where and when it’s needed.</label><input id="q26" name="q26" type="range" min="1" max="5" value="3" /></div>
 
-      <div style="margin-top:1.25rem; display:flex; gap:1rem; flex-wrap:wrap;">
+      <h2>Document Management / Change Balance</h2>
+      <div class="scan-question"><label for="q27">27. Critical documents are version-controlled, accessible, and consistently updated without confusion or duplication.</label><input id="q27" name="q27" type="range" min="1" max="5" value="3" /></div>
+      <div class="scan-question"><label for="q28">28. Change initiatives consistently balance urgency with employee readiness and well-being.</label><input id="q28" name="q28" type="range" min="1" max="5" value="3" /></div>
+      <div class="scan-question"><label for="q29">29. Workflows and approval processes are fully developed and function with accountability, permission-controlled, role-based rigor.</label><input id="q29" name="q29" type="range" min="1" max="5" value="3" /></div>
+      <div class="scan-question"><label for="q30">30. Nowhere in the document control process does any individual work outside the system by downloading files locally.</label><input id="q30" name="q30" type="range" min="1" max="5" value="3" /></div>
+      <div class="scan-question"><label for="q31">31. All software and human factors communicate effectively with each other under a single source of truth environment.</label><input id="q31" name="q31" type="range" min="1" max="5" value="3" /></div>
+
+      <div style="text-align:center; margin-top:2rem;">
         <button id="calcBtn" type="button" class="btn">Calculate Resilience</button>
       </div>
     </form>
+  </main>
 
-    <!-- Modal for calculation results -->
-    <div id="scanModal" class="modal">
-      <div class="modal-content" style="max-width:600px;">
-        <span class="modal-close">&times;</span>
-        <div id="scanModalBody"></div>
-        <div style="margin-top:1.5rem; display:flex; gap:1rem; flex-wrap:wrap; justify-content:center;">
-          <button id="modalExportBtn" class="btn">Export Brief to PDF</button>
-          <button id="modalEmailBtn" class="btn-secondary">Schedule Diagnostic Review</button>
-        </div>
+  <!-- Modal for Results -->
+  <div id="scanModal" class="modal">
+    <div class="modal-content">
+      <span class="modal-close">&times;</span>
+      <div id="scanModalBody"></div>
+      <div style="margin-top:1.0rem; text-align:center;">
+        <button id="modalExportBtn" class="btn">Export Brief to PDF</button>
+        <button id="modalEmailBtn" class="btn-secondary">Schedule Diagnostic Review</button>
       </div>
     </div>
-  </main>
-  <!-- jsPDF CDN -->
+  </div>
+
+  <!-- Libraries & Script -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="scan-script.js"></script>
 </body>
