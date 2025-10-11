@@ -39,25 +39,25 @@ document.addEventListener("DOMContentLoaded", () => {
     "6-19":"Purpose-driven outcomes claimed without comparative improvement. Request metrics tied to purpose initiatives.",
     "4-20":"High perceived purpose but low KPIs. Ask for concrete retention/performance cases linked to mission.",
     "15-18":"Change outcomes claimed but fixes rely on 'work harder'. Request sustained KPI data from initiatives.",
-    "1-2":"Alignment inconsistency — ask which departments miss strategic targets and why."
+    "1-2":"Alignment inconsistency: ask which departments miss strategic targets and why."
   };
 
   // -------- Per-question plain-language interpretation (1..31)
   // Index 0 unused to keep numeric indexing intuitive
   const qInterpret = {
-    1: ["","Q1 (1): Teams do NOT understand how daily work maps to strategy — local optimization dominates.","Q1 (2): Teams lack clarity; alignment inconsistent.","Q1 (3): Mixed awareness: visibility gaps exist.","Q1 (4): Teams generally map work to strategy.","Q1 (5): Strong, consistent translation of strategy into daily activity."],
-    2: ["","Q2 (1): Leadership decisions rarely cascade; implementation stalls.","Q2 (2): Cascade occasionally but slow due to bottlenecks.","Q2 (3): Cascade uneven:some decisions land, others don't.","Q2 (4): Decisions cascade quickly and are implemented.","Q2 (5): Rapid cascade and disciplined execution organization-wide."],
+    1: ["","Q1 (1): Teams do NOT understand how daily work maps to strategy, local optimization dominates.","Q1 (2): Teams lack clarity; alignment inconsistent.","Q1 (3): Mixed awareness: visibility gaps exist.","Q1 (4): Teams generally map work to strategy.","Q1 (5): Strong, consistent translation of strategy into daily activity."],
+    2: ["","Q2 (1): Leadership decisions rarely cascade; implementation stalls.","Q2 (2): Cascade occasionally but slow due to bottlenecks.","Q2 (3): Cascade uneven: some decisions land, others don't.","Q2 (4): Decisions cascade quickly and are implemented.","Q2 (5): Rapid cascade and disciplined execution organization-wide."],
     3: ["","Q3 (1): Departments functionally siloed; duplication and rework common.","Q3 (2): Collaboration exists but duplication persists.","Q3 (3): Collaboration uneven; cross-team friction remains.","Q3 (4): Departments collaborate effectively with limited duplication.","Q3 (5): Seamless cross-functional collaboration and deconfliction."],
-    4: ["","Q4 (1): Employees do NOT see purpose — motivation risk high.","Q4 (2): Purpose weak or inconsistently communicated.","Q4 (3): Purpose awareness mixed across roles.","Q4 (4): Employees generally perceive meaningful purpose.","Q4 (5): Purpose is embedded and drives behavior."],
+    4: ["","Q4 (1): Employees do NOT see purpose, motivation risk high.","Q4 (2): Purpose weak or inconsistently communicated.","Q4 (3): Purpose awareness mixed across roles.","Q4 (4): Employees generally perceive meaningful purpose.","Q4 (5): Purpose is embedded and drives behavior."],
     5: ["","Q5 (1): Rewards do not reinforce desired behaviors; signals misaligned.","Q5 (2): Recognition tokenistic and not behavior-shaping.","Q5 (3): Mixed effectiveness; incentives sometimes align.","Q5 (4): Rewards largely reinforce desired actions.","Q5 (5): Recognition strongly shapes culture and performance."],
-    6: ["","Q6 (1): No evidence purpose improved outcomes — claims unsupported.","Q6 (2): Only anecdotal examples exist.","Q6 (3): Some examples but inconsistent measurement.","Q6 (4): Clear examples where purpose improved outcomes.","Q6 (5): Robust evidence showing repeatable performance gains tied to purpose."],
+    6: ["","Q6 (1): No evidence purpose improved outcomes, claims unsupported.","Q6 (2): Only anecdotal examples exist.","Q6 (3): Some examples but inconsistent measurement.","Q6 (4): Clear examples where purpose improved outcomes.","Q6 (5): Robust evidence showing repeatable performance gains tied to purpose."],
     7: ["","Q7 (1): Psychological safety low; blame culture present.","Q7 (2): Safety limited; some voices suppressed.","Q7 (3): Mixed safety across teams.","Q7 (4): Employees usually feel safe to speak up.","Q7 (5): Strong psychological safety and encouragement to experiment."],
     8: ["","Q8 (1): Leadership fails to communicate change; surprises common.","Q8 (2): Communication inconsistent or late.","Q8 (3): Some changes communicated well; others not.","Q8 (4): Leadership communicates with transparency and empathy.","Q8 (5): Outstanding change comms and stakeholder engagement."],
     9: ["","Q9 (1): Failures lead to blame, not learning.","Q9 (2): Occasional learning but not routine.","Q9 (3): Some root-cause analysis; inconsistent.","Q9 (4): Systemic learning is routine.","Q9 (5): Robust blameless learning and continuous improvement."],
     10:["","Q10 (1): Generational differences create conflict and lost knowledge.","Q10 (2): Friction evident; little integration.","Q10 (3): Mixed generational flow; gaps remain.","Q10 (4): Generational strengths leveraged.","Q10 (5): Generational integration is a strategic advantage."],
     11:["","Q11 (1): Comms channels rigid and exclude workstyles.","Q11 (2): Partial accommodation but many ignored.","Q11 (3): Adaptation inconsistent across org.","Q11 (4): Communication adapts to diverse styles.","Q11 (5): Systems flexibly serve all workstyles."],
     12:["","Q12 (1): New hires left to sink: no mentoring.","Q12 (2): Onboarding ad hoc and dependent on individuals.","Q12 (3): Some mentoring but not systematic.","Q12 (4): Mentoring and transfer programs effective.","Q12 (5): Institutionalized rapid integration and knowledge capture."],
-    13:["","Q13 (1): Workflows/docs create friction — rework and delays.","Q13 (2): Docs inconsistent and outdated.","Q13 (3): Some workflows efficient; others not.","Q13 (4): Workflows usually reduce friction.","Q13 (5): Optimized workflows and docs reduce cognitive load."],
+    13:["","Q13 (1): Workflows/docs create friction, rework and delays.","Q13 (2): Docs inconsistent and outdated.","Q13 (3): Some workflows efficient; others not.","Q13 (4): Workflows usually reduce friction.","Q13 (5): Optimized workflows and docs reduce cognitive load."],
     14:["","Q14 (1): Hiring/retention failing: skill & culture fit issues.","Q14 (2): Recruitment retains some but departures persist.","Q14 (3): Mixed success; retention manager-dependent.","Q14 (4): Talent pipeline meets most needs.","Q14 (5): Strong attraction & retention aligned to needs."],
     15:["","Q15 (1): Change efforts produced no measurable improvement.","Q15 (2): Temporary KPI gains only.","Q15 (3): Some initiatives improved; others did not.","Q15 (4): Past initiatives show measurable sustained improvements.","Q15 (5): Consistent, measured change outcomes."],
     16:["","Q16 (1): Docs/controls obsolete or unused: compliance risk.","Q16 (2): Partial compliance; docs not trusted.","Q16 (3): Docs exist and used intermittently.","Q16 (4): Docs current and used daily.","Q16 (5): Docs authoritative and embedded in work."],
@@ -75,8 +75,8 @@ document.addEventListener("DOMContentLoaded", () => {
     27:["","Q27 (1): Critical docs are uncontrolled, inaccessible, and confusing.","Q27 (2): Versioning is inconsistent; trust low.","Q27 (3): Docs are accessible but maintenance uneven.","Q27 (4): Docs version-controlled and reliably accessible.","Q27 (5): Documents are authoritative, versioned, and trusted."],
     28:["","Q28 (1): Change initiatives ignore employee readiness and wellbeing.","Q28 (2): Some attention to readiness but inconsistent.","Q28 (3): Balance sometimes achieved; pacing uneven.","Q28 (4): Changes balance urgency and readiness appropriately.","Q28 (5): Change processes fully balance urgency with wellbeing."],
     29:["","Q29 (1): Approval processes lack structure: decisions made ad hoc with no accountability.","Q29 (2): Some approvals exist but role clarity and permissions are inconsistent.","Q29 (3): Processes defined but not always followed; accountability weak.","Q29 (4): Approval workflows function with mostly clear roles and permissions.","Q29 (5): Fully developed workflows with strict, auditable, role-based control and accountability."],
-    30:["","Q30 (1): Employees frequently bypass document control, downloading files locally: major compliance risk.","Q30 (2): Occasional local downloads occur outside the system.","Q30 (3): Policy discourages local files but not fully enforced.","Q30 (4): Rare local downloads — most work stays in system.","Q30 (5): No off-system file activity — full compliance with controlled repository."],
-    31:["","Q31 (1): Software systems and human workflows disconnected: multiple conflicting truths exist.","Q31 (2): Data handoffs and human coordination inconsistent; partial communication between systems.","Q31 (3): Systems communicate intermittently: partial integration.","Q31 (4): Systems and teams mostly aligned under shared source of truth.","Q31 (5): Seamless technical and human integration — unified single source of truth organization-wide."]
+    30:["","Q30 (1): Employees frequently bypass document control, downloading files locally: major compliance risk.","Q30 (2): Occasional local downloads occur outside the system.","Q30 (3): Policy discourages local files but not fully enforced.","Q30 (4): Rare local downloads, most work stays in system.","Q30 (5): No off-system file activity, full compliance with controlled repository."],
+    31:["","Q31 (1): Software systems and human workflows disconnected: multiple conflicting truths exist.","Q31 (2): Data handoffs and human coordination inconsistent; partial communication between systems.","Q31 (3): Systems communicate intermittently: partial integration.","Q31 (4): Systems and teams mostly aligned under shared source of truth.","Q31 (5): Seamless technical and human integration, unified single source of truth organization-wide."]
   };
 
   // ----- Pillar categories with new Qs included -----
@@ -246,7 +246,7 @@ document.addEventListener("DOMContentLoaded", () => {
       html += `<strong>${s.name}</strong> — <em>${s.needPercent}% need (${s.severityLabel})</em><br>`;
       html += `<small>Est. scope: ${s.weeks} weeks • Est. cost: $${s.estCost.toLocaleString()}</small>`;
       if (s.drivers && s.drivers.length) {
-        html += `<div style="margin-top:0.5rem;"><strong>Key drivers — plain-language interpretation:</strong><ul style="margin:0.25rem 0 0 1rem;">`;
+        html += `<div style="margin-top:0.5rem;"><strong>Key drivers:  plain-language interpretation:</strong><ul style="margin:0.25rem 0 0 1rem;">`;
         s.drivers.forEach(d => {
           // Remove Qx identifier from driver interpretation
           html += `<li style="margin-bottom:0.25rem;">${d.interp.replace(/^Q\d+\s*\(\d+\):\s*/, "")}</li>`;
@@ -285,7 +285,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (modalEmailBtn) {
       modalEmailBtn.onclick = () => {
         let body = "";
-        body += `MDOA Solutions — Resilience Readiness Brief\n\n`;
+        body += `MDOA Solutions:  Resilience Readiness Brief\n\n`;
         body += `Client: ${clientName}\n`;
         body += `Date: ${consultDate}\n`;
         body += `Resilience Index: ${overall}%\n\n`;
@@ -337,7 +337,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const left = 40;
 
     doc.setFontSize(18);
-    doc.text("MDOA Solutions — Resilience Readiness Brief", left, y);
+    doc.text("MDOA Solutions:  Resilience Readiness Brief", left, y);
     y += 26;
 
     doc.setFontSize(12);
