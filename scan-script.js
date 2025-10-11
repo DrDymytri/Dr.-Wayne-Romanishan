@@ -1,5 +1,6 @@
 // scan-script.js
 // Enhanced Resilience Readiness Scan — 31 questions, 7 service domains, interpretation-driven drivers
+
 document.addEventListener("DOMContentLoaded", () => {
   const calcBtn = document.getElementById("calcBtn");
   const scanModal = document.getElementById("scanModal");
@@ -44,8 +45,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // -------- Per-question plain-language interpretation (1..31)
   // Index 0 unused to keep numeric indexing intuitive
   const qInterpret = {
-    1: ["","Q1 (1): Teams do NOT understand how daily work maps to strategy — local optimization dominates.","Q1 (2): Teams lack clarity; alignment inconsistent.","Q1 (3): Mixed awareness — visibility gaps exist.","Q1 (4): Teams generally map work to strategy.","Q1 (5): Strong, consistent translation of strategy into daily activity."],
-    2: ["","Q2 (1): Leadership decisions rarely cascade; implementation stalls.","Q2 (2): Cascade occasionally but slow due to bottlenecks.","Q2 (3): Cascade uneven — some decisions land, others don't.","Q2 (4): Decisions cascade quickly and are implemented.","Q2 (5): Rapid cascade and disciplined execution organization-wide."],
+    1: ["","Q1 (1): Teams do NOT understand how daily work maps to strategy — local optimization dominates.","Q1 (2): Teams lack clarity; alignment inconsistent.","Q1 (3): Mixed awareness: visibility gaps exist.","Q1 (4): Teams generally map work to strategy.","Q1 (5): Strong, consistent translation of strategy into daily activity."],
+    2: ["","Q2 (1): Leadership decisions rarely cascade; implementation stalls.","Q2 (2): Cascade occasionally but slow due to bottlenecks.","Q2 (3): Cascade uneven:some decisions land, others don't.","Q2 (4): Decisions cascade quickly and are implemented.","Q2 (5): Rapid cascade and disciplined execution organization-wide."],
     3: ["","Q3 (1): Departments functionally siloed; duplication and rework common.","Q3 (2): Collaboration exists but duplication persists.","Q3 (3): Collaboration uneven; cross-team friction remains.","Q3 (4): Departments collaborate effectively with limited duplication.","Q3 (5): Seamless cross-functional collaboration and deconfliction."],
     4: ["","Q4 (1): Employees do NOT see purpose — motivation risk high.","Q4 (2): Purpose weak or inconsistently communicated.","Q4 (3): Purpose awareness mixed across roles.","Q4 (4): Employees generally perceive meaningful purpose.","Q4 (5): Purpose is embedded and drives behavior."],
     5: ["","Q5 (1): Rewards do not reinforce desired behaviors; signals misaligned.","Q5 (2): Recognition tokenistic and not behavior-shaping.","Q5 (3): Mixed effectiveness; incentives sometimes align.","Q5 (4): Rewards largely reinforce desired actions.","Q5 (5): Recognition strongly shapes culture and performance."],
@@ -55,12 +56,12 @@ document.addEventListener("DOMContentLoaded", () => {
     9: ["","Q9 (1): Failures lead to blame, not learning.","Q9 (2): Occasional learning but not routine.","Q9 (3): Some root-cause analysis; inconsistent.","Q9 (4): Systemic learning is routine.","Q9 (5): Robust blameless learning and continuous improvement."],
     10:["","Q10 (1): Generational differences create conflict and lost knowledge.","Q10 (2): Friction evident; little integration.","Q10 (3): Mixed generational flow; gaps remain.","Q10 (4): Generational strengths leveraged.","Q10 (5): Generational integration is a strategic advantage."],
     11:["","Q11 (1): Comms channels rigid and exclude workstyles.","Q11 (2): Partial accommodation but many ignored.","Q11 (3): Adaptation inconsistent across org.","Q11 (4): Communication adapts to diverse styles.","Q11 (5): Systems flexibly serve all workstyles."],
-    12:["","Q12 (1): New hires left to sink — no mentoring.","Q12 (2): Onboarding ad hoc and dependent on individuals.","Q12 (3): Some mentoring but not systematic.","Q12 (4): Mentoring and transfer programs effective.","Q12 (5): Institutionalized rapid integration and knowledge capture."],
+    12:["","Q12 (1): New hires left to sink: no mentoring.","Q12 (2): Onboarding ad hoc and dependent on individuals.","Q12 (3): Some mentoring but not systematic.","Q12 (4): Mentoring and transfer programs effective.","Q12 (5): Institutionalized rapid integration and knowledge capture."],
     13:["","Q13 (1): Workflows/docs create friction — rework and delays.","Q13 (2): Docs inconsistent and outdated.","Q13 (3): Some workflows efficient; others not.","Q13 (4): Workflows usually reduce friction.","Q13 (5): Optimized workflows and docs reduce cognitive load."],
-    14:["","Q14 (1): Hiring/retention failing — skill & culture fit issues.","Q14 (2): Recruitment retains some but departures persist.","Q14 (3): Mixed success; retention manager-dependent.","Q14 (4): Talent pipeline meets most needs.","Q14 (5): Strong attraction & retention aligned to needs."],
+    14:["","Q14 (1): Hiring/retention failing: skill & culture fit issues.","Q14 (2): Recruitment retains some but departures persist.","Q14 (3): Mixed success; retention manager-dependent.","Q14 (4): Talent pipeline meets most needs.","Q14 (5): Strong attraction & retention aligned to needs."],
     15:["","Q15 (1): Change efforts produced no measurable improvement.","Q15 (2): Temporary KPI gains only.","Q15 (3): Some initiatives improved; others did not.","Q15 (4): Past initiatives show measurable sustained improvements.","Q15 (5): Consistent, measured change outcomes."],
-    16:["","Q16 (1): Docs/controls obsolete or unused — compliance risk.","Q16 (2): Partial compliance; docs not trusted.","Q16 (3): Docs exist and used intermittently.","Q16 (4): Docs current and used daily.","Q16 (5): Docs authoritative and embedded in work."],
-    17:["","Q17 (1): Rarely feel blindsided by leadership.","Q17 (2): Infrequent blindsiding.","Q17 (3): Mixed experiences regarding surprise.","Q17 (4): Employees often surprised.","Q17 (5): Frequent blindsiding — systemic comms breakdown."],
+    16:["","Q16 (1): Docs/controls obsolete or unused: compliance risk.","Q16 (2): Partial compliance; docs not trusted.","Q16 (3): Docs exist and used intermittently.","Q16 (4): Docs current and used daily.","Q16 (5): Docs authoritative and embedded in work."],
+    17:["","Q17 (1): Rarely feel blindsided by leadership.","Q17 (2): Infrequent blindsiding.","Q17 (3): Mixed experiences regarding surprise.","Q17 (4): Employees often surprised.","Q17 (5): Frequent blindsiding: systemic comms breakdown."],
     18:["","Q18 (1): Problems SOLVED structurally, not by 'work harder'.","Q18 (2): 'Work harder' occasionally used as stopgap.","Q18 (3): Mix of systemic change and heroics.","Q18 (4): 'Work harder' often default.","Q18 (5): Heavy reliance on extra effort vs systemic fixes."],
     19:["","Q19 (1): Far less adaptable than 3 years ago.","Q19 (2): Adaptability weakened.","Q19 (3): Similar adaptability as 3 years ago.","Q19 (4): Noticeable improvement vs 3 years ago.","Q19 (5): Significant adaptability gains vs 3 years ago."],
     20:["","Q20 (1): No verifiable KPIs show resilience.","Q20 (2): KPIs limited or unreliable.","Q20 (3): Some KPIs exist but incomplete.","Q20 (4): KPIs show resilience in areas.","Q20 (5): Robust KPIs demonstrate resilience across disruptions."],
@@ -73,9 +74,9 @@ document.addEventListener("DOMContentLoaded", () => {
     26:["","Q26 (1): Digital and physical workflows are disconnected and fragmentary.","Q26 (2): Partial integration; handoffs break frequently.","Q26 (3): Integration exists but gaps remain.","Q26 (4): Digital/physical workflows integrated most places.","Q26 (5): Seamless integration of digital and physical flows."],
     27:["","Q27 (1): Critical docs are uncontrolled, inaccessible, and confusing.","Q27 (2): Versioning is inconsistent; trust low.","Q27 (3): Docs are accessible but maintenance uneven.","Q27 (4): Docs version-controlled and reliably accessible.","Q27 (5): Documents are authoritative, versioned, and trusted."],
     28:["","Q28 (1): Change initiatives ignore employee readiness and wellbeing.","Q28 (2): Some attention to readiness but inconsistent.","Q28 (3): Balance sometimes achieved; pacing uneven.","Q28 (4): Changes balance urgency and readiness appropriately.","Q28 (5): Change processes fully balance urgency with wellbeing."],
-    29:["","Q29 (1): Approval processes lack structure — decisions made ad hoc with no accountability.","Q29 (2): Some approvals exist but role clarity and permissions are inconsistent.","Q29 (3): Processes defined but not always followed; accountability weak.","Q29 (4): Approval workflows function with mostly clear roles and permissions.","Q29 (5): Fully developed workflows with strict, auditable, role-based control and accountability."],
-    30:["","Q30 (1): Employees frequently bypass document control, downloading files locally — major compliance risk.","Q30 (2): Occasional local downloads occur outside the system.","Q30 (3): Policy discourages local files but not fully enforced.","Q30 (4): Rare local downloads — most work stays in system.","Q30 (5): No off-system file activity — full compliance with controlled repository."],
-    31:["","Q31 (1): Software systems and human workflows disconnected — multiple conflicting truths exist.","Q31 (2): Data handoffs and human coordination inconsistent; partial communication between systems.","Q31 (3): Systems communicate intermittently — partial integration.","Q31 (4): Systems and teams mostly aligned under shared source of truth.","Q31 (5): Seamless technical and human integration — unified single source of truth organization-wide."]
+    29:["","Q29 (1): Approval processes lack structure: decisions made ad hoc with no accountability.","Q29 (2): Some approvals exist but role clarity and permissions are inconsistent.","Q29 (3): Processes defined but not always followed; accountability weak.","Q29 (4): Approval workflows function with mostly clear roles and permissions.","Q29 (5): Fully developed workflows with strict, auditable, role-based control and accountability."],
+    30:["","Q30 (1): Employees frequently bypass document control, downloading files locally: major compliance risk.","Q30 (2): Occasional local downloads occur outside the system.","Q30 (3): Policy discourages local files but not fully enforced.","Q30 (4): Rare local downloads — most work stays in system.","Q30 (5): No off-system file activity — full compliance with controlled repository."],
+    31:["","Q31 (1): Software systems and human workflows disconnected: multiple conflicting truths exist.","Q31 (2): Data handoffs and human coordination inconsistent; partial communication between systems.","Q31 (3): Systems communicate intermittently: partial integration.","Q31 (4): Systems and teams mostly aligned under shared source of truth.","Q31 (5): Seamless technical and human integration — unified single source of truth organization-wide."]
   };
 
   // ----- Pillar categories with new Qs included -----
@@ -150,7 +151,21 @@ document.addEventListener("DOMContentLoaded", () => {
       let driverHighlights = drivers.filter(d => d.val <= 3).sort((a,b)=>a.val-b.val).slice(0,4);
       if (driverHighlights.length === 0) driverHighlights = drivers.sort((a,b)=>a.val-b.val).slice(0,3);
 
-      const severityLabel = needPercent >= 75 ? "High Urgency" : needPercent >= 50 ? "Moderate Need" : needPercent >= 30 ? "Tactical Improvement" : "Advisory";
+      // Replace severityLabel logic with six increments
+      let severityLabel;
+      if (needPercent >= 90) {
+        severityLabel = "Critical Urgency";
+      } else if (needPercent >= 75) {
+        severityLabel = "High Urgency";
+      } else if (needPercent >= 60) {
+        severityLabel = "Significant Need";
+      } else if (needPercent >= 45) {
+        severityLabel = "Moderate Need";
+      } else if (needPercent >= 30) {
+        severityLabel = "Tactical Improvement";
+      } else {
+        severityLabel = "Advisory";
+      }
 
       results.push({
         key, name: cfg.name, needPercent, needScore, weeks, estCost, drivers: driverHighlights, contradictionBump, pillarBump, severityLabel
@@ -192,10 +207,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // banding
     let scoreLabel, scoreDesc;
-    if (overall < 40) { scoreLabel = "🔴 Fragile"; scoreDesc = "Immediate intervention recommended — full RWRM engagement."; }
+    if (overall < 40) { scoreLabel = "🔴 Fragile"; scoreDesc = "Immediate intervention recommended: full RWRM engagement."; }
     else if (overall < 55) { scoreLabel = "🟠 Recovering (Reactive)"; scoreDesc = "Reactive patterns present; targeted stabilization advised."; }
     else if (overall < 70) { scoreLabel = "🟡 Developing Resilience"; scoreDesc = "Resilience emerging; continue integration and targeted improvements."; }
-    else { scoreLabel = "🟢 Resilient"; scoreDesc = "Solid resilience — focus on optimization and sustainment.";}
+    else { scoreLabel = "🟢 Resilient"; scoreDesc = "Solid resilience: focus on optimization and sustainment.";}
 
     // compute services
     const serviceResults = computeServiceNeeds(values, contradictions, pillarScores, weakest);
@@ -204,26 +219,39 @@ document.addEventListener("DOMContentLoaded", () => {
     let html = `<h3>Resilience Index: <strong>${overall}%</strong> <span>${scoreLabel}</span></h3>`;
     html += `<p>${scoreDesc}</p>`;
     html += `<div class="scores-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-top:1rem;">`;
-    html += `<div class="score-card"><strong>Algorithmic Alignment</strong><div class="score-value">${alignScore}%</div></div>`;
-    html += `<div class="score-card"><strong>Purpose Capital</strong><div class="score-value">${purposeScore}%</div></div>`;
-    html += `<div class="score-card"><strong>Adaptive Fear Reset</strong><div class="score-value">${adaptiveScore}%</div></div>`;
-    html += `<div class="score-card"><strong>Generational Flow</strong><div class="score-value">${genScore}%</div></div></div>`;
+    html += `<div class="score-card"><strong>Algorithmic Alignment</strong><div class="score-value">${alignScore}%</div><div style="font-size:0.95rem;color:#555;">Represents how well your organization's systems anticipate and prevent disengagement triggers.</div></div>`;
+    html += `<div class="score-card"><strong>Purpose Capital</strong><div class="score-value">${purposeScore}%</div><div style="font-size:0.95rem;color:#555;">Shows how much meaning and motivation is embedded in your work culture.</div></div>`;
+    html += `<div class="score-card"><strong>Adaptive Fear Reset</strong><div class="score-value">${adaptiveScore}%</div><div style="font-size:0.95rem;color:#555;">Indicates your organization's ability to turn fear into constructive challenge and adapt to change.</div></div>`;
+    html += `<div class="score-card"><strong>Generational Flow</strong><div class="score-value">${genScore}%</div><div style="font-size:0.95rem;color:#555;">Reflects how well generational diversity is integrated as a strength.</div></div></div>`;
 
-    html += `<p style="margin-top:1rem;"><strong>Weakest Pillar:</strong> ${weakest ? `${weakest[0]} (${weakest[1]}%)` : "N/A"}</p>`;
+    // Remove weakest pillar info
 
-    // top 3 recommendations
-    html += `<h4 style="margin-top:1rem;">Service Recommendations (Top 3)</h4>`;
-    serviceResults.slice(0,3).forEach((s,idx)=>{
+    // Show all services, not just top 3
+    html += `<h4 style="margin-top:1rem;">Service Needs Overview</h4>`;
+    html += `<div style="margin-bottom:1.2rem;padding:0.7rem;background:#f4f8fb;border-radius:6px;border-left:4px solid #c5a46d;">
+      <strong>Disclaimer:</strong> The percentages below reflect estimated need based on your scan responses. 
+      <br>
+      <strong>Thresholds:</strong> 
+      <span style="color:#b71c1c;">Critical Urgency ≥ 90%</span>, 
+      <span style="color:#d84315;">High Urgency ≥ 75%</span>, 
+      <span style="color:#ff9800;">Significant Need ≥ 60%</span>, 
+      <span style="color:#fbc02d;">Moderate Need ≥ 45%</span>, 
+      <span style="color:#1976d2;">Tactical Improvement ≥ 30%</span>, 
+      <span style="color:#388e3c;">Advisory &lt; 30%</span>.
+      <br>
+      You may choose to address all services, or select only those most relevant to your organization’s goals and priorities.
+    </div>`;
+    serviceResults.forEach((s,idx)=>{
       html += `<div style="margin-bottom:0.6rem;padding:0.7rem;border-left:4px solid #004d80;background:#fff;">`;
-      html += `<strong>${idx+1}. ${s.name}</strong> — <em>${s.needPercent}% need (${s.severityLabel})</em><br>`;
+      html += `<strong>${s.name}</strong> — <em>${s.needPercent}% need (${s.severityLabel})</em><br>`;
       html += `<small>Est. scope: ${s.weeks} weeks • Est. cost: $${s.estCost.toLocaleString()}</small>`;
       if (s.drivers && s.drivers.length) {
         html += `<div style="margin-top:0.5rem;"><strong>Key drivers — plain-language interpretation:</strong><ul style="margin:0.25rem 0 0 1rem;">`;
-        s.drivers.forEach(d => html += `<li style="margin-bottom:0.25rem;">${d.interp}</li>`);
+        s.drivers.forEach(d => {
+          // Remove Qx identifier from driver interpretation
+          html += `<li style="margin-bottom:0.25rem;">${d.interp.replace(/^Q\d+\s*\(\d+\):\s*/, "")}</li>`;
+        });
         html += `</ul></div>`;
-      }
-      if (s.contradictionBump > 0 || s.pillarBump > 0) {
-        html += `<div style="margin-top:0.4rem;color:#8a2b2b;"><strong>Note:</strong> Contradictions or pillar weakness increased priority — validate during diagnostic.</div>`;
       }
       html += `</div>`;
     });
@@ -232,26 +260,13 @@ document.addEventListener("DOMContentLoaded", () => {
       html += `<div style="margin-top:1rem;padding:1rem;border-left:4px solid #c5a46d;background:#fff;">`;
       html += `<h4>Contradiction Flags</h4>`;
       contradictions.forEach(c => {
-        html += `<div style="margin-bottom:0.6rem;"><strong>Q${c.pos}/Q${c.inv}</strong>: ${c.posVal}/${c.invVal}<br><em>${c.probe}</em></div>`;
+        // Remove Qx identifiers from contradiction display
+        html += `<div style="margin-bottom:0.6rem;"><strong>${c.posVal}/${c.invVal}</strong><br><em>${c.probe}</em></div>`;
       });
       html += `</div>`;
     } else {
       html += `<p style="margin-top:1rem;">No major contradiction flags detected.</p>`;
     }
-
-    // expandable full question interpretations
-    html += `<details style="margin-top:1rem;"><summary style="cursor:pointer;font-weight:700;">Full question interpretations (what your score indicates)</summary><div style="margin-top:0.8rem;">`;
-    for (let i=1;i<=31;i++){
-      const val = values[i-1];
-      const interp = qInterpret[i] ? qInterpret[i][val] : `Q${i}: ${val}`;
-      // Remove duplicate "Qx (val):" prefix if present
-      if (qInterpret[i] && qInterpret[i][val]) {
-        html += `<p style="margin:0.35rem 0;"><strong>Q${i} (${val}):</strong> ${interp.replace(/^Q\d+\s*\(\d+\):\s*/, "")}</p>`;
-      } else {
-        html += `<p style="margin:0.35rem 0;"><strong>Q${i} (${val}):</strong> ${interp}</p>`;
-      }
-    }
-    html += `</div></details>`;
 
     openScanModal(html);
 
@@ -269,7 +284,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const modalEmailBtn = document.getElementById("modalEmailBtn");
     if (modalEmailBtn) {
       modalEmailBtn.onclick = () => {
-        // Compose email body to match PDF content
         let body = "";
         body += `MDOA Solutions — Resilience Readiness Brief\n\n`;
         body += `Client: ${clientName}\n`;
@@ -282,35 +296,32 @@ document.addEventListener("DOMContentLoaded", () => {
         body += `• Adaptive Fear Reset: ${adaptiveScore}%\n`;
         body += `• Generational Flow Integration: ${genScore}%\n\n`;
 
-        body += `Top Service Recommendations:\n`;
-        serviceResults.slice(0,3).forEach(s => {
-          body += `${s.name} — ${s.needPercent}% need • ${s.weeks} weeks • $${s.estCost.toLocaleString()}\n`;
+        body += `Service Needs Overview:\n`;
+        body += `Disclaimer: The percentages below reflect estimated need based on your scan responses.\n`;
+        body += `Thresholds: Critical Urgency ≥ 90%, High Urgency ≥ 75%, Significant Need ≥ 60%, Moderate Need ≥ 45%, Tactical Improvement ≥ 30%, Advisory < 30%.\n`;
+        body += `You may choose to address all services, or select only those most relevant to your organization’s goals and priorities.\n\n`;
+        serviceResults.forEach(s => {
+          body += `${s.name}: ${s.needPercent}% need (${s.severityLabel})\n`;
+          body += `  Est. scope: ${s.weeks} weeks • Est. cost: $${s.estCost.toLocaleString()}\n`;
           if (s.drivers && s.drivers.length) {
             body += `  Key drivers:\n`;
             s.drivers.forEach(d => {
-              body += `    - ${d.interp}\n`;
+              // Remove Qx identifier from driver interpretation
+              body += `    - ${d.interp.replace(/^Q\d+\s*\(\d+\):\s*/, "")}\n`;
             });
           }
+          body += `\n`;
         });
-        body += `\n`;
 
         if (contradictions.length) {
           body += `Contradictions & Suggested Probes:\n`;
           contradictions.forEach(c => {
-            body += `  Q${c.pos}/Q${c.inv}: ${c.posVal}/${c.invVal} — ${c.probe || ""}\n`;
+            // Remove Qx identifiers from contradiction display
+            body += `  ${c.posVal}/${c.invVal} — ${c.probe || ""}\n`;
           });
           body += `\n`;
         }
 
-        body += `Full question interpretations:\n`;
-        for (let i=1;i<=31;i++) {
-          const val = values[i-1];
-          const interp = qInterpret[i] ? qInterpret[i][val] : `Q${i}: ${val}`;
-          // Always show "Qx (val): interpretation" for each question
-          body += `Q${i} (${val}): ${interp.replace(/^Q\d+\s*\(\d+\):\s*/, "")}\n`;
-        }
-
-        // Open mailto (use encodeURIComponent for full body)
         window.location.href =
           "mailto:dr.wayneromanishan@mdoasolutions.com?subject=Resilience Scan Diagnostic Review&body=" +
           encodeURIComponent(body);
@@ -334,7 +345,6 @@ document.addEventListener("DOMContentLoaded", () => {
     doc.text(`Date: ${data.consultDate}`, left, y); y += 18;
     doc.text(`Resilience Index: ${data.overall}%`, left, y); y += 18;
 
-    // Section: Pillar Scores
     doc.setFont("times", "bold");
     doc.setFontSize(14);
     doc.text("Pillar Scores:", left, y); y += 18;
@@ -349,31 +359,40 @@ document.addEventListener("DOMContentLoaded", () => {
     scores.forEach(s => { doc.text(`• ${s[0]}: ${s[1]}%`, left+12, y); y += 12; });
     y += 16;
 
-    // Section: Top Service Recommendations
+    // Fix: Avoid ampersands in disclaimer/thresholds for PDF
     doc.setFont("times", "bold");
     doc.setFontSize(14);
-    doc.text("Top Service Recommendations:", left, y); y += 18;
+    doc.text("Service Needs Overview:", left, y); y += 18;
+    doc.setFont("times", "normal");
+    doc.setFontSize(11);
+    doc.text("Disclaimer: The percentages below reflect estimated need based on your scan responses.", left+12, y); y += 12;
+    doc.text("Thresholds: Critical Urgency >= 90%, High Urgency >= 75%, Significant Need >= 60%, Moderate Need >= 45%, Tactical Improvement >= 30%, Advisory < 30%.", left+12, y); y += 12;
+    doc.text("You may choose to address all services, or select only those most relevant to your organization's goals and priorities.", left+12, y); y += 16;
     doc.setFont("times", "normal");
     doc.setFontSize(12);
-    data.serviceResults.slice(0,3).forEach(s => {
-      const line = `${s.name} — ${s.needPercent}% need • ${s.weeks} weeks • $${s.estCost.toLocaleString()}`;
+
+    data.serviceResults.forEach(s => {
+      const line = `${s.name}: ${s.needPercent}% need (${s.severityLabel})`;
       const lines = doc.splitTextToSize(line, 480);
       doc.text(lines, left+12, y);
-      y += lines.length * 12 + 6;
+      y += lines.length * 12 + 2;
+      doc.text(`Est. scope: ${s.weeks} weeks • Est. cost: $${s.estCost.toLocaleString()}`, left+24, y);
+      y += 12;
       if (s.drivers && s.drivers.length) {
-        doc.text("Key drivers:", left+18, y); y += 12;
+        doc.text("Key drivers:", left+30, y); y += 12;
         s.drivers.forEach(d => {
-          const drvLines = doc.splitTextToSize(`- ${d.interp}`, 460);
-          doc.text(drvLines, left+24, y);
+          // Remove Qx identifier from driver interpretation
+          const drvLines = doc.splitTextToSize(`- ${d.interp.replace(/^Q\d+\s*\(\d+\):\s*/, "")}`, 460);
+          doc.text(drvLines, left+36, y);
           y += drvLines.length * 12 + 4;
           if (y > 700) { doc.addPage(); y = 40; }
         });
       }
+      y += 8;
       if (y > 700) { doc.addPage(); y = 40; }
     });
     y += 16;
 
-    // Section: Contradictions
     if (data.contradictions && data.contradictions.length) {
       doc.setFont("times", "bold");
       doc.setFontSize(14);
@@ -381,7 +400,8 @@ document.addEventListener("DOMContentLoaded", () => {
       doc.setFont("times", "normal");
       doc.setFontSize(12);
       data.contradictions.forEach(c => {
-        const text = `Q${c.pos}/Q${c.inv}: ${c.posVal}/${c.invVal} — ${c.probe || ""}`;
+        // Remove Qx identifiers from contradiction display
+        const text = `${c.posVal}/${c.invVal} — ${c.probe || ""}`;
         const lines = doc.splitTextToSize(text, 480);
         doc.text(lines, left+12, y);
         y += lines.length * 12 + 6;
@@ -407,8 +427,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const filename = `ResilienceBrief_${(data.clientName||"Client")}_${(data.consultDate||new Date().toLocaleDateString())}.pdf`.replace(/[^a-zA-Z0-9_\-\.]/g, "_");
     doc.save(filename);
-  }
+  } // end exportScanToPDF
 
   // wire calc
   if (calcBtn) calcBtn.addEventListener("click", calculate);
-}); // DOMContentLoaded end
+});
