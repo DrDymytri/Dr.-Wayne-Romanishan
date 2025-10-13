@@ -274,6 +274,56 @@ document.addEventListener("DOMContentLoaded", () => {
     const clientName = document.getElementById("clientName") ? document.getElementById("clientName").value : "Client";
     const consultDate = document.getElementById("scanDate") ? document.getElementById("scanDate").value : new Date().toLocaleDateString();
 
+    // Returns the full scan report as plain text for PDF/email
+    function getScanReportText(data) {
+      let body = "";
+      body += `<strong>MDOA Solutions:  Resilience Readiness Brief</strong>\n\n`;
+      body += `Client: ${data.clientName}\n`;
+      body += `Date: ${data.consultDate}\n`;
+      body += `Resilience Index: ${data.overall}%\n\n`;
+
+      body += `<strong>Pillar Scores:</strong>\n`;
+      body += `• Algorithmic Alignment: ${data.alignScore}%\n`;
+      body += `• Purpose Capital: ${data.purposeScore}%\n`;
+      body += `• Adaptive Fear Reset: ${data.adaptiveScore}%\n`;
+      body += `• Generational Flow Integration: ${data.genScore}%\n\n`;
+
+      body += `<strong>Service Needs Overview:</strong>\n`;
+      body += `Disclaimer: The percentages below reflect estimated need based on your scan responses.\n`;
+      body += `Thresholds: Critical Urgency ≥ 90%, High Urgency ≥ 75%, Significant Need ≥ 60%, Moderate Need ≥ 45%, Tactical Improvement ≥ 30%, Advisory < 30%.\n`;
+      body += `You may choose to address all services, or select only those most relevant to your organization’s goals and priorities.\n\n`;
+      data.serviceResults.forEach(s => {
+        body += `${s.name}: ${s.needPercent}% need (${s.severityLabel})\n`;
+        body += `  Est. scope: ${s.weeks} weeks • Est. cost: $${s.estCost.toLocaleString()}\n`;
+        if (s.drivers && s.drivers.length) {
+          body += `  Key drivers:\n`;
+          s.drivers.forEach(d => {
+            body += `    - ${d.interp.replace(/^Q\d+\s*\(\d+\):\s*/, "")}\n`;
+          });
+        }
+        body += `\n`;
+      });
+
+      if (data.contradictions && data.contradictions.length) {
+        body += `<strong>Contradictions & Suggested Probes:</strong>\n`;
+        data.contradictions.forEach(c => {
+          body += `  ${c.posVal}/${c.invVal} — ${c.probe || ""}\n`;
+        });
+        body += `\n`;
+      } else {
+        body += `<em>No major contradiction flags detected.</em>\n\n`;
+      }
+
+      body += `<strong>Full question interpretations:</strong>\n`;
+      for (let i = 1; i <= 31; i++) {
+        const val = data.values ? data.values[i - 1] : 3;
+        const interp = qInterpret[i] ? qInterpret[i][val] : `Q${i}: ${val}`;
+        body += `${i}. ${interp}\n`;
+      }
+
+      return body;
+    }
+
     // Attach modalExportBtn handler after modal is rendered
     const modalExportBtn = document.getElementById("modalExportBtn");
     if (modalExportBtn) {
@@ -284,47 +334,21 @@ document.addEventListener("DOMContentLoaded", () => {
     const modalEmailBtn = document.getElementById("modalEmailBtn");
     if (modalEmailBtn) {
       modalEmailBtn.onclick = () => {
-        let body = "";
-        body += `MDOA Solutions:  Resilience Readiness Brief\n\n`;
-        body += `Client: ${clientName}\n`;
-        body += `Date: ${consultDate}\n`;
-        body += `Resilience Index: ${overall}%\n\n`;
-
-        body += `Pillar Scores:\n`;
-        body += `• Algorithmic Alignment: ${alignScore}%\n`;
-        body += `• Purpose Capital: ${purposeScore}%\n`;
-        body += `• Adaptive Fear Reset: ${adaptiveScore}%\n`;
-        body += `• Generational Flow Integration: ${genScore}%\n\n`;
-
-        body += `Service Needs Overview:\n`;
-        body += `Disclaimer: The percentages below reflect estimated need based on your scan responses.\n`;
-        body += `Thresholds: Critical Urgency ≥ 90%, High Urgency ≥ 75%, Significant Need ≥ 60%, Moderate Need ≥ 45%, Tactical Improvement ≥ 30%, Advisory < 30%.\n`;
-        body += `You may choose to address all services, or select only those most relevant to your organization’s goals and priorities.\n\n`;
-        serviceResults.forEach(s => {
-          body += `${s.name}: ${s.needPercent}% need (${s.severityLabel})\n`;
-          body += `  Est. scope: ${s.weeks} weeks • Est. cost: $${s.estCost.toLocaleString()}\n`;
-          if (s.drivers && s.drivers.length) {
-            body += `  Key drivers:\n`;
-            s.drivers.forEach(d => {
-              // Remove Qx identifier from driver interpretation
-              body += `    - ${d.interp.replace(/^Q\d+\s*\(\d+\):\s*/, "")}\n`;
-            });
-          }
-          body += `\n`;
+        const reportText = getScanReportText({
+          clientName,
+          consultDate,
+          overall,
+          alignScore,
+          purposeScore,
+          adaptiveScore,
+          genScore,
+          contradictions,
+          serviceResults,
+          values
         });
-
-        if (contradictions.length) {
-          body += `Contradictions & Suggested Probes:\n`;
-          contradictions.forEach(c => {
-            // Remove Qx identifiers from contradiction display
-            body += `  ${c.posVal}/${c.invVal} — ${c.probe || ""}\n`;
-          });
-          body += `\n`;
-        }
-
         window.location.href =
           "mailto:dr.wayneromanishan@mdoasolutions.com?subject=Resilience Scan Diagnostic Review&body=" +
-          encodeURIComponent(body);
+          encodeURIComponent(reportText);
       };
     }
   } // end calculate

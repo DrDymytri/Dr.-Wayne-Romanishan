@@ -1118,6 +1118,35 @@ img[alt~="Romanishan"] {
   margin-top: 1rem;
 }
 
+/* Make modal .btn-secondary look like .btn in the modal */
+#scanModal .btn-secondary {
+  background: linear-gradient(
+    to right,
+    rgb(60, 137, 209),
+    rgb(18, 67, 112),
+    rgb(13, 41, 66),
+    rgb(18, 67, 112),
+    rgb(60, 137, 209)
+  );
+  border: 2px solid #a1d5f8;
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(0, 33, 71, 0.28);
+  text-shadow: 0.125px 0.25px black, 0.25px 0.5px black, 0.375px 0.75px black,
+    0.5px 1px black, 0.625px 1.25px black, 0.75px 1.5px black;
+  border-radius: 1px;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 0.85rem 1.75rem;
+  margin: 0.75rem;
+  transition: all 0.3s ease;
+}
+
+#scanModal .btn-secondary:hover {
+  background: #c5a46d;
+  border-color: #c5a46d;
+  color: #fff;
+}
+
 /* Subtle responsive tweaks */
 @media (max-width: 600px) {
   .scan-guidance {
