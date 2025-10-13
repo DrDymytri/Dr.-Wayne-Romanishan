@@ -140,17 +140,21 @@ li {
 .hero-overlay {
   position: relative;
   z-index: 2;
-  max-width: 900px;
+  max-width: 1000px;
   padding: 2rem;
   display: block;
   align-items: center;
   justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .hero-overlay h1 {
   width: 100%;
   max-width: 800px;
-  font-size: 3.2rem;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 2.5rem;
   margin-bottom: 1rem;
   font-family: "Lato", Arial, sans-serif;
   color: aliceblue;
@@ -178,9 +182,9 @@ li {
   left: auto;
   transform: none;
   width: 100%;
-  max-width: 800px;
+  max-width: 1000px;
   margin: 0 auto 1rem auto;
-  font-size: 2rem;
+  font-size: 2.5rem;
   font-weight: 700;
   color: aliceblue;
   padding: 0.5rem 1rem;
@@ -193,7 +197,7 @@ li {
 
 .hero-signature {
   font-family: 'Dancing Script', cursive; /* calligraphy style */
-  font-size: 2rem;
+  font-size: 2.5rem;
   color: #cdae79; /* gold accent for prestige */  
   text-shadow: 0.125px 0.25px black, 0.25px 0.5px black, 0.375px 0.75px black,
     0.5px 1px black, 0.625px 1.25px black, 0.75px 1.5px black;
@@ -222,20 +226,22 @@ li {
   margin-right: auto;
   margin-bottom: 0.5rem;
   text-align: center;
-  background: linear-gradient(120deg, #004d80 0%, #cdae79 100%);
+  background: linear-gradient(120deg, #004d80 0%, #1185e3 100%);
   border: 2px solid #cdae79; /* gold accent border */
   color: #fff; /* white text for contrast */
   box-shadow: 0 4px 16px rgba(0, 33, 71, 0.28);
-  text-shadow: 0.5px 1px 2px #002147, 0.5px 1px 2px #cdae79;
+  text-shadow: 0.125px 0.25px black, 0.25px 0.5px black, 0.375px 0.75px black,
+    0.5px 1px black, 0.625px 1.25px black, 0.75px 1.5px black;
   /* Remove forced 100% width and max-width for mobile */
 }
 
 .hero .btn-secondary:hover {
-  background: linear-gradient(120deg, #cdae79 0%, #004d80 100%);
+  background: linear-gradient(120deg, #94c5ea 0%, #004d80 100%);
   color: #fff;
-  text-shadow: 0.5px 1px 2px #002147, 0.5px 1px 2px #cdae79;
+  text-shadow: 0.125px 0.25px black, 0.25px 0.5px black, 0.375px 0.75px black,
+    0.5px 1px black, 0.625px 1.25px black, 0.75px 1.5px black;
   box-shadow: 0 8px 24px rgba(0,33,71,0.22);
-  border-color: #c5a46d;
+  border-color: #fff8ec;
 }
 
 /* ===== Buttons ===== */
@@ -655,6 +661,23 @@ form label {
   .client-info input[type="text"] {
     display: block;
     width: 98%;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    box-sizing: border-box;
+  }
+}
+
+/* Make clientName and scanDate inputs exactly the same width and centered on mobile */
+@media (max-width: 600px) {
+  .client-info input#clientName,
+  .client-info input#scanDate {
+    display: block;
+    width: 96%;
     max-width: 500px;
     margin-left: auto;
     margin-right: auto;
