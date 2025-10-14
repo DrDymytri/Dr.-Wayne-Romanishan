@@ -277,18 +277,18 @@ document.addEventListener("DOMContentLoaded", () => {
     // Returns the full scan report as plain text for PDF/email
     function getScanReportText(data) {
       let body = "";
-      body += `<strong>MDOA Solutions:  Resilience Readiness Brief</strong>\n\n`;
+      body += `MDOA Solutions:  Resilience Readiness Brief\n\n`;
       body += `Client: ${data.clientName}\n`;
       body += `Date: ${data.consultDate}\n`;
       body += `Resilience Index: ${data.overall}%\n\n`;
 
-      body += `<strong>Pillar Scores:</strong>\n`;
+      body += `Pillar Scores:\n`;
       body += `• Algorithmic Alignment: ${data.alignScore}%\n`;
       body += `• Purpose Capital: ${data.purposeScore}%\n`;
       body += `• Adaptive Fear Reset: ${data.adaptiveScore}%\n`;
       body += `• Generational Flow Integration: ${data.genScore}%\n\n`;
 
-      body += `<strong>Service Needs Overview:</strong>\n`;
+      body += `Service Needs Overview:\n`;
       body += `Disclaimer: The percentages below reflect estimated need based on your scan responses.\n`;
       body += `Thresholds: Critical Urgency ≥ 90%, High Urgency ≥ 75%, Significant Need ≥ 60%, Moderate Need ≥ 45%, Tactical Improvement ≥ 30%, Advisory < 30%.\n`;
       body += `You may choose to address all services, or select only those most relevant to your organization’s goals and priorities.\n\n`;
@@ -305,16 +305,16 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
       if (data.contradictions && data.contradictions.length) {
-        body += `<strong>Contradictions & Suggested Probes:</strong>\n`;
+        body += `Contradictions & Suggested Probes:\n`;
         data.contradictions.forEach(c => {
           body += `  ${c.posVal}/${c.invVal} — ${c.probe || ""}\n`;
         });
         body += `\n`;
       } else {
-        body += `<em>No major contradiction flags detected.</em>\n\n`;
+        body += `No major contradiction flags detected.\n\n`;
       }
 
-      body += `<strong>Full question interpretations:</strong>\n`;
+      body += `Full question interpretations:\n`;
       for (let i = 1; i <= 31; i++) {
         const val = data.values ? data.values[i - 1] : 3;
         const interp = qInterpret[i] ? qInterpret[i][val] : `Q${i}: ${val}`;
