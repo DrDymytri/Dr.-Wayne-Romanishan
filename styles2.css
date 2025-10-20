@@ -1307,6 +1307,9 @@ img[alt~="Romanishan"] {
   .scan-question {
     padding: 0.75rem;
   }
+  .scan-question label {
+    margin-left: 5px;
+  }
 }
 
 /* Center all elements in .center-content */
