@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MDOA Solutions | Building Resilient Workforces</title>
+  <meta name="description" content="MDOA Solutions applies psychology, engineering, and sustainability to build resilient, purpose-driven organizations. Founded by Dr. Wayne Romanishan, creator of the Romanishan Workforce Resilience Model (RWRM).">
+  <link rel="icon" href="./Images/psyblack.png" type="image/png">
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles2.css">
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-overlay">
+      <div class="hero-brand">Multi-Dimensional Operations and Analysis (MDOA Solutions)</div>
+      <h1>Enterprise Reciprocity Diagnostic</h1>
+      <p style="max-width:920px;margin:auto;">
+        A scientifically structured 28-item scan across seven service domains and four reciprocity dimensions.
+        Complete the diagnostic for an instant domain heatmap, the Enterprise Reciprocity Quotient (ERQ),
+        and a concise interpretive brief that guides next steps.
+      </p>
+      <div class="hero-signature">Dr. Wayne Romanishan Jr., Psy.D.</div> 
+      <a href="./reciprocity-engine.html" class="back-btn" style="margin-top:1rem;">Learn about the Reciprocity Engine™</a>
+    </div>
+  </header>
+
+  <main class="erd-wrap">
+    <div class="erd-intro">
+      <strong>How to use this diagnostic:</strong> Use the 7-point sliders for each statement (1 = Strongly disagree, 7 = Strongly agree). If uncertain, use the tooltip guidance or select the midpoint. The scan is confidential and intended to prompt professional follow-up.
+    </div>
+
+    <div class="erd-grid">
+      <!-- Survey -->
+      <div class="survey-panel" id="surveyPanel">
+        <div class="help">
+          <strong>Tip:</strong> Be candid. The diagnostic is robust to uncertainty, midpoints capture lack of evidence and become diagnostic flags.
+        </div>
+
+        <!-- Domain blocks (7 domains x 4 dims = 28 questions) -->
+        <!-- Domain 1: Organizational Development -->
+        <div class="domain-block" data-domain="Organizational Development">
+
+          <div class="q-row">
+            <label for="q1">1) Day-to-day tasks clearly map to explicit strategic objectives.</label>
+            <input id="q1" type="range" min="1" max="7" value="4" />
+            <span class="tooltip">If unsure, choose a midpoint (4). Evidence: measurable KPIs linked to daily tasks.</span>
+          </div>
+
+          <div class="q-row">
+            <label for="q2">2) Accountability and decision ownership are consistent across teams.</label>
+            <input id="q2" type="range" min="1" max="7" value="4" />
+            <span class="tooltip">Consider whether roles/escalations exist and are enforced.</span>
+          </div>
+
+          <div class="q-row">
+            <label for="q3">3) Roles, responsibilities, and success metrics are well-communicated.</label>
+            <input id="q3" type="range" min="1" max="7" value="4" />
+            <span class="tooltip">Look for documented role descriptions and examples of consistent messaging.</span>
+          </div>
+
+          <div class="q-row">
+            <label for="q4">4) Organizational change is evaluated for system-wide impact before implementation.</label>
+            <input id="q4" type="range" min="1" max="7" value="4" />
+            <span class="tooltip">Evidence: impact assessments, stakeholder reviews, pilot tests.</span>
+          </div>
+        </div>
+
+        <!-- Domain 2: Human Factors Engineering -->
+        <div class="domain-block" data-domain="Human Factors Engineering">
+          <div class="q-row">
+            <label for="q5">5) Systems and tools are designed around human cognitive limits and workflows.</label>
+            <input id="q5" type="range" min="1" max="7" value="4" />
+            <span class="tooltip">Consider observable workarounds and error-prone steps.</span>
+          </div>
+          <div class="q-row">
+            <label for="q6">6) Operational environments minimize needless interruptions and context switching.</label>
+            <input id="q6" type="range" min="1" max="7" value="4" />
+            <span class="tooltip">Are people able to focus? How fragmented is attention?</span>
+          </div>
+          <div class="q-row">
+            <label for="q7">7) Training and interfaces reduce cognitive load and expedite competence.</label>
+            <input id="q7" type="range" min="1" max="7" value="4" />
+            <span class="tooltip">Measure time-to-competence and frequency of support calls.</span>
+          </div>
+          <div class="q-row">
+            <label for="q8">8) Errors are diagnosed as system design signals rather than individual failure.</label>
+            <input id="q8" type="range" min="1" max="7" value="4" />
+            <span class="tooltip">Does leadership ask "why did the system allow this?"</span>
+          </div>
+        </div>
+
+        <!-- Domain 3: Talent Management -->
+        <div class="domain-block" data-domain="Talent Management">
+          <div class="q-row">
+            <label for="q9">9) Recruitment and selection accurately match role competencies and culture.</label>
+            <input id="q9" type="range" min="1" max="7" value="4" />
+            <span class="tooltip">Look at hiring metrics and early attrition.</span>
+          </div>
+          <div class="q-row">
+            <label for="q10">10) Career pathways and skill development are actively supported and visible.</label>
+            <input id="q10" type="range" min="1" max="7" value="4" />
+            <span class="tooltip">Consider mentoring, succession planning, visibility of paths.</span>
+          </div>
+          <div class="q-row">
+            <label for="q11">11) The organization addresses generational and experiential motivators in retention strategies.</label>
+            <input id="q11" type="range" min="1" max="7" value="4" />
+            <span class="tooltip">Are incentives tailored across cohorts?</span>
+          </div>
+          <div class="q-row">
+            <label for="q12">12) Recognition and reward systems meaningfully replenish employee energy.</label>
+            <input id="q12" type="range" min="1" max="7" value="4" />
+            <span class="tooltip">Not just pay—acknowledgment, visibility, autonomy.</span>
+          </div>
+        </div>
+
+        <!-- Domain 4: Engineering Workflow Management -->
+        <div class="domain-block" data-domain="Engineering Workflow Management">
+          <div class="q-row">
+            <label for="q13">13) Handoffs and integrations between teams occur with minimal rework.</label>
+            <input id="q13" type="range" min="1" max="7" value="4" />
+            <span class="tooltip">Consider refactor rates, rework hours, and handoff clarity.</span>
+          </div>
+          <div class="q-row">
+            <label for="q14">14) Prioritization mechanisms prevent chronic context-switching and scope creep.</label>
+            <input id="q14" type="range" min="1" max="7" value="4" />
+            <span class="tooltip">Are escalation rules and prioritization rituals consistent?</span>
+          </div>
+          <div class="q-row">
+            <label for="q15">15) Release and delivery processes are predictable and measured for resilience.</label>
+            <input id="q15" type="range" min="1" max="7" value="4" />
+            <span class="tooltip">Look for sprint predictability, lead time measures.</span>
+          </div>
+          <div class="q-row">
+            <label for="q16">16) Teams are structured to minimize cross-domain bottlenecks and knowledge drains.</label>
+            <input id="q16" type="range" min="1" max="7" value="4" />
+            <span class="tooltip">Assess whether teams are cross-trained or siloed.</span>
+          </div>
+        </div>
+
+        <!-- Domain 5: Document Management -->
+        <div class="domain-block" data-domain="Document Management">
+          <div class="q-row">
+            <label for="q17">17) Single source-of-truth exists and is actively used by teams.</label>
+            <input id="q17" type="range" min="1" max="7" value="4" />
+            <span class="tooltip">Are documents versioned and discoverable?</span>
+          </div>
+          <div class="q-row">
+            <label for="q18">18) Access controls, permissions, and approval workflows function reliably.</label>
+            <input id="q18" type="range" min="1" max="7" value="4" />
+            <span class="tooltip">Consider audit trails and role-based controls.</span>
+          </div>
+          <div class="q-row">
+            <label for="q19">19) Individuals rarely work "offline" outside controlled repositories.</label>
+            <input id="q19" type="range" min="1" max="7" value="4" />
+            <span class="tooltip">Measure local downloads and uncontrolled copies.</span>
+          </div>
+          <div class="q-row">
+            <label for="q20">20) Systems and human workflows interoperate under a single truth model.</label>
+            <input id="q20" type="range" min="1" max="7" value="4" />
+            <span class="tooltip">Integration between tools and human workflows is engineered, not ad hoc.</span>
+          </div>
+        </div>
+
+        <!-- Domain 6: Change Management -->
+        <div class="domain-block" data-domain="Change Management">
+          <div class="q-row">
+            <label for="q21">21) Leaders communicate change rationale and expected employee impact clearly.</label>
+            <input id="q21" type="range" min="1" max="7" value="4" />
+            <span class="tooltip">Transparency and empathy in communication are key signals.</span>
+          </div>
+          <div class="q-row">
+            <label for="q22">22) Change initiatives include measurable KPIs and stakeholder validation.</label>
+            <input id="q22" type="range" min="1" max="7" value="4" />
+            <span class="tooltip">Are success metrics defined and reviewed?</span>
+          </div>
+          <div class="q-row">
+            <label for="q23">23) Employees are coached and supported through transitions to preserve trust.</label>
+            <input id="q23" type="range" min="1" max="7" value="4" />
+            <span class="tooltip">Consider coaching, Q&A sessions, "why" artifacts.</span>
+          </div>
+          <div class="q-row">
+            <label for="q24">24) Organizational learning captures change outcomes and updates practices.</label>
+            <input id="q24" type="range" min="1" max="7" value="4" />
+            <span class="tooltip">Retro practices and lessons learned are institutionalized?</span>
+          </div>
+        </div>
+
+        <!-- Domain 7: Algorithmic Psychology -->
+        <div class="domain-block" data-domain="Algorithmic Psychology">
+          <div class="q-row">
+            <label for="q25">25) People analytics are used to infer causes, not blame individuals.</label>
+            <input id="q25" type="range" min="1" max="7" value="4" />
+            <span class="tooltip">Are analytics contextualized and ethical?</span>
+          </div>
+          <div class="q-row">
+            <label for="q26">26) Behavioral metrics inform interventions that preserve dignity and autonomy.</label>
+            <input id="q26" type="range" min="1" max="7" value="4" />
+            <span class="tooltip">Look for anonymized aggregate use and human-centered interventions.</span>
+          </div>
+          <div class="q-row">
+            <label for="q27">27) Data systems include psychological calibration to account for perception biases.</label>
+            <input id="q27" type="range" min="1" max="7" value="4" />
+            <span class="tooltip">Are models validated to avoid misattributing causes?</span>
+          </div>
+          <div class="q-row">
+            <label for="q28">28) Predictive signals are used to prevent energy debt before it becomes critical.</label>
+            <input id="q28" type="range" min="1" max="7" value="4" />
+            <span class="tooltip">Is the org proactive or reactive?</span>
+          </div>
+        </div>
+
+        <div style="margin-top:1rem;">
+          <button id="calcBtn" type="button" class="btn">Calculate ERQ</button>
+          <button id="resetBtn" type="button" class="btn btn-secondary" style="margin-left:0.5rem;">Reset to Neutral</button>
+        </div>
+
+      </div>
+
+      <!-- Results now appear inside the modal -->
+      
+    </div>
+  </main>
+
+  <!-- Modal for interpretive narrative -->
+  <div id="interpretiveModal" class="modal-overlay" style="display:none;">
+    <div class="modal-content" style="max-width:800px; background:white; padding:1.5rem; border-radius:10px; box-shadow:0 6px 30px rgba(0,0,0,0.25);">
+      <h2 style="margin-top:0; color:#002147;">Enterprise Reciprocity Diagnostic Results</h2>
+
+      <div id="modalResults" style="margin-top:1rem;"></div>
+
+      <canvas id="erqChart" width="600" height="400" style="margin-top:1.2rem;"></canvas>
+
+      <div id="narrativeText" style="color:#333; line-height:1.5; margin-top:1rem;"></div>
+
+      <div class="actions" style="margin-top:1rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+        <!-- Action buttons are injected dynamically by JS to avoid duplicates -->
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <p>© 2025 MDOA Solutions · Developed by Dr. Wayne Romanishan Jr., Psy.D. · All Rights Reserved</p>
+  </footer> 
+
+  <!-- jsPDF -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="./reciprocity-diagnostic.js" defer></script>
+
+</body>
+</html>

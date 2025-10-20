@@ -64,7 +64,7 @@ header {
   border-bottom: 4px solid #c5a46d;
   /* Try all common path/case variants for the hero image */
   background-image:
-    url("/Images/Hero-bg.jpg"),
+    url("./Images/Hero-bg.jpg"),
     linear-gradient(120deg, #002147, #004d80);
   background-repeat: no-repeat;
   background-position: center center;
@@ -493,40 +493,44 @@ footer p {
   color: #d1d5db;
 }
 
-/* Modal: improved centering and scrolling for all screens */
-.modal {
+/* === MODAL: Single canonical implementation for all popups === */
+.modal, .modal-overlay {
   display: none;
   position: fixed;
-  z-index: 1000;
-  left: 0; top: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0,0,0,0.7);
-  padding: 0;
-  overflow-y: auto;
+  z-index: 10000;
+  inset: 0;
+  background: rgba(0,0,0,0.65);
   align-items: center;
   justify-content: center;
+  overflow-y: auto;
+  padding: 0;
+  opacity: 0;
+  transition: opacity 0.3s;
 }
-
-/* Make modal-content always fit and center vertically with margin, allow scrolling if needed */
+.modal.active,
+.modal-overlay.active {
+  display: flex !important;
+  opacity: 1 !important;
+  pointer-events: auto;
+}
 .modal-content {
   background: #fff;
-  margin: 6vh auto 6vh auto;
+  margin: 6vh auto;
   padding: 2rem;
-  border-radius: 10px;
+  border-radius: 12px;
   width: 95vw;
-  max-width: 500px;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+  max-width: 700px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.22);
   position: relative;
   max-height: 88vh;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  padding-top: 3.5rem; /* Add space for close button above title */
+  opacity: 1;
+  transform: scale(1);
+  transition: transform 0.3s, opacity 0.3s;
 }
-
-/* Make close button above modal title and not overlap */
 .modal-close {
   position: absolute;
   top: 0.8rem;
@@ -536,7 +540,6 @@ footer p {
   color: #333;
   cursor: pointer;
   z-index: 10;
-  /* Place above title, not overlapping */
   background: #fff;
   border-radius: 50%;
   width: 2.5rem;
@@ -547,8 +550,6 @@ footer p {
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
   border: 1px solid #eee;
 }
-
-/* On small screens, further adjust modal for usability */
 @media (max-width: 600px) {
   .modal-content {
     width: 99vw;
@@ -1015,6 +1016,156 @@ img[alt~="Romanishan"] {
   max-width: 900px;
 }
 
+/* Reciprocity Engine Styles */
+.reciprocity-hero {
+  background: url('./Images/reciprocity-bg.jpg') center/cover no-repeat;
+  color: #fff;
+  text-align: center;
+  padding: 7rem 1rem;
+}
+
+.section-highlight {
+  background-color: #f5f8fb;
+  padding: 3rem 1.5rem;
+  text-align: center;
+}
+
+.concept-section, .integration-section, .confidential-section, .cta-section {
+  padding: 3rem 1.5rem;
+  max-width: 900px;
+  margin: auto;
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.confidential-section {
+  background-color: #fdfcf8;
+  border-top: 4px solid #c5a46d;
+  border-bottom: 4px solid #c5a46d;
+}
+
+.cta-section {
+  background: linear-gradient(180deg, #111 0%, #222 100%);
+  color: #fff;
+  text-align: center;
+}
+
+.cta-section .btn-primary {
+  margin-top: 1rem;
+  background-color: #c5a46d;
+  color: #111;
+  font-weight: 700;
+}
+.cta-section .btn-primary:hover {
+  background-color: #a1885c;
+  color: #fff;
+}
+
+/* Reciprocity Quotient Gauge */
+.rq-section {
+  text-align: center;
+  background: #f7f9fb;
+  padding: 4rem 1.5rem;
+  border-top: 3px solid #c5a46d;
+  border-bottom: 3px solid #c5a46d;
+}
+
+.rq-gauge {
+  position: relative;
+  width: 220px;
+  height: 110px;
+  margin: 2rem auto;
+  background: linear-gradient(180deg, #eee 0%, #ddd 100%);
+  border-radius: 220px 220px 0 0;
+  overflow: hidden;
+  box-shadow: inset 0 -3px 10px rgba(0,0,0,0.15);
+}
+
+.rq-needle {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 4px;
+  height: 90px;
+  background: #c5a46d;
+  transform-origin: bottom center;
+  transform: rotate(0deg);
+  transition: transform 1.5s ease-out;
+}
+
+.rq-center {
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  background: #111;
+  border-radius: 50%;
+  transform: translateX(-50%);
+}
+
+.rq-value {
+  position: absolute;
+  bottom: -50px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #333;
+}
+
+.rq-legend {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 1.25rem;
+  font-size: 0.95rem;
+}
+
+.rq-legend .dot {
+  width: 10px;
+  height: 10px;
+  display: inline-block;
+  border-radius: 50%;
+  margin-right: 0.4rem;
+}
+
+.dot-low { background: #c0392b; }
+.dot-mid { background: #f1c40f; }
+.dot-high { background: #27ae60; }
+
+.rq-insight {
+  margin-top: 1.25rem;
+  font-style: italic;
+  color: #555;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Pulse center of gauge */
+.rq-center {
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  background: #111;
+  border-radius: 50%;
+  transform: translateX(-50%);
+  animation: pulse 2.5s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: translateX(-50%) scale(1); opacity: 1; }
+  50% { transform: translateX(-50%) scale(1.2); opacity: 0.6; }
+}
+
+
 /* ===== Resilience Readiness Scan Enhancements ===== */
 
 /* Layout container */
@@ -1156,4 +1307,468 @@ img[alt~="Romanishan"] {
   .scan-question {
     padding: 0.75rem;
   }
+}
+
+/* Center all elements in .center-content */
+.center-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.center-content form {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.center-content label,
+.center-content input,
+.center-content textarea,
+.center-content select,
+.center-content .reciprocity-block,
+.center-content .form-buttons {
+  align-self: center;
+  text-align: center;
+}
+
+/* Remove inline styles from .reciprocity-block and .form-buttons */
+.reciprocity-block {
+  background: #f8fafc;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+}
+
+.form-buttons {
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+/* Page-specific styles (keeps consistent with styles2.css) */
+    .calc-hero {
+      padding: 3.5rem 1rem;
+      text-align: center;
+      background: linear-gradient(120deg, #002147, #004d80);
+      color: #fff;
+      border-bottom: 4px solid #c5a46d;
+    }
+
+    .calc-wrap { max-width: 980px; margin: 2rem auto; padding: 1rem; }
+
+    .rq-grid {
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    .controls {
+      background: #fff;
+      padding: 1.25rem;
+      border-radius: 10px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+    }
+
+    .control-row { margin-bottom: 1rem; }
+    .control-row label { display:block; font-weight:700; color:#002147; margin-bottom:0.35rem; }
+    .control-row .range-value { font-weight:700; color:#004d80; margin-left:0.5rem; }
+
+    .rq-panel {
+      background: linear-gradient(180deg,#fbfdfe,#f4f8fb);
+      padding: 1.5rem;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+    }
+
+    /* Gauge */
+    .gauge-wrap { margin: 1rem auto 0 auto; width: 260px; height: 140px; position: relative; }
+    .gauge-arc {
+      width: 100%; height: 100%;
+      border-radius: 260px 260px 0 0;
+      background: linear-gradient(180deg,#eee,#ddd);
+      overflow: hidden;
+      box-shadow: inset 0 -3px 12px rgba(0,0,0,0.08);
+      position: relative;
+    }
+    .needle {
+      position:absolute;
+      bottom: 0;
+      left: 50%;
+      width: 4px;
+      height: 110px;
+      background: #c5a46d;
+      transform-origin: bottom center;
+      transform: rotate(-90deg);
+      transition: transform 1.4s cubic-bezier(.4,.0,.2,1);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+      border-radius: 2px;
+    }
+    .gauge-center {
+      position:absolute;
+      bottom: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 22px; height: 22px;
+      background: #111; border-radius:50%;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+      animation: pulse 2.6s infinite ease-in-out;
+    }
+    @keyframes pulse {
+      0%,100% { transform: translateX(-50%) scale(1); opacity:1; }
+      50% { transform: translateX(-50%) scale(1.15); opacity:0.7; }
+    }
+
+    .rq-bubble { font-size: 2.2rem; font-weight:800; color:#0b2545; margin-top: 6px; }
+    .rq-tier { margin-top: 8px; font-weight:700; color:#004d80; }
+    .rq-desc { margin-top:0.8rem; color:#444; font-style:italic; max-width:340px; margin-left:auto;margin-right:auto; }
+
+    .legend { display:flex; justify-content:center; gap:1rem; margin-top:1rem; font-size:0.95rem; color:#444; }
+    .legend .dot { width:10px;height:10px;border-radius:50%;display:inline-block;margin-right:0.5rem; }
+    .dot-low { background:#c0392b; } .dot-mid { background:#f1c40f; } .dot-high { background:#27ae60; }
+
+    .calc-actions { margin-top:1rem; display:flex; gap:0.75rem; justify-content:center; flex-wrap:wrap; }
+    .btn { padding:0.65rem 1rem; border-radius:6px; border:none; font-weight:700; cursor:pointer; }
+    .btn-primary { background:#004d80; color:#fff; }
+    .btn-alt { background:transparent; border:2px solid #004d80; color:#004d80; }
+
+    @media (max-width:980px) {
+      .rq-grid { grid-template-columns: 1fr; }
+      .gauge-wrap { margin-top:0; width: 220px; height:120px; }
+    }
+
+     /* Page-specific styling */
+    .erd-hero {
+      background: linear-gradient(120deg,#002147,#004d80);
+      color:#fff;
+      text-align:center;
+      padding:3.25rem 1rem;
+      border-bottom:4px solid #c5a46d;
+    }
+    .erd-wrap { max-width:1100px; margin:2rem auto; padding:1rem; box-sizing:border-box; }
+    .erd-intro { background:#f4f7fb; padding:1rem 1.25rem; border-radius:8px; margin-bottom:1rem; color:#14324a; }
+    .erd-grid { display:grid; grid-template-columns: 1fr 360px; gap:1.5rem; align-items:start; }
+    .survey-panel { background:#fff; padding:1rem 1.25rem; border-radius:8px; box-shadow:0 8px 20px rgba(0,0,0,0.04); }
+    .help { font-size:0.95rem; color:#555; margin-bottom:0.75rem; }
+    .domain-block { margin-bottom:1.25rem; border-left:4px solid #c5a46d; padding:0.75rem 1rem; border-radius:6px; background:#fff; }
+    .q-row { display:flex; flex-direction:column; gap:0.3rem; margin:0.45rem 0; }
+    .q-row label { font-weight:700; color:#002147; }
+    .q-row input[type="range"] { width:100%; }
+    .range-num { font-weight:700; color:#004d80; margin-left:0.5rem; }
+    .results-panel { background:linear-gradient(180deg,#fff,#f7fafc); padding:1rem; border-radius:8px; box-shadow:0 8px 20px rgba(0,0,0,0.04); }
+    .heatbar { height:18px; border-radius:10px; background:#eee; overflow:hidden; margin-top:8px; }
+    .heatfill { height:100%; transition:width 900ms cubic-bezier(.2,.8,.2,1); }
+    .domain-score { display:flex; justify-content:space-between; align-items:center; gap:0.5rem; margin-top:0.65rem; }
+    .overall-block { margin-top:1rem; padding:0.75rem; border-radius:8px; background:#fff8e6; border:1px solid #f2e1b6; }
+    .interpret { margin-top:0.6rem; color:#333; }
+    .actions { display:flex; gap:0.75rem; margin-top:1rem; flex-wrap:wrap; justify-content:flex-start; }
+    
+    .btn { 
+      padding:0.6rem 0.9rem; 
+      border-radius:6px; 
+      font-weight:700; 
+      cursor:pointer; 
+      border:none; 
+    }
+    
+    .btn-primary { 
+      background:#004d80;
+      color:#fff; 
+    }
+    
+    .btn-secondary { 
+      background:transparent;
+      color:#004d80;
+      border:2px solid #004d80; 
+    }
+    
+    .tooltip { 
+      font-size:0.9rem; 
+      color:#666; display:block; 
+      margin-top:0.3rem; 
+    }
+    
+    @media (max-width:980px) { 
+      .erd-grid {grid-template-columns: 1fr; } 
+      .results-panel {margin-top:1rem; } 
+    }
+  
+    
+  .modal-overlay {
+    position: fixed;
+    top:0; left:0; right:0; bottom:0;
+    background:rgba(0,0,0,0.6);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:9999;
+  }
+
+  /* Modal reveal animation styles */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.65);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.modal-overlay.active {
+  display: flex;
+  opacity: 1;
+}
+
+.modal-content {
+  transform: scale(0.95);
+  opacity: 0;
+  transition: all 0.5s ease-out;
+}
+
+.modal-content.reveal {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Consolidated slider scale (1..7) — absolute-positioned ticks aligned to slider track */
+.q-row {
+  position: relative;
+  padding-bottom: 40px; /* reserve space for ticks below the slider */
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin: 0.45rem 0;
+}
+
+/* Ensure the range fills the row so percent left aligns correctly */
+.q-row input[type="range"] {
+  width: 100%;
+  background: linear-gradient(90deg, #abdafa, #004d80);
+  border-radius: 4px;
+  height: 3px;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* Range thumb */
+.q-row input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #c5a46d;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.q-row input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+}
+
+.q-row input[type="range"]::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #c5a46d;
+  cursor: pointer;
+}
+
+/* The scale spans the slider area but is inset by half the thumb width so 0% and 100% align with thumb centers.
+   If you change thumb size, update the inset (9px = half of 18px thumb) */
+.slider-scale {
+  position: absolute;
+  left: 9px;    /* inset = half thumb width */
+  right: 9px;   /* inset = half thumb width */
+  bottom: 6px;  /* place just below the slider track */
+  height: 28px;
+  pointer-events: none; /* clicks pass through to the slider */
+  user-select: none;
+}
+
+/* Each tick is positioned by JS via left: X% and centered with translateX(-50%) */
+.slider-scale span {
+  position: absolute;
+  top: 6px;
+  transform: translateX(-50%);
+  font-size: 0.85rem;
+  color: #556;
+  opacity: 0.85;
+  transition: color 160ms ease, transform 160ms ease, opacity 160ms ease;
+  pointer-events: none;
+}
+
+/* Vertical tick mark above the number */
+.slider-scale span::before {
+  content: "";
+  display: block;
+  height: 8px;
+  width: 2px;
+  margin: 0 auto 6px auto;
+  background: #ccc;
+  border-radius: 1px;
+  opacity: 0.95;
+}
+
+/* Active tick state */
+.slider-scale span.active {
+  color: #004d80;
+  font-weight: 700;
+  transform: translateX(-50%) translateY(-3px);
+  opacity: 1;
+}
+.slider-scale span.active::before {
+  background: #004d80;
+}
+
+/* === ERQ Level 2 UX additions === */
+
+/* modal reveal animation */
+.modal-overlay.active { display:flex; align-items:center; justify-content:center; }
+.modal-content.reveal { transform: translateY(0); opacity: 1; transition: transform 320ms ease, opacity 320ms ease; }
+.modal-content { transform: translateY(8px); opacity: 0; }
+
+/* slider-scale ticks */
+.slider-scale { display:flex; gap:6px; margin-top:6px; justify-content:flex-start; font-size:0.85rem; color:#666; user-select:none; }
+.slider-scale span { display:inline-block; width:20px; text-align:center; padding:2px 0; border-radius:4px; opacity:0.6; transition: all 160ms; }
+.slider-scale span.active { background:#e6f1fb; color:#004d80; font-weight:700; opacity:1; box-shadow:0 1px 3px rgba(0,0,0,0.06); }
+
+/* energy meter */
+svg.energy-meter { width:92px; height:92px; display:block; margin-right:12px; }
+svg.energy-meter .em-text { font-family: 'Lato', Arial, sans-serif; }
+
+/* modal small spinner (if used) */
+.spinner { width:48px; height:48px; border-radius:50%; }
+
+/* modal actions spacing */
+.modal-actions { margin-top:12px; display:flex; gap:8px; justify-content:center; align-items:center; flex-wrap:wrap; }
+
+/* small responsive tweaks */
+@media (max-width:700px){
+  .modal-content { width:94vw; padding:1rem; }
+  svg.energy-meter { width:76px; height:76px; margin-right:10px; }
+}
+
+/* Page container */
+    .consultation-form { padding: 2rem 1rem 4rem; }
+    .form-wrap {
+      max-width: 1100px;
+      margin: 2rem auto;
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    /* Form card (column 1) */
+    .consult-card {
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 1.5rem 1.5rem;
+      box-shadow: 0 12px 30px rgba(6,32,63,0.08);
+      border: 1px solid rgba(11,37,69,0.04);
+    }
+    .consult-card h2 { margin-bottom: 0.5rem; color: #002147; font-size: 1.25rem; }
+    .consult-card label { display:block; font-weight:700; color:#0b2545; margin-top:1rem; margin-bottom:0.4rem; }
+    .consult-card input[type="text"],
+    .consult-card input[type="email"],
+    .consult-card input[type="tel"],
+    .consult-card input[type="date"],
+    .consult-card textarea,
+    .consult-card select {
+      width: 100%;
+      padding: 0.85rem;
+      border-radius: 8px;
+      border: 1px solid #dfeaf4;
+      background: #fbfdff;
+      font-size: 0.98rem;
+      color: #102a44;
+      box-sizing: border-box;
+    }
+    .consult-card textarea { min-height: 110px; resize: vertical; }
+
+    /* Right column summary card */
+    .summary-card {
+      background: linear-gradient(180deg,#fbfdfe,#f4f8fb);
+      border-radius: 12px;
+      padding: 1.25rem;
+      box-shadow: 0 10px 26px rgba(6,32,63,0.06);
+      border-left: 4px solid #c5a46d;
+      display:flex;
+      flex-direction:column;
+      gap: 0.75rem;
+    }
+    .summary-card h3 { margin:0; color:#002147; font-size:1.1rem; }
+    .summary-item { font-size:0.95rem; color:#263a50; }
+
+    /* Reciprocity block (prominent) */
+    .reciprocity-block {
+      background: #fff;
+      border-radius: 10px;
+      padding: 0.9rem;
+      border: 1px solid #e6eef7;
+      display:flex;
+      flex-direction:column;
+      gap:0.6rem;
+    }
+    .reciprocity-row { display:flex; gap:0.75rem; align-items:center; }
+    .reciprocity-label { font-weight:700; color:#0b2545; min-width:0; flex:1; }
+    .reciprocity-indicator { width:120px; text-align:center; font-weight:800; color:#004d80; font-size:1.1rem; }
+
+    /* Buttons (partnership tone B2) */
+    .btn-cta { background:#0b2545; color:#fff; border-radius:8px; padding:0.75rem 1rem; border:0; font-weight:700; cursor:pointer; }
+    .btn-ghost { background:transparent; color:#0b2545; border:2px solid rgba(11,37,69,0.12); border-radius:8px; padding:0.7rem 0.9rem; cursor:pointer; }
+    .muted { color:#566978; font-size:0.94rem; }
+
+    /* Form actions */
+    .form-actions { display:flex; gap:0.5rem; margin-top:1rem; flex-wrap:wrap; }
+
+    /* Slider styling tuned to your site */
+    .range-wrap { display:flex; gap:0.9rem; align-items:center; }
+    .range-wrap input[type="range"] { width:100%; height:6px; background:linear-gradient(90deg,#abdafa,#004d80); border-radius:6px; -webkit-appearance:none; appearance:none; }
+    .range-wrap input[type="range"]::-webkit-slider-thumb { -webkit-appearance:none; width:18px; height:18px; border-radius:50%; background:#c5a46d; box-shadow: 0 2px 6px rgba(0,0,0,0.14); }
+    .scale-row { display:flex; justify-content:space-between; margin-top:6px; font-size:0.86rem; color:#65778a; }
+
+    /* Responsive */
+    @media (max-width:980px) {
+      .form-wrap { grid-template-columns: 1fr; padding:0 0.5rem; }
+      .summary-card { order: -1; }
+    }
+
+    /* subtle small print */
+    .small-print { font-size:0.86rem; color:#6b7b8b; }
+
+    /* === MODAL FIX PATCH === */
+.modal.active,
+.modal-overlay.active {
+  display: flex !important;
+  opacity: 1 !important;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal.active .modal-content,
+.modal-overlay.active .modal-content {
+  opacity: 1 !important;
+  transform: scale(1) !important;
 }

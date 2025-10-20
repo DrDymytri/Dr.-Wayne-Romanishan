@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About | MDOA Solutions</title>
+  <meta name="description" content="Learn about Dr. Wayne Romanishan, founder of MDOA Solutions and creator of the Romanishan Workforce Resilience Model (RWRM). Discover how his background in engineering, fabrication, and organizational psychology fuels his mission to build resilient, sustainable organizations.">
+  <link rel="icon" href="./Images/psyblack.png" type="image/png">
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles2.css">
+</head>
+<body>
+
+  <header class="hero">
+    <div class="hero-overlay">
+      <!-- Top brand text -->
+      <div class="hero-brand">Multi-Dimensional Operations and Analysis (MDOA Solutions)</div>
+      <h1>The Reciprocity Quotient : Interactive Calculator</h1>
+      <p style="max-width:880px;margin:auto;">
+        A reflective, evidence-based self-assessment that helps an individual gauge how well their energy investment at work
+        is reciprocated by their organization. Adjust the four dials to reveal your RQ and receive an expert interpretation.
+      </p>
+      <div class="hero-signature">Dr. Wayne Romanishan Jr., Psy.D.</div>
+      <a href="./reciprocity-engine.html" class="back-btn" style="margin-top:1rem;">Learn about the Reciprocity Engine™</a>
+    </div>
+  </header>
+
+  <main class="calc-wrap">
+    <div class="rq-grid">
+      <!-- Controls -->
+      <div class="controls" aria-labelledby="control-heading">
+        <h3 id="control-heading" style="color:#002147;margin-bottom:0.75rem;">Adjust Your Profile</h3>
+
+        <div class="control-row">
+          <label for="inputSlider">Perceived Input
+            <span class="range-value" id="inputVal">3</span>
+          </label>
+          <input id="inputSlider" type="range" min="1" max="5" value="3" step="1" />
+          <small style="color:#666;">How much effort/responsibility do you feel you invest? (1 = low, 5 = very high)</small>
+        </div>
+
+        <div class="control-row">
+          <label for="returnSlider">Perceived Return
+            <span class="range-value" id="returnVal">3</span>
+          </label>
+          <input id="returnSlider" type="range" min="1" max="5" value="3" step="1" />
+          <small style="color:#666;">How much restoration (pay, recognition, meaning) do you feel you receive?</small>
+        </div>
+
+        <div class="control-row">
+          <label for="trustSlider">Systemic Trust
+            <span class="range-value" id="trustVal">3</span>
+          </label>
+          <input id="trustSlider" type="range" min="1" max="5" value="3" step="1" />
+          <small style="color:#666;">Do you trust the organization to be fair, predictable and transparent?</small>
+        </div>
+
+        <div class="control-row">
+          <label for="selfRegSlider">Self-Regulation
+            <span class="range-value" id="selfRegVal">3</span>
+          </label>
+          <input id="selfRegSlider" type="range" min="1" max="5" value="3" step="1" />
+          <small style="color:#666;">Do you maintain boundaries and personal strategies to prevent burnout?</small>
+        </div>
+
+        <div style="margin-top:1rem; color:#444;">
+          <strong>Note:</strong> The RQ is a self-reflective indicator. It is illustrative and intended to prompt professional diagnostic follow-up.
+        </div>
+      </div>
+
+      <!-- Gauge & interpretation -->
+      <div class="rq-panel" role="region" aria-live="polite">
+        <h3 style="margin-top:0;color:#002147;">Reciprocity Quotient (RQ)</h3>
+        <div class="gauge-wrap" aria-hidden="false">
+          <div class="gauge-arc" id="gaugeArc">
+            <div class="needle" id="gaugeNeedle" aria-hidden="true"></div>
+            <div class="gauge-center"></div>
+          </div>
+        </div>
+
+        <div class="rq-bubble" id="rqNumber">—</div>
+        <div class="rq-tier" id="rqTier">—</div>
+        <div class="rq-desc" id="rqDesc">Adjust the sliders to calculate your RQ. The gauge updates in real time.</div>
+
+        <div class="legend" style="margin-top:1rem;">
+          <div><span class="dot dot-low"></span>Under-Reciprocity</div>
+          <div><span class="dot dot-mid"></span>Developing Equilibrium</div>
+          <div><span class="dot dot-high"></span>Reciprocal Synergy</div>
+        </div>
+
+        <div class="calc-actions">
+          <button class="btn" id="exportPdfBtn">Export Summary (PDF)</button>
+          <button class="btn btn-secondary" id="emailBtn">Email Me a Quotient</button>
+          <a href="./reciprocity-diagnostic.html" class="btn" style="background: rgb(230, 238, 247); color: rgb(0, 77, 128); border: 1px solid rgb(197, 224, 255); text-shadow: none;">To Enterprise Reciprocity Diagnostic</a>
+        </div>
+      </div>
+    </div> <!-- /rq-grid -->
+  </main>
+
+  <!-- jsPDF for PDF export -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="./reciprocity-calculator.js"></script>
+
+  <footer class="footer">
+    <p>© 2025 MDOA Solutions · Developed by Dr. Wayne Romanishan Jr., Psy.D. · All Rights Reserved</p>
+  </footer>
+
+</body>
+</html>

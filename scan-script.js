@@ -1,13 +1,18 @@
 // scan-script.js
-// Enhanced Resilience Readiness Scan — 31 questions, 7 service domains, interpretation-driven drivers
+// Enhanced Resilience Readiness Scan — robust, defensive, and single-init
 
 document.addEventListener("DOMContentLoaded", () => {
+  // ---------- Safe DOM refs ----------
   const calcBtn = document.getElementById("calcBtn");
   const scanModal = document.getElementById("scanModal");
   const scanModalBody = document.getElementById("scanModalBody");
   const modalClose = scanModal ? scanModal.querySelector(".modal-close") : null;
-  const modalExportBtn = document.getElementById("modalExportBtn");
-  const modalEmailBtn = document.getElementById("modalEmailBtn");
+
+  // ---------- Utilities ----------
+  function safeGet(id, fallback = null) {
+    const el = document.getElementById(id);
+    return el || fallback;
+  }
 
   // Safe getter for question inputs (1..31)
   function getQ(id) {
@@ -17,20 +22,224 @@ document.addEventListener("DOMContentLoaded", () => {
     return (isNaN(v) ? 3 : Math.max(1, Math.min(5, v)));
   }
 
-  // Modal open / close
-  function openScanModal(html) {
-    if (!scanModal) return;
+  // Modal open / close (defensive)
+  function openScanModal(html, data) {
     scanModalBody.innerHTML = html;
-    scanModal.style.display = "block";
-  }
-  function closeScanModal() {
-    if (!scanModal) return;
-    scanModal.style.display = "none";
-  }
-  if (modalClose) modalClose.onclick = closeScanModal;
-  window.onclick = e => { if (e.target === scanModal) closeScanModal(); };
 
-  // Contradiction pairs and probe guidance
+    // Dynamically add action buttons with type="button"
+    const modalActions = document.createElement("div");
+    modalActions.classList.add("modal-actions");
+    modalActions.innerHTML = `
+      <button id="modalExportBtn" type="button" class="btn">Export to PDF</button>
+      <button id="modalEmailBtn" type="button" class="btn btn-secondary">Email Report</button>
+    `;
+    scanModalBody.appendChild(modalActions);
+
+    // Attach event listeners to the buttons immediately after adding them
+    document.getElementById("modalExportBtn").onclick = function(e) {
+      e.preventDefault();
+      // FIX: use the robust exporter that matches the payload shape
+      exportScanToPDF(data);
+    };
+    document.getElementById("modalEmailBtn").onclick = function(e) {
+      e.preventDefault();
+      // FIX: updated emailReport to not require pillarScores and use full brief text
+      emailReport(data);
+    };
+
+    // Show the modal
+    scanModal.style.display = "flex";
+    scanModal.classList.add("active");
+  }
+
+  function closeScanModal() {
+    scanModal.style.display = "none";
+    scanModal.classList.remove("active");
+  }
+
+  if (modalClose) modalClose.onclick = closeScanModal;
+  window.addEventListener("click", (e) => {
+    if (e.target === scanModal) closeScanModal();
+  });
+
+  // --- Email Report ---
+  // FIX: do not depend on data.pillarScores; use the existing getScanReportText
+  function emailReport(data) {
+    if (!data || typeof data !== "object") {
+      alert("Please calculate first.");
+      return;
+    }
+    const subject = `Resilience Readiness Diagnostic — ${data.clientName || "Client"}`;
+    const body = getScanReportText(data);
+    const mailto = `mailto:dr.wayneromanishan@mdoasolutions.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    try { window.location.href = mailto; } catch { window.open(mailto, "_self"); }
+  }
+
+  // --- Export to PDF ---
+  function exportToPDF(data) {
+    // Defensive: ensure data is an object and pillarScores is an array
+    if (!data || typeof data !== "object" || !Array.isArray(data.pillarScores)) {
+      // Try to recover: get modalResults from DOM and reconstruct minimal data
+      const modalResults = document.getElementById("modalResults");
+      let clientName = "Client", consultDate = new Date().toLocaleDateString(), overall = "";
+      let pillarScores = [];
+      if (modalResults) {
+        // Try to parse modalResults HTML for scores
+        const h3 = modalResults.querySelector("h3");
+        if (h3) {
+          const match = h3.textContent.match(/(\d+)%/);
+          if (match) overall = match[1];
+        }
+        const lis = modalResults.querySelectorAll("ul li");
+        lis.forEach(li => {
+          const parts = li.textContent.split(":");
+          if (parts.length === 2) {
+            pillarScores.push({ name: parts[0].trim(), score: parseInt(parts[1], 10) || "" });
+          }
+        });
+      }
+      data = {
+        clientName,
+        consultDate,
+        overall,
+        pillarScores
+      };
+      if (!pillarScores.length) {
+        alert("PDF export failed: missing or invalid data.");
+        return;
+      }
+    }
+    const jsPDF = (window.jspdf && window.jspdf.jsPDF) || window.jsPDF;
+    if (!jsPDF) {
+      alert("PDF export is unavailable (jsPDF not loaded).");
+      return;
+    }
+    const doc = new jsPDF({ unit: "pt", format: "letter" });
+    let y = 40;
+    doc.setFontSize(18);
+    doc.text("Resilience Readiness Diagnostic Results", 40, y);
+    y += 26;
+    doc.setFontSize(12);
+    doc.text(`Client: ${data.clientName || ""}`, 40, y); y += 14;
+    doc.text(`Date: ${data.consultDate || ""}`, 40, y); y += 18;
+    doc.text(`Resilience Index: ${typeof data.overall === "number" ? data.overall : data.overall}%`, 40, y); y += 18;
+    doc.setFontSize(14);
+    doc.text("Pillar Scores:", 40, y); y += 18;
+    data.pillarScores.forEach((pillar) => {
+      doc.setFontSize(12);
+      doc.text(`${pillar.name}: ${pillar.score}%`, 50, y);
+      y += 14;
+    });
+    const filename = `Resilience_Report_${new Date().toISOString().slice(0, 10)}.pdf`;
+    doc.save(filename);
+  }
+
+  // Inject once: styles for tick marks and numbers under range sliders (absolute positioning)
+  function injectScanSliderTickStyles() {
+    if (document.getElementById("scan-slider-ticks-style")) return;
+    const style = document.createElement("style");
+    style.id = "scan-slider-ticks-style";
+    style.textContent = `
+      .range-scale {
+        position: relative;
+        width: 100%;
+        height: 28px; /* space for labels */
+      }
+      .range-scale .ticks {
+        position: relative;
+        width: 100%;
+        height: 100%;
+      }
+      .range-scale .tick-line {
+        position: absolute;
+        top: 0;
+        width: 1px;
+        height: 10px;
+        background: #9aa3ab;
+        transform: translateX(-0.5px); /* center the 1px line on the position */
+      }
+      .range-scale .tick-label {
+        position: absolute;
+        top: 12px;            /* label below the line */
+        font-size: 12px;
+        color: #666;
+        line-height: 1;
+        white-space: nowrap;
+        transform: translateX(-50%);
+        text-align: center;
+      }
+      /* Snap first and last labels flush with ends */
+      .range-scale .tick-label.is-first {
+        transform: none;      /* no centering */
+        left: 0% !important;
+        text-align: left;
+      }
+      .range-scale .tick-label.is-last {
+        transform: translateX(-100%); /* right-align */
+        left: 100% !important;
+        text-align: right;
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
+  // Add ticks/labels under a single range input aligned to thumb positions
+  function addTicksToRange(rangeEl) {
+    if (!rangeEl || rangeEl.dataset.ticksAdded === "1") return;
+
+    const min = parseInt(rangeEl.getAttribute("min") || "1", 10);
+    const max = parseInt(rangeEl.getAttribute("max") || "5", 10);
+    if (isNaN(min) || isNaN(max) || max <= min) return;
+
+    const scale = document.createElement("div");
+    scale.className = "range-scale";
+    const ticks = document.createElement("div");
+    ticks.className = "ticks";
+    scale.appendChild(ticks);
+
+    for (let v = min; v <= max; v++) {
+      const pct = ((v - min) / (max - min)) * 100;
+
+      // vertical line at exact position
+      const line = document.createElement("i");
+      line.className = "tick-line";
+      line.style.left = pct + "%";
+      ticks.appendChild(line);
+
+      // numeric label at exact position
+      const label = document.createElement("span");
+      label.className = "tick-label";
+      label.textContent = String(v);
+
+      if (v === min) {
+        label.classList.add("is-first");
+        label.style.left = "0%";
+      } else if (v === max) {
+        label.classList.add("is-last");
+        label.style.left = "100%";
+      } else {
+        label.style.left = pct + "%";
+      }
+
+      ticks.appendChild(label);
+    }
+
+    // Place scale immediately after the slider
+    rangeEl.insertAdjacentElement("afterend", scale);
+    rangeEl.dataset.ticksAdded = "1";
+  }
+
+  // Enhance all scan sliders (Q1..Q31) with tick marks and numbers
+  function enhanceScanSliders() {
+    injectScanSliderTickStyles();
+    const sliders = document.querySelectorAll('input[type="range"][id^="q"]');
+    sliders.forEach(addTicksToRange);
+  }
+
+  // Run once on load (safe if not on scan.html)
+  enhanceScanSliders();
+
+  // ---------- Static data (unchanged, kept intact) ----------
   const contradictionPairs = [
     [8,17], [6,19], [4,20], [15,18], [1,2]
   ];
@@ -42,8 +251,6 @@ document.addEventListener("DOMContentLoaded", () => {
     "1-2":"Alignment inconsistency: ask which departments miss strategic targets and why."
   };
 
-  // -------- Per-question plain-language interpretation (1..31)
-  // Index 0 unused to keep numeric indexing intuitive
   const qInterpret = {
     1: ["","Q1 (1): Teams do NOT understand how daily work maps to strategy, local optimization dominates.","Q1 (2): Teams lack clarity; alignment inconsistent.","Q1 (3): Mixed awareness: visibility gaps exist.","Q1 (4): Teams generally map work to strategy.","Q1 (5): Strong, consistent translation of strategy into daily activity."],
     2: ["","Q2 (1): Leadership decisions rarely cascade; implementation stalls.","Q2 (2): Cascade occasionally but slow due to bottlenecks.","Q2 (3): Cascade uneven: some decisions land, others don't.","Q2 (4): Decisions cascade quickly and are implemented.","Q2 (5): Rapid cascade and disciplined execution organization-wide."],
@@ -65,7 +272,6 @@ document.addEventListener("DOMContentLoaded", () => {
     18:["","Q18 (1): Problems SOLVED structurally, not by 'work harder'.","Q18 (2): 'Work harder' occasionally used as stopgap.","Q18 (3): Mix of systemic change and heroics.","Q18 (4): 'Work harder' often default.","Q18 (5): Heavy reliance on extra effort vs systemic fixes."],
     19:["","Q19 (1): Far less adaptable than 3 years ago.","Q19 (2): Adaptability weakened.","Q19 (3): Similar adaptability as 3 years ago.","Q19 (4): Noticeable improvement vs 3 years ago.","Q19 (5): Significant adaptability gains vs 3 years ago."],
     20:["","Q20 (1): No verifiable KPIs show resilience.","Q20 (2): KPIs limited or unreliable.","Q20 (3): Some KPIs exist but incomplete.","Q20 (4): KPIs show resilience in areas.","Q20 (5): Robust KPIs demonstrate resilience across disruptions."],
-    // NEW Q21 - Q31
     21:["","Q21 (1): No data/behavioral insights used to anticipate problems.","Q21 (2): Limited analytics; mostly reactive.","Q21 (3): Some predictive use but not systematic.","Q21 (4): Data used to anticipate issues in some domains.","Q21 (5): Strong predictive systems integrated into operations."],
     22:["","Q22 (1): Leaders avoid data that challenge intuition.","Q22 (2): Partial resistance to evidence-based decisions.","Q22 (3): Mixed adoption of data-informed decision making.","Q22 (4): Leaders usually make evidence-informed choices.","Q22 (5): Leaders consistently use data to challenge norms."],
     23:["","Q23 (1): Systems ignore human limits; cognitive overload common.","Q23 (2): Ergonomic issues exist and cause errors.","Q23 (3): Some human-centered design, inconsistent application.","Q23 (4): Work design reduces overload most of the time.","Q23 (5): Work systems are designed tightly around human capability."],
@@ -79,7 +285,6 @@ document.addEventListener("DOMContentLoaded", () => {
     31:["","Q31 (1): Software systems and human workflows disconnected: multiple conflicting truths exist.","Q31 (2): Data handoffs and human coordination inconsistent; partial communication between systems.","Q31 (3): Systems communicate intermittently: partial integration.","Q31 (4): Systems and teams mostly aligned under shared source of truth.","Q31 (5): Seamless technical and human integration, unified single source of truth organization-wide."]
   };
 
-  // ----- Pillar categories with new Qs included -----
   const categories = {
     alignment: [1,2,3,25,26,27,29,31],
     purpose: [4,5,6,26,27,28],
@@ -87,8 +292,6 @@ document.addEventListener("DOMContentLoaded", () => {
     generational: [10,11,12,23]
   };
 
-  // ----- Service configuration (7 domains) -----
-  // each service: qids, weights (same length), min/max weeks
   const serviceConfig = {
     orgdev: { name:"Organizational Development", qids:[1,2,3,4,11], weights:[0.22,0.18,0.18,0.24,0.18], minWeeks:6, maxWeeks:20 },
     humanFactors: { name:"Human Factors Engineering", qids:[7,8,9,13,16,23,24], weights:[0.20,0.16,0.14,0.12,0.12,0.14,0.12], minWeeks:4, maxWeeks:14 },
@@ -99,10 +302,8 @@ document.addEventListener("DOMContentLoaded", () => {
     algoPsych: { name:"Algorithmic Psychology", qids:[21,22,6,14,19,20], weights:[0.30,0.20,0.16,0.12,0.12,0.10], minWeeks:4, maxWeeks:12 }
   };
 
-  // convert answer to need value (1->1 need, 5->0 need)
   function needFromValue(v) { return (5 - v) / 4; }
 
-  // compute service needs
   function computeServiceNeeds(values, contradictions, pillarScores, weakest) {
     const results = [];
     Object.keys(serviceConfig).forEach(key => {
@@ -147,25 +348,16 @@ document.addEventListener("DOMContentLoaded", () => {
       const hourlyRate = 225; const weeklyHours = 30;
       const estCost = Math.round(weeks * hourlyRate * weeklyHours);
 
-      // drivers: prefer low-valued items, else pick lowest three
       let driverHighlights = drivers.filter(d => d.val <= 3).sort((a,b)=>a.val-b.val).slice(0,4);
       if (driverHighlights.length === 0) driverHighlights = drivers.sort((a,b)=>a.val-b.val).slice(0,3);
 
-      // Replace severityLabel logic with six increments
       let severityLabel;
-      if (needPercent >= 90) {
-        severityLabel = "Critical Urgency";
-      } else if (needPercent >= 75) {
-        severityLabel = "High Urgency";
-      } else if (needPercent >= 60) {
-        severityLabel = "Significant Need";
-      } else if (needPercent >= 45) {
-        severityLabel = "Moderate Need";
-      } else if (needPercent >= 30) {
-        severityLabel = "Tactical Improvement";
-      } else {
-        severityLabel = "Advisory";
-      }
+      if (needPercent >= 90) severityLabel = "Critical Urgency";
+      else if (needPercent >= 75) severityLabel = "High Urgency";
+      else if (needPercent >= 60) severityLabel = "Significant Need";
+      else if (needPercent >= 45) severityLabel = "Moderate Need";
+      else if (needPercent >= 30) severityLabel = "Tactical Improvement";
+      else severityLabel = "Advisory";
 
       results.push({
         key, name: cfg.name, needPercent, needScore, weeks, estCost, drivers: driverHighlights, contradictionBump, pillarBump, severityLabel
@@ -175,11 +367,163 @@ document.addEventListener("DOMContentLoaded", () => {
     return results;
   }
 
-  // Main calculate
+  // ---------- Text report builder used for email/pdf ----------
+  function getScanReportText(data) {
+    let body = "";
+    body += `MDOA Solutions:  Resilience Readiness Brief\n\n`;
+    body += `Client: ${data.clientName}\n`;
+    body += `Date: ${data.consultDate}\n`;
+    body += `Resilience Index: ${data.overall}%\n\n`;
+
+    body += `Pillar Scores:\n`;
+    body += `• Algorithmic Alignment: ${data.alignScore}%\n`;
+    body += `• Purpose Capital: ${data.purposeScore}%\n`;
+    body += `• Adaptive Fear Reset: ${data.adaptiveScore}%\n`;
+    body += `• Generational Flow Integration: ${data.genScore}%\n\n`;
+
+    body += `Service Needs Overview:\n`;
+    body += `Disclaimer: The percentages below reflect estimated need based on your scan responses.\n`;
+    body += `Thresholds: Critical Urgency >= 90%, High Urgency >= 75%, Significant Need >= 60%, Moderate Need >= 45%, Tactical Improvement >= 30%, Advisory < 30%.\n`;
+    body += `You may choose to address all services, or select only those most relevant to your organization's goals and priorities.\n\n`;
+    data.serviceResults.forEach(s => {
+      body += `${s.name}: ${s.needPercent}% need (${s.severityLabel})\n`;
+      body += `  Est. scope: ${s.weeks} weeks • Est. cost: $${s.estCost.toLocaleString()}\n`;
+      if (s.drivers && s.drivers.length) {
+        body += `  Key drivers:\n`;
+        s.drivers.forEach(d => {
+          body += `    - ${d.interp.replace(/^Q\d+\s*\(\d+\):\s*/, "")}\n`;
+        });
+      }
+      body += `\n`;
+    });
+
+    if (data.contradictions && data.contradictions.length) {
+      body += `Contradictions & Suggested Probes:\n`;
+      data.contradictions.forEach(c => {
+        body += `  ${c.posVal}/${c.invVal} — ${c.probe || ""}\n`;
+      });
+      body += `\n`;
+    } else {
+      body += `No major contradiction flags detected.\n\n`;
+    }
+
+    body += `Full question interpretations:\n`;
+    for (let i = 1; i <= 31; i++) {
+      const val = data.values ? data.values[i - 1] : 3;
+      const interp = qInterpret[i] ? qInterpret[i][val] : `Q${i}: ${val}`;
+      body += `${i}. ${interp}\n`;
+    }
+
+    return body;
+  }
+
+  // ---------- PDF export (jsPDF) ----------
+  async function exportScanToPDF(data) {
+    const jspdf = window.jspdf || window.jsPDF || null;
+    const jsPDF = jspdf ? (jspdf.jsPDF || jspdf) : null;
+    if (!jsPDF) { alert("PDF export unavailable (jsPDF not found)."); return; }
+
+    const doc = new jsPDF({ unit: "pt", format: "letter" });
+    let y = 40;
+    const left = 40;
+
+    doc.setFontSize(18);
+    doc.text("MDOA Solutions:  Resilience Readiness Brief", left, y);
+    y += 26;
+
+    doc.setFontSize(12);
+    doc.text(`Client: ${data.clientName}`, left, y); y += 14;
+    doc.text(`Date: ${data.consultDate}`, left, y); y += 18;
+    doc.text(`Resilience Index: ${data.overall}%`, left, y); y += 18;
+
+    doc.setFont("times", "bold");
+    doc.setFontSize(14);
+    doc.text("Pillar Scores:", left, y); y += 18;
+    doc.setFont("times", "normal");
+    doc.setFontSize(12);
+    const scores = [
+      ["Algorithmic Alignment", data.alignScore],
+      ["Purpose Capital", data.purposeScore],
+      ["Adaptive Fear Reset", data.adaptiveScore],
+      ["Generational Flow Integration", data.genScore]
+    ];
+    scores.forEach(s => { doc.text(`• ${s[0]}: ${s[1]}%`, left+12, y); y += 12; });
+    y += 16;
+
+    doc.setFont("times", "bold");
+    doc.setFontSize(14);
+    doc.text("Service Needs Overview:", left, y); y += 18;
+    doc.setFont("times", "normal");
+    doc.setFontSize(11);
+    doc.text("Disclaimer: The percentages below reflect estimated need based on your scan responses.", left+12, y); y += 12;
+    doc.text("Thresholds: Critical Urgency >= 90%, High Urgency >= 75%, Significant Need >= 60%, Moderate Need >= 45%, Tactical Improvement >= 30%, Advisory < 30%.", left+12, y); y += 14;
+    doc.text("You may choose to address all services, or select only those most relevant to your organization's goals and priorities.", left+12, y); y += 16;
+
+    data.serviceResults.forEach(s => {
+      const line = `${s.name}: ${s.needPercent}% need (${s.severityLabel})`;
+      const lines = doc.splitTextToSize(line, 480);
+      doc.text(lines, left+12, y);
+      y += lines.length * 12 + 2;
+      doc.text(`Est. scope: ${s.weeks} weeks • Est. cost: $${s.estCost.toLocaleString()}`, left+24, y);
+      y += 12;
+      if (s.drivers && s.drivers.length) {
+        doc.text("Key drivers:", left+30, y); y += 12;
+        s.drivers.forEach(d => {
+          const drvLines = doc.splitTextToSize(`- ${d.interp.replace(/^Q\d+\s*\(\d+\):\s*/, "")}`, 460);
+          doc.text(drvLines, left+36, y);
+          y += drvLines.length * 12 + 4;
+          if (y > 700) { doc.addPage(); y = 40; }
+        });
+      }
+      y += 8;
+      if (y > 700) { doc.addPage(); y = 40; }
+    });
+    y += 16;
+
+    if (data.contradictions && data.contradictions.length) {
+      doc.setFont("times", "bold");
+      doc.setFontSize(14);
+      doc.text("Contradictions & Suggested Probes:", left, y); y += 18;
+      doc.setFont("times", "normal");
+      doc.setFontSize(12);
+      data.contradictions.forEach(c => {
+        const text = `${c.posVal}/${c.invVal} — ${c.probe || ""}`;
+        const lines = doc.splitTextToSize(text, 480);
+        doc.text(lines, left+12, y);
+        y += lines.length * 12 + 6;
+        if (y > 700) { doc.addPage(); y = 40; }
+      });
+      y += 16;
+    }
+
+    doc.setFont("times", "bold");
+    doc.setFontSize(14);
+    doc.text("Full question interpretations:", left, y); y += 18;
+    doc.setFont("times", "normal");
+    doc.setFontSize(12);
+    for (let i=1;i<=31;i++) {
+      const val = data.values ? data.values[i-1] : getQ(i);
+      const interp = qInterpret[i] ? qInterpret[i][val] : `Q${i}: ${val}`;
+      const lines = doc.splitTextToSize(`${i}. ${interp}`, 480);
+      doc.text(lines, left+12, y);
+      y += lines.length * 12 + 6;
+      if (y > 700) { doc.addPage(); y = 40; }
+    }
+
+    const filename = `ResilienceBrief_${(data.clientName||"Client")}_${(data.consultDate||new Date().toLocaleDateString())}.pdf`.replace(/[^a-zA-Z0-9_\-\.]/g, "_");
+    doc.save(filename);
+  }
+
+  // ---------- Main calculate function ----------
   function calculate() {
+    // collect values
     const values = Array.from({length:31}, (_,i) => getQ(i+1));
-    // pillar (category) scores
-    function catScore(ids) { const sum = ids.reduce((a,qid)=>a + values[qid-1], 0); return Math.round((sum / (ids.length * 5)) * 100); }
+
+    // pillar scores helper
+    function catScore(ids) { 
+      const sum = ids.reduce((a,qid)=>a + values[qid-1], 0);
+      return Math.round((sum / (ids.length * 5)) * 100);
+    }
     const alignScore = catScore(categories.alignment);
     const purposeScore = catScore(categories.purpose);
     const adaptiveScore = catScore(categories.adaptive);
@@ -210,7 +554,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (overall < 40) { scoreLabel = "🔴 Fragile"; scoreDesc = "Immediate intervention recommended: full RWRM engagement."; }
     else if (overall < 55) { scoreLabel = "🟠 Recovering (Reactive)"; scoreDesc = "Reactive patterns present; targeted stabilization advised."; }
     else if (overall < 70) { scoreLabel = "🟡 Developing Resilience"; scoreDesc = "Resilience emerging; continue integration and targeted improvements."; }
-    else { scoreLabel = "🟢 Resilient"; scoreDesc = "Solid resilience: focus on optimization and sustainment.";}
+    else { scoreLabel = "🟢 Resilient"; scoreDesc = "Solid resilience: focus on optimization and sustainment."; }
 
     // compute services
     const serviceResults = computeServiceNeeds(values, contradictions, pillarScores, weakest);
@@ -224,31 +568,19 @@ document.addEventListener("DOMContentLoaded", () => {
     html += `<div class="score-card"><strong>Adaptive Fear Reset</strong><div class="score-value">${adaptiveScore}%</div><div style="font-size:0.95rem;color:#555;">Indicates your organization's ability to turn fear into constructive challenge and adapt to change.</div></div>`;
     html += `<div class="score-card"><strong>Generational Flow</strong><div class="score-value">${genScore}%</div><div style="font-size:0.95rem;color:#555;">Reflects how well generational diversity is integrated as a strength.</div></div></div>`;
 
-    // Remove weakest pillar info
-
-    // Show all services, not just top 3
     html += `<h4 style="margin-top:1rem;">Service Needs Overview</h4>`;
-    html += `<div style="margin-bottom:1.2rem;padding:0.7rem;background:#f4f8fb;border-radius:6px;border-left:4px solid #c5a46d;">
-      <strong>Disclaimer:</strong> The percentages below reflect estimated need based on your scan responses. 
-      <br>
-      <strong>Thresholds:</strong> 
-      <span style="color:#b71c1c;">Critical Urgency ≥ 90%</span>, 
-      <span style="color:#d84315;">High Urgency ≥ 75%</span>, 
-      <span style="color:#ff9800;">Significant Need ≥ 60%</span>, 
-      <span style="color:#fbc02d;">Moderate Need ≥ 45%</span>, 
-      <span style="color:#1976d2;">Tactical Improvement ≥ 30%</span>, 
-      <span style="color:#388e3c;">Advisory &lt; 30%</span>.
-      <br>
-      You may choose to address all services, or select only those most relevant to your organization’s goals and priorities.
-    </div>`;
+    html += `<div style="margin-bottom:1.2rem;padding:0.7rem;background:#f4f8fb;border-radius:6px;border-left:4px solid #c5a46d;">`;
+    html += `<strong>Disclaimer:</strong> The percentages below reflect estimated need based on your scan responses. <br>`;
+    html += `<strong>Thresholds:</strong> Critical Urgency >= 90%, High Urgency >= 75%, Significant Need >= 60%, Moderate Need >= 45%, Tactical Improvement >= 30%, Advisory < 30%.`;
+    html += `<br>You may choose to address all services, or select only those most relevant to your organization’s goals and priorities.</div>`;
+
     serviceResults.forEach((s,idx)=>{
       html += `<div style="margin-bottom:0.6rem;padding:0.7rem;border-left:4px solid #004d80;background:#fff;">`;
       html += `<strong>${s.name}</strong> — <em>${s.needPercent}% need (${s.severityLabel})</em><br>`;
       html += `<small>Est. scope: ${s.weeks} weeks • Est. cost: $${s.estCost.toLocaleString()}</small>`;
       if (s.drivers && s.drivers.length) {
-        html += `<div style="margin-top:0.5rem;"><strong>Key drivers:  plain-language interpretation:</strong><ul style="margin:0.25rem 0 0 1rem;">`;
+        html += `<div style="margin-top:0.5rem;"><strong>Key drivers: plain-language interpretation:</strong><ul style="margin:0.25rem 0 0 1rem;">`;
         s.drivers.forEach(d => {
-          // Remove Qx identifier from driver interpretation
           html += `<li style="margin-bottom:0.25rem;">${d.interp.replace(/^Q\d+\s*\(\d+\):\s*/, "")}</li>`;
         });
         html += `</ul></div>`;
@@ -260,7 +592,6 @@ document.addEventListener("DOMContentLoaded", () => {
       html += `<div style="margin-top:1rem;padding:1rem;border-left:4px solid #c5a46d;background:#fff;">`;
       html += `<h4>Contradiction Flags</h4>`;
       contradictions.forEach(c => {
-        // Remove Qx identifiers from contradiction display
         html += `<div style="margin-bottom:0.6rem;"><strong>${c.posVal}/${c.invVal}</strong><br><em>${c.probe}</em></div>`;
       });
       html += `</div>`;
@@ -268,191 +599,63 @@ document.addEventListener("DOMContentLoaded", () => {
       html += `<p style="margin-top:1rem;">No major contradiction flags detected.</p>`;
     }
 
-    openScanModal(html);
-
-    // prepare export payload
-    const clientName = document.getElementById("clientName") ? document.getElementById("clientName").value : "Client";
-    const consultDate = document.getElementById("scanDate") ? document.getElementById("scanDate").value : new Date().toLocaleDateString();
-
-    // Returns the full scan report as plain text for PDF/email
-    function getScanReportText(data) {
-      let body = "";
-      body += `MDOA Solutions:  Resilience Readiness Brief\n\n`;
-      body += `Client: ${data.clientName}\n`;
-      body += `Date: ${data.consultDate}\n`;
-      body += `Resilience Index: ${data.overall}%\n\n`;
-
-      body += `Pillar Scores:\n`;
-      body += `• Algorithmic Alignment: ${data.alignScore}%\n`;
-      body += `• Purpose Capital: ${data.purposeScore}%\n`;
-      body += `• Adaptive Fear Reset: ${data.adaptiveScore}%\n`;
-      body += `• Generational Flow Integration: ${data.genScore}%\n\n`;
-
-      body += `Service Needs Overview:\n`;
-      body += `Disclaimer: The percentages below reflect estimated need based on your scan responses.\n`;
-      body += `Thresholds: Critical Urgency ≥ 90%, High Urgency ≥ 75%, Significant Need ≥ 60%, Moderate Need ≥ 45%, Tactical Improvement ≥ 30%, Advisory < 30%.\n`;
-      body += `You may choose to address all services, or select only those most relevant to your organization’s goals and priorities.\n\n`;
-      data.serviceResults.forEach(s => {
-        body += `${s.name}: ${s.needPercent}% need (${s.severityLabel})\n`;
-        body += `  Est. scope: ${s.weeks} weeks • Est. cost: $${s.estCost.toLocaleString()}\n`;
-        if (s.drivers && s.drivers.length) {
-          body += `  Key drivers:\n`;
-          s.drivers.forEach(d => {
-            body += `    - ${d.interp.replace(/^Q\d+\s*\(\d+\):\s*/, "")}\n`;
-          });
-        }
-        body += `\n`;
-      });
-
-      if (data.contradictions && data.contradictions.length) {
-        body += `Contradictions & Suggested Probes:\n`;
-        data.contradictions.forEach(c => {
-          body += `  ${c.posVal}/${c.invVal} — ${c.probe || ""}\n`;
-        });
-        body += `\n`;
-      } else {
-        body += `No major contradiction flags detected.\n\n`;
-      }
-
-      body += `Full question interpretations:\n`;
-      for (let i = 1; i <= 31; i++) {
-        const val = data.values ? data.values[i - 1] : 3;
-        const interp = qInterpret[i] ? qInterpret[i][val] : `Q${i}: ${val}`;
-        body += `${i}. ${interp}\n`;
-      }
-
-      return body;
-    }
-
-    // Attach modalExportBtn handler after modal is rendered
-    const modalExportBtn = document.getElementById("modalExportBtn");
-    if (modalExportBtn) {
-      modalExportBtn.onclick = () => exportScanToPDF({ clientName, consultDate, overall, alignScore, purposeScore, adaptiveScore: adaptiveScore, genScore, weakest, contradictions, serviceResults, values });
-    }
-
-    // Attach modalEmailBtn handler after modal is rendered
-    const modalEmailBtn = document.getElementById("modalEmailBtn");
-    if (modalEmailBtn) {
-      modalEmailBtn.onclick = () => {
-        const reportText = getScanReportText({
-          clientName,
-          consultDate,
-          overall,
-          alignScore,
-          purposeScore,
-          adaptiveScore,
-          genScore,
-          contradictions,
-          serviceResults,
-          values
-        });
-        window.location.href =
-          "mailto:dr.wayneromanishan@mdoasolutions.com?subject=Resilience Scan Diagnostic Review&body=" +
-          encodeURIComponent(reportText);
-      };
-    }
-  } // end calculate
-
-  // Export to PDF (jsPDF)
-  async function exportScanToPDF(data) {
-    const { jsPDF } = window.jspdf;
-    const doc = new jsPDF({ unit: "pt", format: "letter" });
-    let y = 40;
-    const left = 40;
-
-    doc.setFontSize(18);
-    doc.text("MDOA Solutions:  Resilience Readiness Brief", left, y);
-    y += 26;
-
-    doc.setFontSize(12);
-    doc.text(`Client: ${data.clientName}`, left, y); y += 14;
-    doc.text(`Date: ${data.consultDate}`, left, y); y += 18;
-    doc.text(`Resilience Index: ${data.overall}%`, left, y); y += 18;
-
-    doc.setFont("times", "bold");
-    doc.setFontSize(14);
-    doc.text("Pillar Scores:", left, y); y += 18;
-    doc.setFont("times", "normal");
-    doc.setFontSize(12);
-    const scores = [
-      ["Algorithmic Alignment", data.alignScore],
-      ["Purpose Capital", data.purposeScore],
-      ["Adaptive Fear Reset", data.adaptiveScore],
-      ["Generational Flow Integration", data.genScore]
-    ];
-    scores.forEach(s => { doc.text(`• ${s[0]}: ${s[1]}%`, left+12, y); y += 12; });
-    y += 16;
-
-    // Fix: Avoid ampersands in disclaimer/thresholds for PDF
-    doc.setFont("times", "bold");
-    doc.setFontSize(14);
-    doc.text("Service Needs Overview:", left, y); y += 18;
-    doc.setFont("times", "normal");
-    doc.setFontSize(11);
-    doc.text("Disclaimer: The percentages below reflect estimated need based on your scan responses.", left+12, y); y += 12;
-    doc.text("Thresholds: Critical Urgency >= 90%, High Urgency >= 75%, Significant Need >= 60%, Moderate Need >= 45%, Tactical Improvement >= 30%, Advisory < 30%.", left+12, y); y += 12;
-    doc.text("You may choose to address all services, or select only those most relevant to your organization's goals and priorities.", left+12, y); y += 16;
-    doc.setFont("times", "normal");
-    doc.setFontSize(12);
-
-    data.serviceResults.forEach(s => {
-      const line = `${s.name}: ${s.needPercent}% need (${s.severityLabel})`;
-      const lines = doc.splitTextToSize(line, 480);
-      doc.text(lines, left+12, y);
-      y += lines.length * 12 + 2;
-      doc.text(`Est. scope: ${s.weeks} weeks • Est. cost: $${s.estCost.toLocaleString()}`, left+24, y);
-      y += 12;
-      if (s.drivers && s.drivers.length) {
-        doc.text("Key drivers:", left+30, y); y += 12;
-        s.drivers.forEach(d => {
-          // Remove Qx identifier from driver interpretation
-          const drvLines = doc.splitTextToSize(`- ${d.interp.replace(/^Q\d+\s*\(\d+\):\s*/, "")}`, 460);
-          doc.text(drvLines, left+36, y);
-          y += drvLines.length * 12 + 4;
-          if (y > 700) { doc.addPage(); y = 40; }
-        });
-      }
-      y += 8;
-      if (y > 700) { doc.addPage(); y = 40; }
+    // show modal
+    openScanModal(html, {
+      clientName: document.getElementById("clientName") ? document.getElementById("clientName").value : "Client",
+      consultDate: document.getElementById("scanDate") ? document.getElementById("scanDate").value : new Date().toLocaleDateString(),
+      overall,
+      alignScore,
+      purposeScore,
+      adaptiveScore,
+      genScore,
+      pillarScores, // added to satisfy any consumer expecting this
+      weakest,
+      contradictions,
+      serviceResults,
+      values
     });
-    y += 16;
+  } // end calculate()
 
-    if (data.contradictions && data.contradictions.length) {
-      doc.setFont("times", "bold");
-      doc.setFontSize(14);
-      doc.text("Contradictions & Suggested Probes:", left, y); y += 18;
-      doc.setFont("times", "normal");
-      doc.setFontSize(12);
-      data.contradictions.forEach(c => {
-        // Remove Qx identifiers from contradiction display
-        const text = `${c.posVal}/${c.invVal} — ${c.probe || ""}`;
-        const lines = doc.splitTextToSize(text, 480);
-        doc.text(lines, left+12, y);
-        y += lines.length * 12 + 6;
-        if (y > 700) { doc.addPage(); y = 40; }
-      });
-      y += 16;
+  // ---------- Wire calculate button (only if present) ----------
+  if (calcBtn) {
+    calcBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      try {
+        calculate();
+      } catch (err) {
+        console.error("Error running calculate():", err);
+        alert("An error occurred while running the diagnostic. Check console for details.");
+      }
+    });
+  } else {
+    // If there's no calculate button, make sure no silent failures occur
+    console.debug("scan-script.js: no #calcBtn found on this page — calculate not wired.");
+  }
+
+  // ---------- Optional: small RQ demo (guarded) ----------
+  // If the page includes a reciprocal gauge, update it safely.
+  const rqNeedle = document.querySelector(".rq-needle");
+  const rqValue = document.getElementById("rqValue");
+  const rqInsight = document.getElementById("rqInsight");
+
+  if (rqNeedle && rqValue && rqInsight) {
+    function updateRQ() {
+      const rq = Math.floor(Math.random() * 61) + 40; // Random value between 40–100
+      const angle = (rq - 50) * 1.8; // Needle rotation scale
+      rqNeedle.style.transform = `rotate(${angle}deg)`;
+      rqValue.textContent = rq;
+
+      let insight = "";
+      if (rq < 55) insight = "Energy deficit detected — reciprocal feedback loops are insufficient.";
+      else if (rq < 70) insight = "Emerging equilibrium — the organization restores some but not all expended energy.";
+      else if (rq < 85) insight = "Balanced reciprocity — inputs and outputs remain psychologically sustainable.";
+      else insight = "Restorative surplus — high engagement and mutual reinforcement of purpose.";
+
+      rqInsight.textContent = insight;
     }
 
-    // Section: Full question interpretations
-    doc.setFont("times", "bold");
-    doc.setFontSize(14);
-    doc.text("Full question interpretations:", left, y); y += 18;
-    doc.setFont("times", "normal");
-    doc.setFontSize(12);
-    for (let i=1;i<=31;i++) {
-      const val = data.values ? data.values[i-1] : getQ(i);
-      const interp = qInterpret[i] ? qInterpret[i][val] : `Q${i}: ${val}`;
-      const lines = doc.splitTextToSize(`${i}. ${interp}`, 480);
-      doc.text(lines, left+12, y);
-      y += lines.length * 12 + 6;
-      if (y > 700) { doc.addPage(); y = 40; }
-    }
+    updateRQ();
+    setInterval(updateRQ, 7000);
+  }
 
-    const filename = `ResilienceBrief_${(data.clientName||"Client")}_${(data.consultDate||new Date().toLocaleDateString())}.pdf`.replace(/[^a-zA-Z0-9_\-\.]/g, "_");
-    doc.save(filename);
-  } // end exportScanToPDF
-
-  // wire calc
-  if (calcBtn) calcBtn.addEventListener("click", calculate);
 });

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MDOA Solutions | Building Resilient Workforces</title>
+  <meta name="description" content="MDOA Solutions applies psychology, engineering, and sustainability to build resilient, purpose-driven organizations. Founded by Dr. Wayne Romanishan, creator of the Romanishan Workforce Resilience Model (RWRM).">
+  <link rel="icon" href="./Images/psyblack.png" type="image/png">
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles2.css">
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-overlay">
+      <div class="hero-brand">Multi-Dimensional Operations and Analysis (MDOA Solutions)</div>
+      <h1>Consultation Request</h1>
+      <p style="max-width:880px;margin:auto;">
+        Share your organization’s current condition and objectives. Your responses allow MDOA to design a precise, ethical, executive-grade diagnostic and remediation pathway.
+      </p>
+      <!-- Signature at bottom -->
+      <div class="hero-signature">Dr. Wayne Romanishan Jr., Psy.D.</div> 
+      <a href="./reciprocity-engine.html" class="back-btn" style="margin-top:1rem;">Learn about the Reciprocity Engine™</a>
+    </div>
+  </header>
+
+  <main class="consultation-form">
+    <div class="form-wrap">
+      <!-- Left: Form -->
+      <section class="consult-card" aria-labelledby="formTitle">
+        <h2 id="formTitle">Organization & Diagnostic Overview</h2>
+
+        <label for="orgName">Organization Name</label>
+        <input id="orgName" type="text" placeholder="Acme Systems, Inc." required />
+
+        <label for="contactName">Primary Contact</label>
+        <input id="contactName" type="text" placeholder="Jane Doe" required />
+
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:0.75rem;">
+          <div>
+            <label for="contactEmail">Email</label>
+            <input id="contactEmail" type="email" placeholder="name@company.com" required />
+          </div>
+          <div>
+            <label for="contactPhone">Phone</label>
+            <input id="contactPhone" type="tel" placeholder="+1 (555) 555-5555" />
+          </div>
+        </div>
+
+        <label for="domains">Domains of Interest (select one or more)</label>
+        <select id="domains" multiple size="4" aria-label="Select domains">
+          <option>Organizational Development</option>
+          <option>Human Factors Engineering</option>
+          <option>Talent Management</option>
+          <option>Engineering Workflow Management</option>
+          <option>Document Management</option>
+          <option>Change Management</option>
+          <option>Algorithmic Psychology</option>
+        </select>
+
+        <label for="challenge">Describe the main challenge or objective</label>
+        <textarea id="challenge" placeholder="Be as detailed as possible… (what's failing, who is affected, why now?)"></textarea>
+
+        <label for="outcome">Outcomes that would define success</label>
+        <textarea id="outcome" placeholder="Specific operational, human, or financial outcomes you're seeking"></textarea>
+
+        <div style="display:flex; gap:0.75rem; margin-top:1rem;">
+          <div style="flex:1;">
+            <label for="startDate">Preferred start date</label>
+            <input id="startDate" type="date" />
+          </div>
+          <div style="width:180px;">
+            <label for="readiness">Leadership readiness</label>
+            <input id="readiness" type="range" min="1" max="5" value="3" />
+          </div>
+        </div>
+
+        <hr style="margin:1.25rem 0;border:none;border-top:1px solid #eef5fb;" />
+
+        <h2 style="margin-bottom:0.5rem;">Personal Reciprocity Index</h2>
+        <p class="small-print">How balanced do you feel the exchange of energy and reward is between you (or your employees) and the organization?</p>
+
+        <div class="reciprocity-block">
+          <div class="reciprocity-row">
+            <div class="reciprocity-label">Perceived Balance (1 = exploited → 5 = fully balanced)</div>
+          </div>
+
+          <div class="range-wrap">
+            <input id="reciprocity" type="range" min="1" max="5" value="3" />
+          </div>
+
+          <div class="scale-row" aria-hidden="true">
+            <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
+          </div>
+
+          <div id="reciprocityInterpretation" class="muted">Reciprocity Score: Developing balance. Interpretations are illustrative and used to prioritize domains during a diagnostic.</div>
+        </div>
+
+        <div class="form-actions" role="group" aria-label="Form actions">
+          <button id="exportBtn" type="button" class="btn" title="Export a one-page brief">Request Brief (PDF)</button>
+          <button id="emailBtn" type="button" class="btn btn-secondary" title="Email the consultation request to MDOA">Email Request</button>
+        </div>
+
+        <div style="margin-top:0.9rem;color:#6d7f8f;font-size:0.9rem;">
+          <strong>Confidentiality:</strong> Your diagnostic data is handled according to MDOA's ethical data policy. Submitting this form requests an intake review, we will reply within 2 business days.
+        </div>
+      </section>
+
+      <!-- Right: Summary / Guidance -->
+      <aside class="summary-card" aria-labelledby="summaryTitle">
+        <h3 id="summaryTitle">Organizational Insights (Preview)</h3>
+        <div class="summary-item"><strong>Quick view:</strong> Use this form to communicate the problem context and urgency.</div>
+
+        <div style="border-top:1px dashed rgba(11,37,69,0.06); padding-top:0.8rem;">
+          <div class="small-print"><strong>What we evaluate</strong></div>
+          <ul style="margin-left:1rem;color:#38506c;">
+            <li>Alignment of work to strategy</li>
+            <li>Human factors & cognitive load</li>
+            <li>Talent fit and retention mechanics</li>
+            <li>Engineering workflows and delivery resilience</li>
+            <li>Document control & single source of truth</li>
+            <li>Change readiness & coaching</li>
+            <li>Algorithmic psychology & ethical measurement</li>
+          </ul>
+        </div>
+
+        <div style="border-top:1px dashed rgba(11,37,69,0.06); padding-top:0.8rem;">
+          <div class="small-print"><strong>Why this matters</strong></div>
+          <p style="color:#344a5f;margin:0;">Organizational problems often appear operational, but are driven by mismatches in reciprocity and system design. MDOA’s diagnostic isolates root causes without finger-pointing.</p>
+        </div>
+
+        <div style="border-top:1px dashed rgba(11,37,69,0.06); padding-top:0.8rem;">
+          <div class="small-print"><strong>Next step</strong></div>
+          <p style="margin:0;color:#344a5f;">After review we’ll propose a scoped diagnostic engagement: time, approach, and a prioritized roadmap.</p>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="footer" style="padding:2rem 1rem;">
+    <div style="max-width:1100px;margin:0 auto;color:#fff8ec;text-align:center;">
+      © 2025 MDOA Solutions · Developed by Dr. Wayne Romanishan Jr., Psy.D. · All Rights Reserved
+    </div>
+  </footer>
+
+  <!-- jsPDF -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="./consultation-form.js"></script>
+ </body>
+</html>
