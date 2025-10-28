@@ -94,6 +94,30 @@
     }
   };
 
+  // Map each service to its detailed page. Defaults to services2.html if not specified.
+  const serviceLinks = {
+    organizational: 'OrganizationalDevelopment.html#organizational-development',
+    humanFactors: 'HumanFactorsEngineering.html#human-factors-engineering',
+    talent: 'TalentManagement.html#talent-management',
+    workflow: 'EngineeringWorkflowManagement.html#engineering-workflow-management',
+    documents: 'DocumentManagement.html#document-management',
+    change: 'ChangeManagement.html#change-management',
+    algorithmic: 'AlgorithmicPsychologyProcesses.html#algorithmic-psychology'
+  };
+  function getMoreLink(key) {
+    return serviceLinks[key] || 'services2.html';
+  }
+  function ensureActionsContainer(modalContent) {
+    let actions = modalContent.querySelector('.modal-actions');
+    if (!actions) {
+      actions = document.createElement('div');
+      actions.className = 'modal-actions';
+      modalContent.appendChild(actions);
+    }
+    actions.innerHTML = '';
+    return actions;
+  }
+
   // -------------------------
   // DOM refs & state
   // -------------------------
@@ -134,7 +158,7 @@
     }
   }
 
-  function populateModal(data) {
+  function populateModal(key, data) {
     titleEl.textContent = data.title || '';
     problemEl.textContent = data.problem || '';
     approachEl.textContent = data.approach || '';
@@ -148,6 +172,16 @@
       });
     }
     proofEl.textContent = data.proof || '';
+
+    // Inject "Learn more" button at bottom
+    const actions = ensureActionsContainer(modalContent);
+    const href = getMoreLink(key);
+    const moreBtn = document.createElement('a');
+    moreBtn.href = href;
+    moreBtn.className = 'btn btn-secondary';
+    moreBtn.textContent = 'Learn more';
+    moreBtn.target = '_self';
+    actions.appendChild(moreBtn);
   }
 
   // Trap focus inside modal (basic)
@@ -224,7 +258,7 @@
   window.openModal = function openModal(key) {
     const data = serviceData[key];
     // populate, then reveal
-    populateModal(data || { title: '', problem: '', approach: '', value: [], proof: '' });
+    populateModal(key, data || { title: '', problem: '', approach: '', value: [], proof: '' });
 
     // show modal (use inline styles + classes to leverage CSS transitions)
     modal.style.display = 'flex';

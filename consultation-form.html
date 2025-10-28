@@ -48,7 +48,7 @@
           </div>
         </div>
 
-        <label for="domains">Domains of Interest (select one or more)</label>
+        <label for="domains">Domains of Interest (select one or hold "Control" down and select more)</label>
         <select id="domains" multiple size="4" aria-label="Select domains">
           <option>Organizational Development</option>
           <option>Human Factors Engineering</option>
@@ -70,9 +70,14 @@
             <label for="startDate">Preferred start date</label>
             <input id="startDate" type="date" />
           </div>
-          <div style="width:180px;">
+          <div style="width:180px; margin-left:auto; text-align:center;">
             <label for="readiness">Leadership readiness</label>
-            <input id="readiness" type="range" min="1" max="5" value="3" />
+            <input id="readiness" type="range" min="1" max="5" value="3" title="Drag left: Not Ready • Drag right: Really Ready" />
+            <!-- Stacked labels -->
+            <div class="scale-row" aria-hidden="true" style="margin-top:2px; line-height:1.05;">
+              <span style="text-align:center;">Not<br>Ready</span>
+              <span style="text-align:center;">Really<br>Ready</span>
+            </div>
           </div>
         </div>
 
