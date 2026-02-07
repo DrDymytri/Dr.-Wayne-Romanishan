@@ -315,6 +315,19 @@
     .data-section button { margin: 0.3rem; }
     #import-input { display: none; }
 
+    /* ===== Sync Status ===== */
+    .sync-status {
+      display: inline-block;
+      font-size: 0.8rem;
+      font-family: "Lato", sans-serif;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      margin-top: 0.5rem;
+    }
+    .sync-status.connected { background: #27ae60; color: #fff; }
+    .sync-status.disconnected { background: #e74c3c; color: #fff; }
+    .sync-status.syncing { background: #f39c12; color: #fff; }
+
     /* ===== Responsive ===== */
     @media (max-width: 600px) {
       #app { padding: 1rem; }
@@ -346,6 +359,7 @@
     <div class="app-header">
       <h1>🎲 Name Randomizer</h1>
       <p>Add names with attributes, then randomize to pick one at random.</p>
+      <span class="sync-status syncing" id="sync-status">⏳ Connecting...</span>
     </div>
 
     <!-- Add / Edit Form -->
@@ -419,12 +433,26 @@
     </div>
   </div>
 
+  <!-- Firebase SDK (compat for simplicity) -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
+
   <script>
+    // ===== FIREBASE CONFIG =====
+    const firebaseConfig = {
+      apiKey: "AIzaSyBJb3lOfklbARIrSOjCXw6Rk3Hh8aROkbg",
+      authDomain: "mdoa-randomizer.firebaseapp.com",
+      databaseURL: "https://mdoa-randomizer-default-rtdb.firebaseio.com",
+      projectId: "mdoa-randomizer",
+      storageBucket: "mdoa-randomizer.firebasestorage.app",
+      messagingSenderId: "158865060742",
+      appId: "1:158865060742:web:ad910ef91025f6ffbbf207"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+    const namesRef = db.ref('randomizer/names');
+
     // ===== CONFIG =====
-    // SHA-256 hash of the access password. Default password: "mdoa2026"
-    // To change: open browser console, run:
-    //   crypto.subtle.digest('SHA-256', new TextEncoder().encode('YOUR_NEW_PASSWORD'))
-    //     .then(h => console.log(Array.from(new Uint8Array(h)).map(b=>b.toString(16).padStart(2,'0')).join('')))
     const PASS_HASH = '46c00f7a1c9852f3387b1a75398babc0d95fc3013158cf710845bb1c4d3fc62b';
     const STORAGE_KEY = 'mdoa_private_randomizer_data';
     const SESSION_KEY = 'mdoa_private_auth';
@@ -432,6 +460,22 @@
     // ===== STATE =====
     let names = [];
     let editIndex = -1;
+    let firebaseConnected = false;
+
+    // ===== SYNC STATUS UI =====
+    function setSyncStatus(state) {
+      const el = document.getElementById('sync-status');
+      if (state === 'connected') {
+        el.className = 'sync-status connected';
+        el.textContent = '🟢 Synced in real-time';
+      } else if (state === 'disconnected') {
+        el.className = 'sync-status disconnected';
+        el.textContent = '🔴 Offline — using local data';
+      } else {
+        el.className = 'sync-status syncing';
+        el.textContent = '⏳ Connecting...';
+      }
+    }
 
     // ===== AUTH =====
     async function hashString(str) {
@@ -453,12 +497,10 @@
       }
     }
 
-    // Allow Enter key to submit password
     document.getElementById('auth-password').addEventListener('keydown', (e) => {
       if (e.key === 'Enter') authenticate();
     });
 
-    // Check session on load
     (function checkSession() {
       if (sessionStorage.getItem(SESSION_KEY) === 'true') {
         document.getElementById('auth-gate').style.display = 'none';
@@ -466,18 +508,50 @@
       }
     })();
 
-    // ===== DATA PERSISTENCE =====
+    // ===== DATA PERSISTENCE (Firebase + localStorage fallback) =====
     function saveData() {
+      // Always cache locally
       localStorage.setItem(STORAGE_KEY, JSON.stringify(names));
+      // Push to Firebase
+      namesRef.set(names).catch(err => console.warn('Firebase write failed:', err));
     }
 
-    function loadData() {
+    function loadLocalData() {
       try {
         const raw = localStorage.getItem(STORAGE_KEY);
         if (raw) names = JSON.parse(raw);
       } catch (e) { names = []; }
       renderTable();
     }
+
+    // ===== FIREBASE REAL-TIME LISTENER =====
+    // This fires whenever data changes on the server (from either user)
+    namesRef.on('value', (snapshot) => {
+      firebaseConnected = true;
+      setSyncStatus('connected');
+      const data = snapshot.val();
+      names = Array.isArray(data) ? data : [];
+      // Update local cache
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(names));
+      renderTable();
+    }, (error) => {
+      console.warn('Firebase read error:', error);
+      firebaseConnected = false;
+      setSyncStatus('disconnected');
+      // Fall back to localStorage
+      loadLocalData();
+    });
+
+    // Monitor connection state
+    db.ref('.info/connected').on('value', (snap) => {
+      if (snap.val() === true) {
+        firebaseConnected = true;
+        setSyncStatus('connected');
+      } else {
+        firebaseConnected = false;
+        setSyncStatus('disconnected');
+      }
+    });
 
     // ===== CRUD =====
     function addOrUpdateEntry() {
@@ -591,11 +665,9 @@
       const nameEl = document.getElementById('result-name');
       const attrsEl = document.getElementById('result-attrs');
 
-      // Remove previous highlights
       document.querySelectorAll('tbody tr.highlight').forEach(r => r.classList.remove('highlight'));
       card.classList.remove('visible');
 
-      // Spin animation — rapidly cycle through names for suspense
       btn.classList.add('spinning');
       btn.disabled = true;
       let cycles = 0;
@@ -609,7 +681,6 @@
         cycles++;
         if (cycles >= totalCycles) {
           clearInterval(interval);
-          // Final pick
           const winnerIdx = Math.floor(Math.random() * names.length);
           const winner = names[winnerIdx];
           nameEl.textContent = winner.name;
@@ -622,7 +693,6 @@
           btn.classList.remove('spinning');
           btn.disabled = false;
 
-          // Highlight row
           const row = document.getElementById(`row-${winnerIdx}`);
           if (row) {
             row.classList.add('highlight');
@@ -690,7 +760,8 @@
     });
 
     // ===== INIT =====
-    loadData();
+    // Load local data first for instant render, Firebase listener will overwrite when connected
+    loadLocalData();
   </script>
 </body>
 </html>
