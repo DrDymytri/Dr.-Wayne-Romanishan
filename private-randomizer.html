@@ -734,7 +734,35 @@
       return div.innerHTML;
     }
 
-    // ===== RANDOMIZER =====
+    // ===== RANDOMIZER (Shuffle Bag — no repeats until all names used) =====
+    let shuffleBag = [];
+    let lastWinnerIdx = -1;
+
+    // Fisher-Yates shuffle using crypto-quality randomness
+    function secureShuffle(arr) {
+      const a = arr.slice();
+      for (let i = a.length - 1; i > 0; i--) {
+        const rnd = crypto.getRandomValues(new Uint32Array(1))[0];
+        const j = rnd % (i + 1);
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    }
+
+    function getNextRandomIdx() {
+      // Refill bag if empty or list size changed
+      if (shuffleBag.length === 0 || shuffleBag.some(i => i >= names.length)) {
+        shuffleBag = secureShuffle([...Array(names.length).keys()]);
+        // If the first in the new bag matches the last winner, move it to the end
+        if (shuffleBag.length > 1 && shuffleBag[0] === lastWinnerIdx) {
+          shuffleBag.push(shuffleBag.shift());
+        }
+      }
+      const idx = shuffleBag.shift();
+      lastWinnerIdx = idx;
+      return idx;
+    }
+
     function randomizeName() {
       if (names.length === 0) {
         alert('Add at least one name to the list first.');
@@ -749,12 +777,18 @@
       document.querySelectorAll('tbody tr.highlight').forEach(r => r.classList.remove('highlight'));
       card.classList.remove('visible');
 
+      // Pre-pick the winner BEFORE the animation starts
+      const winnerIdx = getNextRandomIdx();
+
       btn.classList.add('spinning');
       btn.disabled = true;
       let cycles = 0;
       const totalCycles = 20 + Math.floor(Math.random() * 10);
       const interval = setInterval(() => {
-        const tempIdx = Math.floor(Math.random() * names.length);
+        // Show random names during spin (avoid spoiling the winner)
+        let tempIdx;
+        do { tempIdx = Math.floor(Math.random() * names.length); }
+        while (names.length > 1 && tempIdx === winnerIdx);
         nameEl.textContent = names[tempIdx].name;
         attrsEl.textContent = '';
         card.classList.add('visible');
@@ -762,7 +796,6 @@
         cycles++;
         if (cycles >= totalCycles) {
           clearInterval(interval);
-          const winnerIdx = Math.floor(Math.random() * names.length);
           const winner = names[winnerIdx];
           nameEl.textContent = winner.name;
           const parts = [];
