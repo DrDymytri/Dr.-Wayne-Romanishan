@@ -41,7 +41,8 @@
       width: 90%;
     }
     .auth-box h2 { margin-bottom: 1rem; font-size: 1.5rem; }
-    .auth-box input[type="password"] {
+    .auth-box input[type="password"],
+    .auth-box input[type="email"] {
       width: 100%;
       padding: 0.75rem 1rem;
       font-size: 1rem;
@@ -50,10 +51,37 @@
       margin-bottom: 1rem;
       font-family: inherit;
     }
-    .auth-box input[type="password"]:focus {
+    .auth-box input[type="password"]:focus,
+    .auth-box input[type="email"]:focus {
       outline: none;
       border-color: #c5a46d;
       box-shadow: 0 0 0 3px rgba(197,164,109,0.3);
+    }
+    .auth-box .btn[disabled] {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+    .sign-out-btn {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      z-index: 100;
+      padding: 0.4rem 1rem;
+      font-size: 0.85rem;
+      font-family: "Lato", sans-serif;
+      font-weight: 600;
+      background: rgba(0,33,71,0.85);
+      color: #fff;
+      border: 1px solid #c5a46d;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .sign-out-btn:hover { background: #c5a46d; color: #002147; }
+    .user-label {
+      font-size: 0.8rem;
+      color: #c5a46d;
+      margin-right: 0.5rem;
     }
     .auth-error {
       color: #c0392b;
@@ -342,17 +370,23 @@
 </head>
 <body>
 
-  <!-- ===== PASSWORD GATE ===== -->
+  <!-- ===== LOGIN GATE ===== -->
   <div id="auth-gate">
     <div class="auth-box">
       <h2>🔒 Private Access</h2>
-      <p style="margin-bottom:1rem; color:#555; font-size:0.9rem;">This page is restricted. Enter the access code to continue.</p>
+      <p style="margin-bottom:1rem; color:#555; font-size:0.9rem;">Sign in with your authorized account.</p>
       <div class="auth-error" id="auth-error"></div>
-      <input type="password" id="auth-password" placeholder="Enter access code" autofocus>
+      <input type="email" id="auth-email" placeholder="Email address" autofocus>
+      <input type="password" id="auth-password" placeholder="Password">
       <br>
-      <button class="btn" onclick="authenticate()" style="margin-top:0.5rem;">Unlock</button>
+      <button class="btn" id="login-btn" onclick="authenticate()" style="margin-top:0.5rem;">Sign In</button>
     </div>
   </div>
+
+  <!-- Sign out button (visible when logged in) -->
+  <button class="sign-out-btn" id="sign-out-btn" style="display:none;" onclick="signOut()">
+    <span class="user-label" id="user-label"></span>Sign Out
+  </button>
 
   <!-- ===== MAIN APP (hidden until authenticated) ===== -->
   <div id="app">
@@ -435,6 +469,7 @@
 
   <!-- Firebase SDK (compat for simplicity) -->
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
 
   <script>
@@ -449,18 +484,18 @@
       appId: "1:158865060742:web:ad910ef91025f6ffbbf207"
     };
     firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
     const db = firebase.database();
     const namesRef = db.ref('randomizer/names');
 
     // ===== CONFIG =====
-    const PASS_HASH = '46c00f7a1c9852f3387b1a75398babc0d95fc3013158cf710845bb1c4d3fc62b';
     const STORAGE_KEY = 'mdoa_private_randomizer_data';
-    const SESSION_KEY = 'mdoa_private_auth';
 
     // ===== STATE =====
     let names = [];
     let editIndex = -1;
     let firebaseConnected = false;
+    let dbListener = null;
 
     // ===== SYNC STATUS UI =====
     function setSyncStatus(state) {
@@ -477,42 +512,80 @@
       }
     }
 
-    // ===== AUTH =====
-    async function hashString(str) {
-      const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
-      return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
-    }
-
+    // ===== FIREBASE AUTH =====
     async function authenticate() {
+      const email = document.getElementById('auth-email').value.trim();
       const pw = document.getElementById('auth-password').value;
-      const hash = await hashString(pw);
-      if (hash === PASS_HASH) {
-        sessionStorage.setItem(SESSION_KEY, 'true');
-        document.getElementById('auth-gate').style.display = 'none';
-        document.getElementById('app').classList.add('visible');
-      } else {
-        document.getElementById('auth-error').textContent = 'Incorrect access code. Try again.';
+      const errorEl = document.getElementById('auth-error');
+      const btn = document.getElementById('login-btn');
+
+      if (!email || !pw) {
+        errorEl.textContent = 'Please enter both email and password.';
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = 'Signing in...';
+      errorEl.textContent = '';
+
+      try {
+        await auth.signInWithEmailAndPassword(email, pw);
+        // onAuthStateChanged will handle the UI transition
+      } catch (err) {
+        let msg = 'Sign in failed. Please try again.';
+        if (err.code === 'auth/user-not-found' || err.code === 'auth/wrong-password' || err.code === 'auth/invalid-credential') {
+          msg = 'Invalid email or password.';
+        } else if (err.code === 'auth/too-many-requests') {
+          msg = 'Too many attempts. Please wait a moment and try again.';
+        } else if (err.code === 'auth/invalid-email') {
+          msg = 'Please enter a valid email address.';
+        }
+        errorEl.textContent = msg;
         document.getElementById('auth-password').value = '';
         document.getElementById('auth-password').focus();
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Sign In';
       }
     }
 
+    function signOut() {
+      auth.signOut();
+    }
+
+    // Listen for auth state changes (login/logout)
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        // User is signed in — show app
+        document.getElementById('auth-gate').style.display = 'none';
+        document.getElementById('app').classList.add('visible');
+        document.getElementById('sign-out-btn').style.display = 'block';
+        document.getElementById('user-label').textContent = user.email + ' · ';
+        // Start listening to database
+        startDatabaseListener();
+      } else {
+        // User is signed out — show login
+        document.getElementById('auth-gate').style.display = 'flex';
+        document.getElementById('app').classList.remove('visible');
+        document.getElementById('sign-out-btn').style.display = 'none';
+        document.getElementById('user-label').textContent = '';
+        // Stop database listener
+        stopDatabaseListener();
+        names = [];
+      }
+    });
+
+    // Enter key on login fields
+    document.getElementById('auth-email').addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') document.getElementById('auth-password').focus();
+    });
     document.getElementById('auth-password').addEventListener('keydown', (e) => {
       if (e.key === 'Enter') authenticate();
     });
 
-    (function checkSession() {
-      if (sessionStorage.getItem(SESSION_KEY) === 'true') {
-        document.getElementById('auth-gate').style.display = 'none';
-        document.getElementById('app').classList.add('visible');
-      }
-    })();
-
     // ===== DATA PERSISTENCE (Firebase + localStorage fallback) =====
     function saveData() {
-      // Always cache locally
       localStorage.setItem(STORAGE_KEY, JSON.stringify(names));
-      // Push to Firebase
       namesRef.set(names).catch(err => console.warn('Firebase write failed:', err));
     }
 
@@ -525,33 +598,41 @@
     }
 
     // ===== FIREBASE REAL-TIME LISTENER =====
-    // This fires whenever data changes on the server (from either user)
-    namesRef.on('value', (snapshot) => {
-      firebaseConnected = true;
-      setSyncStatus('connected');
-      const data = snapshot.val();
-      names = Array.isArray(data) ? data : [];
-      // Update local cache
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(names));
-      renderTable();
-    }, (error) => {
-      console.warn('Firebase read error:', error);
-      firebaseConnected = false;
-      setSyncStatus('disconnected');
-      // Fall back to localStorage
-      loadLocalData();
-    });
-
-    // Monitor connection state
-    db.ref('.info/connected').on('value', (snap) => {
-      if (snap.val() === true) {
+    function startDatabaseListener() {
+      if (dbListener) return; // already listening
+      dbListener = namesRef.on('value', (snapshot) => {
         firebaseConnected = true;
         setSyncStatus('connected');
-      } else {
+        const data = snapshot.val();
+        names = Array.isArray(data) ? data : [];
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(names));
+        renderTable();
+      }, (error) => {
+        console.warn('Firebase read error:', error);
         firebaseConnected = false;
         setSyncStatus('disconnected');
+        loadLocalData();
+      });
+
+      // Monitor connection state
+      db.ref('.info/connected').on('value', (snap) => {
+        if (snap.val() === true) {
+          firebaseConnected = true;
+          setSyncStatus('connected');
+        } else {
+          firebaseConnected = false;
+          setSyncStatus('disconnected');
+        }
+      });
+    }
+
+    function stopDatabaseListener() {
+      if (dbListener) {
+        namesRef.off('value', dbListener);
+        dbListener = null;
       }
-    });
+      db.ref('.info/connected').off();
+    }
 
     // ===== CRUD =====
     function addOrUpdateEntry() {
@@ -760,7 +841,7 @@
     });
 
     // ===== INIT =====
-    // Load local data first for instant render, Firebase listener will overwrite when connected
+    // Load cached local data for instant render; Firebase listener takes over after auth
     loadLocalData();
   </script>
 </body>
