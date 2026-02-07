@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Private Tool</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" href="./Images/psyblack.png" type="image/png">
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* ===== Reset ===== */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "Merriweather", Georgia, serif;
+      line-height: 1.75;
+      background-color: #fffcf4;
+      color: #2b2b2b;
+      font-size: 17px;
+      min-height: 100vh;
+    }
+    h1, h2, h3 {
+      font-family: "Lato", Arial, sans-serif;
+      font-weight: 700;
+      color: #2a4876;
+    }
+
+    /* ===== Password Gate ===== */
+    #auth-gate {
+      position: fixed; inset: 0;
+      background: linear-gradient(135deg, #002147 0%, #004d80 100%);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 9999;
+    }
+    .auth-box {
+      background: #fffcf4;
+      padding: 2.5rem 2rem;
+      border-radius: 10px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+      text-align: center;
+      max-width: 400px;
+      width: 90%;
+    }
+    .auth-box h2 { margin-bottom: 1rem; font-size: 1.5rem; }
+    .auth-box input[type="password"] {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      font-size: 1rem;
+      border: 2px solid #004d80;
+      border-radius: 6px;
+      margin-bottom: 1rem;
+      font-family: inherit;
+    }
+    .auth-box input[type="password"]:focus {
+      outline: none;
+      border-color: #c5a46d;
+      box-shadow: 0 0 0 3px rgba(197,164,109,0.3);
+    }
+    .auth-error {
+      color: #c0392b;
+      font-size: 0.9rem;
+      margin-bottom: 0.75rem;
+      min-height: 1.4rem;
+    }
+
+    /* ===== Shared Button Styles ===== */
+    .btn {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      border-radius: 4px;
+      font-weight: 600;
+      font-size: 1rem;
+      text-decoration: none;
+      border: 2px solid #a1d5f8;
+      background: linear-gradient(to right, rgb(60,137,209), rgb(18,67,112), rgb(13,41,66), rgb(18,67,112), rgb(60,137,209));
+      color: #fff;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-shadow: 0.125px 0.25px black, 0.25px 0.5px black;
+      font-family: "Lato", sans-serif;
+    }
+    .btn:hover { background: #c5a46d; border-color: #c5a46d; }
+
+    .btn-danger {
+      background: linear-gradient(to right, #c0392b, #922b21);
+      border-color: #e74c3c;
+    }
+    .btn-danger:hover { background: #e74c3c; border-color: #e74c3c; }
+
+    .btn-secondary {
+      background: linear-gradient(120deg, #abdafa 0%, rgba(0,77,128,0.25) 100%);
+      border: 2px solid #004d80;
+      color: #002147;
+      text-shadow: none;
+    }
+    .btn-secondary:hover {
+      background: linear-gradient(120deg, #004d80 0%, #abdafa 100%);
+      color: #fff;
+    }
+
+    .btn-small {
+      padding: 0.4rem 0.9rem;
+      font-size: 0.85rem;
+    }
+
+    /* ===== App Container ===== */
+    #app {
+      display: none;
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 1.5rem 2rem 3rem;
+    }
+    #app.visible { display: block; }
+
+    .app-header {
+      text-align: center;
+      padding: 1.5rem 0;
+      border-bottom: 4px solid #c5a46d;
+      margin-bottom: 2rem;
+    }
+    .app-header h1 { font-size: 1.8rem; margin-bottom: 0.25rem; }
+    .app-header p { color: #555; font-size: 0.95rem; }
+
+    /* ===== Add/Edit Form ===== */
+    .form-section {
+      background: #fff;
+      padding: 1.5rem;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      margin-bottom: 2rem;
+    }
+    .form-section h3 {
+      margin-bottom: 1rem;
+      font-size: 1.15rem;
+      border-left: 4px solid #c5a46d;
+      padding-left: 0.6rem;
+    }
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+    .form-grid label {
+      font-family: "Lato", sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #004d80;
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+    .form-grid input {
+      width: 100%;
+      padding: 0.6rem 0.75rem;
+      font-size: 0.95rem;
+      border: 2px solid #ccc;
+      border-radius: 5px;
+      font-family: inherit;
+      transition: border-color 0.2s;
+    }
+    .form-grid input:focus {
+      outline: none;
+      border-color: #004d80;
+      box-shadow: 0 0 0 3px rgba(0,77,128,0.15);
+    }
+
+    /* ===== Name List Table ===== */
+    .table-section { margin-bottom: 2rem; }
+    .table-section h3 {
+      margin-bottom: 1rem;
+      font-size: 1.15rem;
+      border-left: 4px solid #c5a46d;
+      padding-left: 0.6rem;
+    }
+    .name-count {
+      font-size: 0.9rem;
+      color: #666;
+      margin-bottom: 0.75rem;
+    }
+    .table-wrapper {
+      overflow-x: auto;
+      border-radius: 8px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+    }
+    thead { background: #002147; color: #fff; }
+    th {
+      padding: 0.75rem 1rem;
+      font-family: "Lato", sans-serif;
+      font-size: 0.9rem;
+      text-align: left;
+      letter-spacing: 0.5px;
+    }
+    td {
+      padding: 0.65rem 1rem;
+      border-bottom: 1px solid #eee;
+      font-size: 0.95rem;
+    }
+    tbody tr:hover { background: #f0f7ff; }
+    tbody tr.highlight {
+      background: #c5a46d !important;
+      color: #fff;
+      font-weight: 700;
+      animation: flash 0.6s ease 3;
+    }
+    @keyframes flash {
+      0%, 100% { background: #c5a46d; }
+      50% { background: #e8d5a8; }
+    }
+    .actions-cell { white-space: nowrap; }
+    .actions-cell button { margin-right: 0.3rem; }
+
+    .empty-state {
+      text-align: center;
+      padding: 2rem;
+      color: #999;
+      font-style: italic;
+    }
+
+    /* ===== Randomizer ===== */
+    .randomizer-section {
+      text-align: center;
+      padding: 2rem;
+      background: linear-gradient(135deg, #002147, #004d80);
+      border-radius: 10px;
+      color: #fff;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 20px rgba(0,33,71,0.3);
+    }
+    .randomizer-section h3 {
+      color: #fff;
+      border-left: 4px solid #c5a46d;
+      padding-left: 0.6rem;
+      display: inline-block;
+      margin-bottom: 1rem;
+    }
+    #randomize-btn {
+      font-size: 1.15rem;
+      padding: 1rem 2.5rem;
+      margin: 1rem 0;
+      border: 2px solid #c5a46d;
+      background: linear-gradient(to right, #c5a46d, #a8894f, #c5a46d);
+      color: #002147;
+      font-weight: 700;
+      cursor: pointer;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+      text-shadow: none;
+      font-family: "Lato", sans-serif;
+    }
+    #randomize-btn:hover {
+      background: #e8d5a8;
+      transform: scale(1.05);
+      box-shadow: 0 6px 20px rgba(197,164,109,0.5);
+    }
+    #randomize-btn:active { transform: scale(0.97); }
+    #randomize-btn.spinning {
+      animation: spin-pulse 0.12s linear infinite;
+    }
+    @keyframes spin-pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.03); }
+      100% { transform: scale(1); }
+    }
+
+    .result-display {
+      margin-top: 1.5rem;
+      min-height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .result-card {
+      background: rgba(255,252,244,0.12);
+      border: 2px solid #c5a46d;
+      border-radius: 10px;
+      padding: 1.25rem 2rem;
+      display: none;
+      text-align: center;
+      backdrop-filter: blur(4px);
+    }
+    .result-card.visible { display: block; animation: pop-in 0.4s ease; }
+    @keyframes pop-in {
+      0% { transform: scale(0.8); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    .result-name {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #c5a46d;
+      font-family: "Lato", sans-serif;
+    }
+    .result-attrs {
+      font-size: 0.95rem;
+      color: #ddd;
+      margin-top: 0.4rem;
+    }
+
+    /* ===== Data Management ===== */
+    .data-section {
+      text-align: center;
+      padding: 1rem;
+      border-top: 2px solid #eee;
+    }
+    .data-section h3 {
+      margin-bottom: 0.75rem;
+      font-size: 1rem;
+      color: #666;
+      border: none;
+    }
+    .data-section button { margin: 0.3rem; }
+    #import-input { display: none; }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 600px) {
+      #app { padding: 1rem; }
+      .form-grid { grid-template-columns: 1fr; }
+      .app-header h1 { font-size: 1.4rem; }
+      table { font-size: 0.85rem; }
+      th, td { padding: 0.5rem 0.6rem; }
+      #randomize-btn { font-size: 1rem; padding: 0.85rem 1.5rem; }
+      .result-name { font-size: 1.3rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== PASSWORD GATE ===== -->
+  <div id="auth-gate">
+    <div class="auth-box">
+      <h2>🔒 Private Access</h2>
+      <p style="margin-bottom:1rem; color:#555; font-size:0.9rem;">This page is restricted. Enter the access code to continue.</p>
+      <div class="auth-error" id="auth-error"></div>
+      <input type="password" id="auth-password" placeholder="Enter access code" autofocus>
+      <br>
+      <button class="btn" onclick="authenticate()" style="margin-top:0.5rem;">Unlock</button>
+    </div>
+  </div>
+
+  <!-- ===== MAIN APP (hidden until authenticated) ===== -->
+  <div id="app">
+    <div class="app-header">
+      <h1>🎲 Name Randomizer</h1>
+      <p>Add names with attributes, then randomize to pick one at random.</p>
+    </div>
+
+    <!-- Add / Edit Form -->
+    <div class="form-section">
+      <h3 id="form-title">Add a Name</h3>
+      <div class="form-grid">
+        <div>
+          <label for="input-name">Name</label>
+          <input type="text" id="input-name" placeholder="e.g. John Smith">
+        </div>
+        <div>
+          <label for="input-attr1" id="label-attr1">Attribute 1</label>
+          <input type="text" id="input-attr1" placeholder="e.g. Department">
+        </div>
+        <div>
+          <label for="input-attr2" id="label-attr2">Attribute 2</label>
+          <input type="text" id="input-attr2" placeholder="e.g. Role">
+        </div>
+        <div>
+          <label for="input-attr3" id="label-attr3">Attribute 3</label>
+          <input type="text" id="input-attr3" placeholder="e.g. Location">
+        </div>
+      </div>
+      <button class="btn" id="add-btn" onclick="addOrUpdateEntry()">Add Name</button>
+      <button class="btn-secondary btn btn-small" id="cancel-edit-btn" onclick="cancelEdit()" style="display:none;">Cancel</button>
+    </div>
+
+    <!-- Randomizer -->
+    <div class="randomizer-section">
+      <h3>🎯 Randomize</h3>
+      <p style="margin-bottom:0.5rem; opacity:0.85;">Click the button to randomly select one name from the list.</p>
+      <button id="randomize-btn" onclick="randomizeName()">Pick a Random Name</button>
+      <div class="result-display">
+        <div class="result-card" id="result-card">
+          <div class="result-name" id="result-name"></div>
+          <div class="result-attrs" id="result-attrs"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Names Table -->
+    <div class="table-section">
+      <h3>📋 Name List</h3>
+      <div class="name-count" id="name-count"></div>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Name</th>
+              <th>Attribute 1</th>
+              <th>Attribute 2</th>
+              <th>Attribute 3</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="names-tbody">
+            <tr><td colspan="6" class="empty-state">No names added yet. Use the form above to get started.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Data Management -->
+    <div class="data-section">
+      <h3>Data Management</h3>
+      <button class="btn btn-small" onclick="exportData()">📤 Export List (JSON)</button>
+      <button class="btn-secondary btn btn-small" onclick="document.getElementById('import-input').click()">📥 Import List (JSON)</button>
+      <input type="file" id="import-input" accept=".json" onchange="importData(event)">
+      <button class="btn-danger btn btn-small" onclick="clearAllData()">🗑️ Clear All</button>
+    </div>
+  </div>
+
+  <script>
+    // ===== CONFIG =====
+    // SHA-256 hash of the access password. Default password: "mdoa2026"
+    // To change: open browser console, run:
+    //   crypto.subtle.digest('SHA-256', new TextEncoder().encode('YOUR_NEW_PASSWORD'))
+    //     .then(h => console.log(Array.from(new Uint8Array(h)).map(b=>b.toString(16).padStart(2,'0')).join('')))
+    const PASS_HASH = '46c00f7a1c9852f3387b1a75398babc0d95fc3013158cf710845bb1c4d3fc62b';
+    const STORAGE_KEY = 'mdoa_private_randomizer_data';
+    const SESSION_KEY = 'mdoa_private_auth';
+
+    // ===== STATE =====
+    let names = [];
+    let editIndex = -1;
+
+    // ===== AUTH =====
+    async function hashString(str) {
+      const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+      return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    async function authenticate() {
+      const pw = document.getElementById('auth-password').value;
+      const hash = await hashString(pw);
+      if (hash === PASS_HASH) {
+        sessionStorage.setItem(SESSION_KEY, 'true');
+        document.getElementById('auth-gate').style.display = 'none';
+        document.getElementById('app').classList.add('visible');
+      } else {
+        document.getElementById('auth-error').textContent = 'Incorrect access code. Try again.';
+        document.getElementById('auth-password').value = '';
+        document.getElementById('auth-password').focus();
+      }
+    }
+
+    // Allow Enter key to submit password
+    document.getElementById('auth-password').addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') authenticate();
+    });
+
+    // Check session on load
+    (function checkSession() {
+      if (sessionStorage.getItem(SESSION_KEY) === 'true') {
+        document.getElementById('auth-gate').style.display = 'none';
+        document.getElementById('app').classList.add('visible');
+      }
+    })();
+
+    // ===== DATA PERSISTENCE =====
+    function saveData() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(names));
+    }
+
+    function loadData() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (raw) names = JSON.parse(raw);
+      } catch (e) { names = []; }
+      renderTable();
+    }
+
+    // ===== CRUD =====
+    function addOrUpdateEntry() {
+      const name = document.getElementById('input-name').value.trim();
+      const attr1 = document.getElementById('input-attr1').value.trim();
+      const attr2 = document.getElementById('input-attr2').value.trim();
+      const attr3 = document.getElementById('input-attr3').value.trim();
+
+      if (!name) {
+        alert('Please enter a name.');
+        document.getElementById('input-name').focus();
+        return;
+      }
+
+      const entry = { name, attr1, attr2, attr3 };
+
+      if (editIndex >= 0) {
+        names[editIndex] = entry;
+        editIndex = -1;
+        document.getElementById('form-title').textContent = 'Add a Name';
+        document.getElementById('add-btn').textContent = 'Add Name';
+        document.getElementById('cancel-edit-btn').style.display = 'none';
+      } else {
+        names.push(entry);
+      }
+
+      clearForm();
+      saveData();
+      renderTable();
+    }
+
+    function editEntry(index) {
+      const entry = names[index];
+      document.getElementById('input-name').value = entry.name;
+      document.getElementById('input-attr1').value = entry.attr1;
+      document.getElementById('input-attr2').value = entry.attr2;
+      document.getElementById('input-attr3').value = entry.attr3;
+      editIndex = index;
+      document.getElementById('form-title').textContent = 'Edit Name';
+      document.getElementById('add-btn').textContent = 'Update Name';
+      document.getElementById('cancel-edit-btn').style.display = 'inline-block';
+      document.getElementById('input-name').focus();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function deleteEntry(index) {
+      if (confirm(`Remove "${names[index].name}" from the list?`)) {
+        names.splice(index, 1);
+        if (editIndex === index) cancelEdit();
+        saveData();
+        renderTable();
+      }
+    }
+
+    function cancelEdit() {
+      editIndex = -1;
+      document.getElementById('form-title').textContent = 'Add a Name';
+      document.getElementById('add-btn').textContent = 'Add Name';
+      document.getElementById('cancel-edit-btn').style.display = 'none';
+      clearForm();
+    }
+
+    function clearForm() {
+      document.getElementById('input-name').value = '';
+      document.getElementById('input-attr1').value = '';
+      document.getElementById('input-attr2').value = '';
+      document.getElementById('input-attr3').value = '';
+    }
+
+    // ===== RENDER =====
+    function renderTable() {
+      const tbody = document.getElementById('names-tbody');
+      const countEl = document.getElementById('name-count');
+      countEl.textContent = `${names.length} name${names.length !== 1 ? 's' : ''} in the list`;
+
+      if (names.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6" class="empty-state">No names added yet. Use the form above to get started.</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = names.map((entry, i) => `
+        <tr id="row-${i}">
+          <td>${i + 1}</td>
+          <td><strong>${esc(entry.name)}</strong></td>
+          <td>${esc(entry.attr1)}</td>
+          <td>${esc(entry.attr2)}</td>
+          <td>${esc(entry.attr3)}</td>
+          <td class="actions-cell">
+            <button class="btn btn-small btn-secondary" onclick="editEntry(${i})">✏️</button>
+            <button class="btn btn-small btn-danger" onclick="deleteEntry(${i})">🗑️</button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function esc(str) {
+      const div = document.createElement('div');
+      div.textContent = str || '';
+      return div.innerHTML;
+    }
+
+    // ===== RANDOMIZER =====
+    function randomizeName() {
+      if (names.length === 0) {
+        alert('Add at least one name to the list first.');
+        return;
+      }
+
+      const btn = document.getElementById('randomize-btn');
+      const card = document.getElementById('result-card');
+      const nameEl = document.getElementById('result-name');
+      const attrsEl = document.getElementById('result-attrs');
+
+      // Remove previous highlights
+      document.querySelectorAll('tbody tr.highlight').forEach(r => r.classList.remove('highlight'));
+      card.classList.remove('visible');
+
+      // Spin animation — rapidly cycle through names for suspense
+      btn.classList.add('spinning');
+      btn.disabled = true;
+      let cycles = 0;
+      const totalCycles = 20 + Math.floor(Math.random() * 10);
+      const interval = setInterval(() => {
+        const tempIdx = Math.floor(Math.random() * names.length);
+        nameEl.textContent = names[tempIdx].name;
+        attrsEl.textContent = '';
+        card.classList.add('visible');
+        card.style.opacity = '0.5';
+        cycles++;
+        if (cycles >= totalCycles) {
+          clearInterval(interval);
+          // Final pick
+          const winnerIdx = Math.floor(Math.random() * names.length);
+          const winner = names[winnerIdx];
+          nameEl.textContent = winner.name;
+          const parts = [];
+          if (winner.attr1) parts.push(winner.attr1);
+          if (winner.attr2) parts.push(winner.attr2);
+          if (winner.attr3) parts.push(winner.attr3);
+          attrsEl.textContent = parts.join('  •  ');
+          card.style.opacity = '1';
+          btn.classList.remove('spinning');
+          btn.disabled = false;
+
+          // Highlight row
+          const row = document.getElementById(`row-${winnerIdx}`);
+          if (row) {
+            row.classList.add('highlight');
+            row.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+        }
+      }, 80);
+    }
+
+    // ===== EXPORT / IMPORT =====
+    function exportData() {
+      if (names.length === 0) { alert('Nothing to export.'); return; }
+      const blob = new Blob([JSON.stringify(names, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `randomizer-list-${new Date().toISOString().slice(0,10)}.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    function importData(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        try {
+          const imported = JSON.parse(e.target.result);
+          if (!Array.isArray(imported)) throw new Error('Invalid format');
+          const valid = imported.every(item => typeof item === 'object' && item.name);
+          if (!valid) throw new Error('Each entry must have a "name" field');
+          if (confirm(`Import ${imported.length} name(s)? This will REPLACE your current list.`)) {
+            names = imported.map(item => ({
+              name: item.name || '',
+              attr1: item.attr1 || '',
+              attr2: item.attr2 || '',
+              attr3: item.attr3 || ''
+            }));
+            saveData();
+            renderTable();
+          }
+        } catch (err) {
+          alert('Import failed: ' + err.message);
+        }
+        event.target.value = '';
+      };
+      reader.readAsText(file);
+    }
+
+    function clearAllData() {
+      if (names.length === 0) return;
+      if (confirm('Are you sure you want to delete ALL names? This cannot be undone.')) {
+        names = [];
+        saveData();
+        renderTable();
+        document.getElementById('result-card').classList.remove('visible');
+      }
+    }
+
+    // Allow Enter key in form fields to submit
+    document.querySelectorAll('.form-grid input').forEach(input => {
+      input.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') addOrUpdateEntry();
+      });
+    });
+
+    // ===== INIT =====
+    loadData();
+  </script>
+</body>
+</html>
